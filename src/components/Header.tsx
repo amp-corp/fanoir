@@ -2,6 +2,7 @@
 
 import { useLang } from "@/contexts/LangContext";
 import { useState } from "react";
+import Image from "next/image";
 
 export default function Header() {
   const { locale, t, toggle } = useLang();
@@ -17,8 +18,8 @@ export default function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-[#1A1A1A]/95 backdrop-blur-sm border-b border-[#C9A962]/20">
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="#" className="text-xl tracking-[0.3em] font-light text-[#C9A962]">
-          FANOIR
+        <a href="#" className="flex items-center">
+          <Image src="/logo.png" alt="FANOIR" width={120} height={40} className="h-8 w-auto" style={{ filter: "brightness(0) invert(1)" }} priority />
         </a>
 
         <nav className="hidden md:flex items-center gap-8">

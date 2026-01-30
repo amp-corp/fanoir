@@ -62,6 +62,7 @@ export const translations = {
       title: "제품 라인업",
       subtitle:
         "팬의 모든 순간을 위한 세련된 굿즈를 만듭니다.",
+      comingSoonLabel: "Coming Soon",
       dolls: "인형 관련",
       dollsDesc: "인형옷 · 인형 액세서리",
       dollsDetail:
@@ -98,6 +99,15 @@ export const translations = {
     footer: {
       tagline: "Fandom, refined.",
       copyright: "All rights reserved.",
+      contactLabel: "Contact",
+      linksLabel: "Menu",
+      business: "FANOIR | 팬이 만든, 팬을 위한 브랜드",
+      trustItems: [
+        { label: "국내 제작", desc: "품질 검수 완료" },
+        { label: "1:1 문의", desc: "빠른 답변" },
+        { label: "세련된 디자인", desc: "팬이 만든 브랜드" },
+        { label: "안심 거래", desc: "교환 · 환불 가능" },
+      ],
     },
   },
   en: {
@@ -161,6 +171,7 @@ export const translations = {
       title: "Product Lineup",
       subtitle:
         "Refined goods for every moment of your fan life.",
+      comingSoonLabel: "Coming Soon",
       dolls: "Doll Goods",
       dollsDesc: "Doll clothes · Doll accessories",
       dollsDetail:
@@ -197,6 +208,15 @@ export const translations = {
     footer: {
       tagline: "Fandom, refined.",
       copyright: "All rights reserved.",
+      contactLabel: "Contact",
+      linksLabel: "Menu",
+      business: "FANOIR | By fans, for fans.",
+      trustItems: [
+        { label: "Made in Korea", desc: "Quality inspected" },
+        { label: "1:1 Support", desc: "Quick response" },
+        { label: "Refined Design", desc: "Made by fans" },
+        { label: "Safe Purchase", desc: "Exchange & refund" },
+      ],
     },
   },
 } as const;

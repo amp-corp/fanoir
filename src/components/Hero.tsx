@@ -1,6 +1,7 @@
 "use client";
 
 import { useLang } from "@/contexts/LangContext";
+import Image from "next/image";
 
 export default function Hero() {
   const { t } = useLang();
@@ -11,9 +12,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(201,169,98,0.08)_0%,_transparent_70%)]" />
 
       <div className="relative text-center px-6">
-        <h1 className="text-5xl md:text-7xl lg:text-8xl tracking-[0.4em] font-extralight text-[#C9A962] mb-8">
-          FANOIR
-        </h1>
+        <Image src="/logo.png" alt="FANOIR" width={400} height={133} className="h-24 md:h-32 lg:h-40 w-auto mx-auto mb-8" style={{ filter: "brightness(0) invert(1)" }} priority />
         <p className="text-xl md:text-2xl text-[#F8F8F8] font-light tracking-widest mb-4">
           {t.hero.slogan}
         </p>
