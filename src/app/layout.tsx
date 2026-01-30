@@ -5,6 +5,12 @@ export const metadata: Metadata = {
   title: "FANOIR — Fandom, refined.",
   description:
     "세련되고 품격 있는 팬덤 굿즈 브랜드 FANOIR. 덕질을 세련되게.",
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    apple: "/icon.svg",
+  },
 };
 
 export default function RootLayout({

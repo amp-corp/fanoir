@@ -50,31 +50,6 @@ export default function About() {
             </p>
           </div>
         </div>
-
-        {/* Persona & Target */}
-        <div className="bg-[#1A1A1A] p-10 md:p-16 relative">
-          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-[#C9A962]/60 via-[#C9A962]/20 to-transparent" />
-          <p className="text-xs tracking-[0.3em] text-[#C9A962] mb-6 uppercase">
-            {t.about.personaLabel}
-          </p>
-          <blockquote className="text-xl md:text-2xl text-[#F8F8F8] font-light leading-relaxed mb-8 max-w-3xl">
-            &ldquo;{t.about.persona}&rdquo;
-          </blockquote>
-          <div className="grid sm:grid-cols-3 gap-6 mt-10 pt-8 border-t border-[#F8F8F8]/10">
-            <div>
-              <p className="text-[#C9A962] text-sm tracking-wider mb-1">{t.about.targetAge}</p>
-              <p className="text-[#F8F8F8]/70 text-sm">{t.about.targetAgeVal}</p>
-            </div>
-            <div>
-              <p className="text-[#C9A962] text-sm tracking-wider mb-1">{t.about.targetRegion}</p>
-              <p className="text-[#F8F8F8]/70 text-sm">{t.about.targetRegionVal}</p>
-            </div>
-            <div>
-              <p className="text-[#C9A962] text-sm tracking-wider mb-1">{t.about.targetTrait}</p>
-              <p className="text-[#F8F8F8]/70 text-sm">{t.about.targetTraitVal}</p>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );

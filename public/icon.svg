@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#1A1A1A"/>
+  <!-- Gold star from FANOIR logo -->
+  <g transform="translate(256,256)" fill="#C9A962">
+    <!-- Main vertical line -->
+    <rect x="-2" y="-120" width="4" height="240" />
+    <!-- Main horizontal line -->
+    <rect x="-120" y="-2" width="240" height="4" />
+    <!-- Diagonal lines -->
+    <rect x="-2" y="-85" width="4" height="170" transform="rotate(45)" />
+    <rect x="-2" y="-85" width="4" height="170" transform="rotate(-45)" />
+    <!-- Center glow -->
+    <circle cx="0" cy="0" r="6" />
+  </g>
+  <!-- FANOIR letter F as secondary mark -->
+  <text x="256" y="380" text-anchor="middle" fill="#C9A962" font-family="Georgia, serif" font-size="120" font-weight="400" letter-spacing="0.05em">F</text>
+</svg>
