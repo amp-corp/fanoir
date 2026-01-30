@@ -6,9 +6,7 @@ export const metadata: Metadata = {
   description:
     "세련되고 품격 있는 팬덤 굿즈 브랜드 FANOIR. 덕질을 세련되게.",
   icons: {
-    icon: [
-      { url: "/favicon.svg", type: "image/svg+xml" },
-    ],
+    icon: "/favicon.ico",
     apple: "/icon.svg",
   },
 };
