@@ -1,26 +1,16 @@
 "use client";
 
-import { LangProvider } from "@/contexts/LangContext";
-import Header from "@/components/Header";
+import ClientLayout from "@/components/ClientLayout";
 import Hero from "@/components/Hero";
-import About from "@/components/About";
-import Values from "@/components/Values";
-import Products from "@/components/Products";
-import Story from "@/components/Story";
-import Footer from "@/components/Footer";
+import Identity from "@/components/Identity";
+import Showcase from "@/components/Showcase";
 
 export default function Home() {
   return (
-    <LangProvider>
-      <Header />
-      <main>
-        <Hero />
-        <About />
-        <Values />
-        <Products />
-        <Story />
-      </main>
-      <Footer />
-    </LangProvider>
+    <ClientLayout>
+      <Hero />
+      <Identity />
+      <Showcase />
+    </ClientLayout>
   );
 }

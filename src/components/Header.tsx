@@ -9,67 +9,82 @@ export default function Header() {
   const [open, setOpen] = useState(false);
 
   const links = [
-    { href: "#about", label: t.nav.brand },
-    { href: "#values", label: t.nav.values },
-    { href: "#products", label: t.nav.products },
-    { href: "#story", label: t.nav.story },
+    { href: "/#identity", label: t.nav.identity },
+    { href: "/#products", label: t.nav.products },
+    { href: "/collection", label: t.nav.collection },
+    { href: "/#contact", label: t.nav.contact },
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-[#1A1A1A]/95 backdrop-blur-sm border-b border-[#C9A962]/20">
-      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="#" className="flex items-center">
-          <Image src="/logo.png" alt="FANOIR" width={120} height={40} className="h-8 w-auto" style={{ filter: "brightness(0) invert(1)" }} priority />
-        </a>
+    <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-white/10 px-4 py-4 md:px-10 lg:px-40 fixed top-0 w-full z-50 backdrop-blur-md bg-[#1e1b14]/80">
+      {/* Logo */}
+      <a href="/" className="flex items-center">
+        <Image
+          src="/logo.png"
+          alt="FANOIR"
+          width={120}
+          height={40}
+          className="h-5 w-auto"
+          style={{ filter: "brightness(0) invert(1)" }}
+          priority
+        />
+      </a>
 
-        <nav className="hidden md:flex items-center gap-8">
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="text-sm text-[#F8F8F8]/70 hover:text-[#C9A962] transition-colors tracking-wider"
-            >
-              {l.label}
-            </a>
-          ))}
-          <button
-            onClick={toggle}
-            className="text-xs border border-[#C9A962]/40 px-3 py-1 text-[#C9A962] hover:bg-[#C9A962]/10 transition-colors tracking-wider"
+      {/* Desktop nav - centered */}
+      <nav className="hidden md:flex flex-1 justify-center gap-12">
+        {links.map((l) => (
+          <a
+            key={l.href}
+            href={l.href}
+            className="text-slate-300 hover:text-[#caa963] transition-colors text-sm font-medium leading-normal tracking-wide"
           >
-            {locale === "ko" ? "EN" : "KO"}
-          </button>
-        </nav>
+            {l.label}
+          </a>
+        ))}
+      </nav>
 
+      {/* Right icons */}
+      <div className="flex items-center gap-2">
+        <button className="flex items-center justify-center rounded-full size-10 text-white hover:text-[#caa963] transition-colors" aria-label="Search">
+          <span className="material-symbols-outlined">search</span>
+        </button>
+        <button className="flex items-center justify-center rounded-full size-10 text-white hover:text-[#caa963] transition-colors relative" aria-label="Cart">
+          <span className="material-symbols-outlined">shopping_bag</span>
+          <span className="absolute top-2 right-2 size-2 bg-[#caa963] rounded-full" />
+        </button>
+        {/* Language toggle */}
+        <button
+          onClick={toggle}
+          className="hidden md:flex items-center justify-center rounded-full size-10 text-slate-400 hover:text-[#caa963] transition-colors text-xs font-bold tracking-wider"
+        >
+          {locale === "ko" ? "EN" : "KO"}
+        </button>
+        {/* Mobile menu */}
         <button
           onClick={() => setOpen(!open)}
-          className="md:hidden text-[#F8F8F8]"
+          className="md:hidden flex items-center justify-center rounded-full size-10 text-white hover:text-[#caa963] transition-colors"
           aria-label="Menu"
         >
-          <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5">
-            {open ? (
-              <path d="M6 6l12 12M6 18L18 6" />
-            ) : (
-              <path d="M4 7h16M4 12h16M4 17h16" />
-            )}
-          </svg>
+          <span className="material-symbols-outlined">{open ? "close" : "menu"}</span>
         </button>
       </div>
 
+      {/* Mobile menu dropdown */}
       {open && (
-        <nav className="md:hidden bg-[#1A1A1A] border-t border-[#C9A962]/20 px-6 py-4 flex flex-col gap-4">
+        <nav className="absolute top-full left-0 right-0 bg-[#1e1b14] border-t border-white/10 px-6 py-6 flex flex-col gap-5 md:hidden">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
-              className="text-sm text-[#F8F8F8]/70 hover:text-[#C9A962] transition-colors tracking-wider"
+              className="text-slate-300 hover:text-[#caa963] transition-colors text-sm font-medium tracking-wide"
             >
               {l.label}
             </a>
           ))}
           <button
             onClick={toggle}
-            className="text-xs border border-[#C9A962]/40 px-3 py-1 text-[#C9A962] w-fit"
+            className="text-slate-400 hover:text-[#caa963] transition-colors text-xs font-bold tracking-wider w-fit"
           >
             {locale === "ko" ? "EN" : "KO"}
           </button>

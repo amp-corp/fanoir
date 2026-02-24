@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
+import { Manrope, Noto_Sans } from "next/font/google";
 import "./globals.css";
+
+const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope" });
+const notoSans = Noto_Sans({ subsets: ["latin"], variable: "--font-noto" });
 
 const SITE_URL = "https://fanoir.vercel.app";
 
@@ -83,6 +87,8 @@ export default function RootLayout({
     <html lang="ko">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -229,7 +235,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body>{children}</body>
+      <body className={`${manrope.variable} ${notoSans.variable}`}>{children}</body>
     </html>
   );
 }
