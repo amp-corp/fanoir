@@ -1,18 +1,22 @@
 import type { MetadataRoute } from "next";
 
+const SITE_URL = "https://fanoir.vercel.app";
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
-    {
-      url: "https://fanoir.vercel.app",
+  const locales = ["ko", "en"];
+  const pages = ["", "/collection"];
+
+  return pages.flatMap((page) =>
+    locales.map((locale) => ({
+      url: `${SITE_URL}/${locale}${page}`,
       lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 1,
+      changeFrequency: "weekly" as const,
+      priority: page === "" ? 1 : 0.8,
       alternates: {
-        languages: {
-          ko: "https://fanoir.vercel.app",
-          en: "https://fanoir.vercel.app",
-        },
+        languages: Object.fromEntries(
+          locales.map((l) => [l, `${SITE_URL}/${l}${page}`])
+        ),
       },
-    },
-  ];
+    }))
+  );
 }

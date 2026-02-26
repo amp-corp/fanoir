@@ -5,7 +5,17 @@ export const alt = "FANOIR — Fandom, refined.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default function Image() {
+export default async function Image({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const subtitle =
+    locale === "ko"
+      ? "세련되고 품격 있는 팬덤 굿즈 브랜드"
+      : "Premium K-Pop Fandom Goods Brand";
+
   return new ImageResponse(
     (
       <div
@@ -20,7 +30,6 @@ export default function Image() {
           fontFamily: "Georgia, serif",
         }}
       >
-        {/* Star */}
         <svg
           width="40"
           height="40"
@@ -63,10 +72,9 @@ export default function Image() {
             letterSpacing: "0.1em",
           }}
         >
-          세련되고 품격 있는 팬덤 굿즈 브랜드
+          {subtitle}
         </div>
 
-        {/* Bottom accent line */}
         <div
           style={{
             position: "absolute",

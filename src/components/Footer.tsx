@@ -4,14 +4,14 @@ import { useLang } from "@/contexts/LangContext";
 import Image from "next/image";
 
 export default function Footer() {
-  const { t } = useLang();
+  const { t, localePath } = useLang();
 
   return (
     <footer id="contact" className="bg-[#1e1b14] border-t border-[#40392b] py-16">
       <div className="max-w-6xl mx-auto px-6">
         {/* Logo centered */}
         <div className="flex justify-center mb-8">
-          <a href="/">
+          <a href={localePath("/")}>
             <Image
               src="/logo.png"
               alt="FANOIR"
@@ -55,7 +55,7 @@ export default function Footer() {
             className="text-[#6b6355] hover:text-[#caa963] transition-colors"
             aria-label="Instagram"
           >
-            <span className="material-symbols-outlined !text-xl">photo_camera</span>
+            <span className="material-symbols-outlined text-xl!">photo_camera</span>
           </a>
           {/* Twitter / X */}
           <a
@@ -63,7 +63,7 @@ export default function Footer() {
             className="text-[#6b6355] hover:text-[#caa963] transition-colors"
             aria-label="Social"
           >
-            <span className="material-symbols-outlined !text-xl">flutter_dash</span>
+            <span className="material-symbols-outlined text-xl!">flutter_dash</span>
           </a>
           {/* Website */}
           <a
@@ -71,13 +71,13 @@ export default function Footer() {
             className="text-[#6b6355] hover:text-[#caa963] transition-colors"
             aria-label="Website"
           >
-            <span className="material-symbols-outlined !text-xl">public</span>
+            <span className="material-symbols-outlined text-xl!">public</span>
           </a>
         </div>
 
         {/* Copyright */}
         <p className="text-center text-[#6b6355] text-xs">
-          &copy; {new Date().getFullYear()} FANOIR. {t.footer.copyright}
+          &copy; 2025 FANOIR. {t.footer.copyright}
         </p>
       </div>
     </footer>
