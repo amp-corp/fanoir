@@ -6,5 +6,5 @@ export default async function ProductsListPage() {
     orderBy: { order: 'asc' },
   });
 
-  return <ProductsTableClient data={products} />;
+  return <ProductsTableClient data={products as any} />;
 }
