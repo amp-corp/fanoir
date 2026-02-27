@@ -1,18 +1,31 @@
 'use client';
 
 import { useLang } from '@/contexts/LangContext';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
+import { locales, localeLabels, type Locale } from '@/lib/i18n';
 
 export default function Header() {
   const { locale, t, switchLocale, localePath } = useLang();
   const [open, setOpen] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
+  const langRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (langRef.current && !langRef.current.contains(e.target as Node)) {
+        setLangOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
 
   const links = [
     { href: localePath('/#identity'), label: t.nav.identity },
     { href: localePath('/#products'), label: t.nav.products },
     { href: localePath('/collection'), label: t.nav.collection },
-    { href: localePath('/#contact'), label: t.nav.contact },
+    // { href: localePath('/#contact'), label: t.nav.contact },
   ];
 
   return (
@@ -35,7 +48,7 @@ export default function Header() {
           <a
             key={l.href}
             href={l.href}
-            className="text-slate-300 hover:text-[#caa963] transition-colors text-sm font-medium leading-normal tracking-wide"
+            className="text-white hover:text-[#caa963] transition-colors text-sm font-medium leading-normal tracking-wide"
           >
             {l.label}
           </a>
@@ -43,20 +56,40 @@ export default function Header() {
       </nav>
 
       {/* Right icons */}
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-4">
         <button
           className="flex items-center justify-center rounded-full size-10 text-white hover:text-[#caa963] transition-colors"
           aria-label="Search"
         >
           <span className="material-symbols-outlined">search</span>
         </button>
-        {/* Language toggle */}
-        <button
-          onClick={switchLocale}
-          className="hidden md:flex items-center justify-center rounded-full size-10 text-slate-400 hover:text-[#caa963] transition-colors text-xs font-bold tracking-wider"
-        >
-          {locale === 'ko' ? 'EN' : 'KO'}
-        </button>
+        {/* Language dropdown */}
+        <div ref={langRef} className="relative hidden md:block">
+          <button
+            onClick={() => setLangOpen(!langOpen)}
+            className="flex items-center justify-start rounded-full size-10 text-white hover:text-[#caa963] transition-colors text-xs font-bold tracking-wider"
+          >
+            {localeLabels[locale]}
+          </button>
+          {langOpen && (
+            <div className="absolute right-0 top-full mt-1 bg-[#1e1b14] border border-white/10 rounded-lg py-1 min-w-[48px]">
+              {locales
+                .filter((l) => l !== locale)
+                .map((l) => (
+                  <button
+                    key={l}
+                    onClick={() => {
+                      switchLocale(l);
+                      setLangOpen(false);
+                    }}
+                    className="block w-full px-3 py-1.5 text-xs font-bold text-white hover:text-[#caa963] transition-colors tracking-wider text-center"
+                  >
+                    {localeLabels[l]}
+                  </button>
+                ))}
+            </div>
+          )}
+        </div>
         {/* Mobile menu */}
         <button
           onClick={() => setOpen(!open)}
@@ -77,17 +110,27 @@ export default function Header() {
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
-              className="text-slate-300 hover:text-[#caa963] transition-colors text-sm font-medium tracking-wide"
+              className="text-white hover:text-[#caa963] transition-colors text-sm font-medium tracking-wide"
             >
               {l.label}
             </a>
           ))}
-          <button
-            onClick={switchLocale}
-            className="text-slate-400 hover:text-[#caa963] transition-colors text-xs font-bold tracking-wider w-fit"
-          >
-            {locale === 'ko' ? 'EN' : 'KO'}
-          </button>
+          <div className="flex gap-3">
+            {locales
+              .filter((l) => l !== locale)
+              .map((l) => (
+                <button
+                  key={l}
+                  onClick={() => {
+                    switchLocale(l);
+                    setOpen(false);
+                  }}
+                  className="text-white hover:text-[#caa963] transition-colors text-xs font-bold tracking-wider"
+                >
+                  {localeLabels[l]}
+                </button>
+              ))}
+          </div>
         </nav>
       )}
     </header>

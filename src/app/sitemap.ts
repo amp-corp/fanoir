@@ -1,10 +1,10 @@
 import type { MetadataRoute } from "next";
+import { locales } from "@/lib/i18n";
 
 const SITE_URL = "https://fanoir.vercel.app";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const locales = ["ko", "en"];
-  const pages = ["", "/collection"];
+  const pages = ["", "/collection", "/service/terms"];
 
   return pages.flatMap((page) =>
     locales.map((locale) => ({

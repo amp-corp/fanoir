@@ -11,10 +11,14 @@ export default async function Image({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const subtitle =
-    locale === "ko"
-      ? "세련되고 품격 있는 팬덤 굿즈 브랜드"
-      : "Premium K-Pop Fandom Goods Brand";
+  const subtitleMap: Record<string, string> = {
+    ko: "세련되고 품격 있는 팬덤 굿즈 브랜드",
+    en: "Premium K-Pop Fandom Goods Brand",
+    'zh-CN': "精致高端的K-Pop粉丝周边品牌",
+    'zh-TW': "精緻高端的K-Pop粉絲周邊品牌",
+    ja: "洗練されたプレミアムK-Popファンダムグッズブランド",
+  };
+  const subtitle = subtitleMap[locale] ?? subtitleMap.en;
 
   return new ImageResponse(
     (

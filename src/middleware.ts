@@ -4,6 +4,10 @@ import { locales, defaultLocale } from "@/lib/i18n";
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  if (pathname.startsWith('/admin') || pathname.startsWith('/api')) {
+    return NextResponse.next();
+  }
+
   const hasLocale = locales.some(
     (l) => pathname.startsWith(`/${l}/`) || pathname === `/${l}`
   );

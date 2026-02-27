@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  id           String              @id @default(cuid())
+  image        String
+  badgeText    String?
+  badgeColor   String?
+  category     String
+  order        Int                 @default(0)
+  translations Json
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+  collections  CollectionProduct[]
+
+  @@index([order])
+}
+
+model Collection {
+  id           String              @id @default(cuid())
+  slug         String              @unique
+  image        String
+  order        Int                 @default(0)
+  translations Json
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+  products     CollectionProduct[]
+
+  @@index([order])
+}
+
+model CollectionProduct {
+  collectionId String
+  productId    String
+  order        Int        @default(0)
+  collection   Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  product      Product    @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@id([collectionId, productId])
+}

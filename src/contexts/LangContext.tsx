@@ -7,7 +7,7 @@ import { type Locale, translations } from "@/lib/i18n";
 type LangContextType = {
   locale: Locale;
   t: (typeof translations)[Locale];
-  switchLocale: () => void;
+  switchLocale: (target: Locale) => void;
   localePath: (path: string) => string;
 };
 
@@ -24,9 +24,8 @@ export function LangProvider({
   const pathname = usePathname();
   const t = translations[locale];
 
-  const switchLocale = () => {
-    const other = locale === "ko" ? "en" : "ko";
-    const newPath = pathname.replace(`/${locale}`, `/${other}`);
+  const switchLocale = (target: Locale) => {
+    const newPath = pathname.replace(`/${locale}`, `/${target}`);
     router.push(newPath);
   };
 
