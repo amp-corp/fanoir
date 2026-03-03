@@ -19,17 +19,14 @@ export default function CollectionBannerSlider({
 
   const totalPages = Math.ceil(collections.length / PER_PAGE);
 
-  const scrollToPage = useCallback(
-    (page: number) => {
-      const el = scrollRef.current;
-      if (!el) return;
-      const targetChild = el.children[page * PER_PAGE] as HTMLElement | undefined;
-      if (!targetChild) return;
-      el.scrollTo({ left: targetChild.offsetLeft, behavior: 'smooth' });
-      setCurrentPage(page);
-    },
-    [],
-  );
+  const scrollToPage = useCallback((page: number) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const targetChild = el.children[page * PER_PAGE] as HTMLElement | undefined;
+    if (!targetChild) return;
+    el.scrollTo({ left: targetChild.offsetLeft, behavior: 'smooth' });
+    setCurrentPage(page);
+  }, []);
 
   // Auto-slide when there are multiple pages
   useEffect(() => {
@@ -49,7 +46,12 @@ export default function CollectionBannerSlider({
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {collections.map((banner, i) => (
-          <BannerCard key={banner.slug} banner={banner} index={i} localePath={localePath} />
+          <BannerCard
+            key={banner.slug}
+            banner={banner}
+            index={i}
+            localePath={localePath}
+          />
         ))}
       </div>
     );
@@ -63,7 +65,10 @@ export default function CollectionBannerSlider({
         className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide"
       >
         {collections.map((banner, i) => (
-          <div key={banner.slug} className="snap-start shrink-0 w-[calc(50%-12px)]">
+          <div
+            key={banner.slug}
+            className="snap-start shrink-0 w-[calc(50%-12px)]"
+          >
             <BannerCard banner={banner} index={i} localePath={localePath} />
           </div>
         ))}

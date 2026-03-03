@@ -51,6 +51,7 @@ export default function ProductForm({ id }: { id?: string }) {
   const [badgeText, setBadgeText] = useState('');
   const [badgeColor, setBadgeColor] = useState('');
   const [category, setCategory] = useState('dolls');
+  const [comingSoon, setComingSoon] = useState(false);
   const [order, setOrder] = useState(0);
   const [translations, setTranslations] = useState<Record<string, ProductTranslation>>(emptyTranslations());
   const [activeLocale, setActiveLocale] = useState('ko');
@@ -70,6 +71,7 @@ export default function ProductForm({ id }: { id?: string }) {
         setBadgeText(data.badgeText || '');
         setBadgeColor(data.badgeColor || '');
         setCategory(data.category);
+        setComingSoon(data.comingSoon ?? false);
         setOrder(data.order);
         setTranslations(data.translations);
         const txs = data.translations as Record<string, ProductTranslation> | undefined;
@@ -134,7 +136,7 @@ export default function ProductForm({ id }: { id?: string }) {
     const finalTranslations = Object.fromEntries(
       LOCALES.map((l) => [l, { ...translations[l], price: formattedPrice }])
     );
-    const body = { image, badgeText, badgeColor, category, order, translations: finalTranslations };
+    const body = { image, badgeText, badgeColor, category, comingSoon, order, translations: finalTranslations };
     const url = isEdit ? `/api/admin/products/${id}` : '/api/admin/products';
     const method = isEdit ? 'PUT' : 'POST';
 
@@ -202,6 +204,15 @@ export default function ProductForm({ id }: { id?: string }) {
             />
           </div>
         </div>
+        <label className="flex items-center gap-2 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={comingSoon}
+            onChange={(e) => setComingSoon(e.target.checked)}
+            className="accent-[#FF6B6B]"
+          />
+          <span className="text-sm font-medium text-gray-700">Coming Soon</span>
+        </label>
         <div>
           <label className="block text-xs font-medium text-gray-500 mb-1">Badge Color</label>
           <div className="flex items-center gap-2 flex-wrap">

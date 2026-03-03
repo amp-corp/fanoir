@@ -141,7 +141,7 @@ export default function Collection({
         </div>
 
         {/* Filter & Sort Bar */}
-        <div className="sticky top-[73px] z-40 bg-[#FFFFFF]/95 backdrop-blur-sm py-4 border-b border-[#FFE0E0]">
+        <div className="sticky top-[73px] z-40 bg-[#FFFFFF]/95 backdrop-blur-md py-4 border-b border-[#FFE0E0]">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             {/* Categories */}
             <div className="flex overflow-x-auto pb-2 md:pb-0 gap-2">
@@ -217,12 +217,23 @@ export default function Collection({
                   alt={product.name}
                   fill
                   sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  className={`object-cover transition-transform duration-500 group-hover:scale-110 ${product.comingSoon ? 'blur-md scale-105' : ''}`}
                 />
+                {product.comingSoon && (
+                  <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/30 rounded-xl">
+                    <span className="text-white text-sm font-bold tracking-widest uppercase">
+                      {t.showcase.comingSoon}
+                    </span>
+                  </div>
+                )}
                 {product.badgeText && (
                   <div
                     className="absolute top-3 left-3 text-white text-[10px] font-bold px-2 py-1 rounded"
-                    style={{ backgroundColor: product.badgeColor?.match(/^bg-\[(.+)\]$/)?.[1] || '#FF6B6B' }}
+                    style={{
+                      backgroundColor:
+                        product.badgeColor?.match(/^bg-\[(.+)\]$/)?.[1] ||
+                        '#FF6B6B',
+                    }}
                   >
                     {product.badgeText}
                   </div>

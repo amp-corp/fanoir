@@ -28,23 +28,29 @@ export async function PUT(
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const { id } = await params;
-  const body = await request.json();
-  const { image, badgeText, badgeColor, category, order, translations } = body;
+  try {
+    const { id } = await params;
+    const body = await request.json();
+    const { image, badgeText, badgeColor, category, order, translations, comingSoon } = body;
 
-  const product = await prisma.product.update({
-    where: { id },
-    data: {
-      ...(image !== undefined && { image }),
-      ...(badgeText !== undefined && { badgeText: badgeText || null }),
-      ...(badgeColor !== undefined && { badgeColor: badgeColor || null }),
-      ...(category !== undefined && { category }),
-      ...(order !== undefined && { order }),
-      ...(translations !== undefined && { translations }),
-    },
-  });
+    const product = await prisma.product.update({
+      where: { id },
+      data: {
+        ...(image !== undefined && { image }),
+        ...(badgeText !== undefined && { badgeText: badgeText || null }),
+        ...(badgeColor !== undefined && { badgeColor: badgeColor || null }),
+        ...(category !== undefined && { category }),
+        ...(comingSoon !== undefined && { comingSoon }),
+        ...(order !== undefined && { order }),
+        ...(translations !== undefined && { translations }),
+      },
+    });
 
-  return NextResponse.json(product);
+    return NextResponse.json(product);
+  } catch (error) {
+    console.error('PUT /api/admin/products/[id] error:', error);
+    return NextResponse.json({ error: String(error) }, { status: 500 });
+  }
 }
 
 export async function DELETE(

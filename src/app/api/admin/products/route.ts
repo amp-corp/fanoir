@@ -19,19 +19,25 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const body = await request.json();
-  const { image, badgeText, badgeColor, category, order, translations } = body;
+  try {
+    const body = await request.json();
+    const { image, badgeText, badgeColor, category, order, translations, comingSoon } = body;
 
-  const product = await prisma.product.create({
-    data: {
-      image,
-      badgeText: badgeText || null,
-      badgeColor: badgeColor || null,
-      category,
-      order: order ?? 0,
-      translations,
-    },
-  });
+    const product = await prisma.product.create({
+      data: {
+        image,
+        badgeText: badgeText || null,
+        badgeColor: badgeColor || null,
+        category,
+        comingSoon: comingSoon ?? false,
+        order: order ?? 0,
+        translations,
+      },
+    });
 
-  return NextResponse.json(product, { status: 201 });
+    return NextResponse.json(product, { status: 201 });
+  } catch (error) {
+    console.error('POST /api/admin/products error:', error);
+    return NextResponse.json({ error: String(error) }, { status: 500 });
+  }
 }

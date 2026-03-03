@@ -41,10 +41,15 @@ export default function CollectionDetail({
       <div className="max-w-7xl w-full mx-auto px-4 md:px-8 lg:px-12 py-12 flex flex-col gap-10">
         {/* Breadcrumb */}
         <nav className="text-sm text-[#888888] flex items-center gap-1">
-          <Link href={localePath('/collection')} className="hover:text-[#FF6B6B]">
+          <Link
+            href={localePath('/collection')}
+            className="hover:text-[#FF6B6B]"
+          >
             {t.collection.title}
           </Link>
-          <span className="material-symbols-outlined text-[14px]!">chevron_right</span>
+          <span className="material-symbols-outlined text-[14px]!">
+            chevron_right
+          </span>
           <span className="text-[#3D3D3D]">{collection.title}</span>
         </nav>
 
@@ -58,8 +63,15 @@ export default function CollectionDetail({
                   alt={product.name}
                   fill
                   sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  className={`object-cover transition-transform duration-500 group-hover:scale-110 ${product.comingSoon ? 'blur-md scale-105' : ''}`}
                 />
+                {product.comingSoon && (
+                  <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/30 rounded-xl">
+                    <span className="text-white text-sm font-bold tracking-widest uppercase">
+                      {t.showcase.comingSoon}
+                    </span>
+                  </div>
+                )}
                 <button className="absolute bottom-4 right-4 bg-white p-2 rounded-full shadow-lg opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:bg-[#FF6B6B] hover:text-white text-[#3D3D3D]">
                   <span className="material-symbols-outlined text-[20px]!">
                     add_shopping_cart
@@ -68,7 +80,11 @@ export default function CollectionDetail({
                 {product.badgeText && (
                   <div
                     className="absolute top-3 left-3 text-white text-[10px] font-bold px-2 py-1 rounded"
-                    style={{ backgroundColor: product.badgeColor?.match(/^bg-\[(.+)\]$/)?.[1] || '#FF6B6B' }}
+                    style={{
+                      backgroundColor:
+                        product.badgeColor?.match(/^bg-\[(.+)\]$/)?.[1] ||
+                        '#FF6B6B',
+                    }}
                   >
                     {product.badgeText}
                   </div>
@@ -84,7 +100,9 @@ export default function CollectionDetail({
                   </p>
                 </div>
                 <p className="text-[#888888] text-xs mt-1">
-                  {t.collection.filters[product.category as keyof typeof t.collection.filters] || product.category}
+                  {t.collection.filters[
+                    product.category as keyof typeof t.collection.filters
+                  ] || product.category}
                 </p>
               </div>
             </div>

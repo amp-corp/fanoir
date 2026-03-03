@@ -9,6 +9,7 @@ export type ProductForDisplay = {
   category: string;
   name: string;
   price: string;
+  comingSoon: boolean;
 };
 
 export type CollectionForDisplay = {
@@ -41,6 +42,7 @@ export async function getProducts(locale: string): Promise<ProductForDisplay[]> 
       category: p.category,
       name: t.name,
       price: t.price,
+      comingSoon: p.comingSoon,
     };
   });
 }
@@ -92,6 +94,7 @@ export async function getCollectionBySlug(slug: string, locale: string): Promise
       category: cp.product.category,
       name: pt.name,
       price: pt.price,
+      comingSoon: cp.product.comingSoon,
     };
   });
 
