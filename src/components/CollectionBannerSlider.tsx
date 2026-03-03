@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState, useCallback } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useLang } from '@/contexts/LangContext';
 import type { CollectionForDisplay } from '@/lib/db-queries';
@@ -98,10 +99,13 @@ function BannerCard({
       : 'bg-white/20 backdrop-blur-md text-white';
 
   return (
-    <div className="group relative overflow-hidden rounded-xl bg-[#f5f0e8] aspect-video md:aspect-4/3 lg:aspect-16/7">
-      <div
-        className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-        style={{ backgroundImage: `url('${banner.image}')` }}
+    <div className="group relative overflow-hidden rounded-xl bg-[#f5f0e8] aspect-[21/9]">
+      <Image
+        src={banner.image}
+        alt={banner.title}
+        fill
+        sizes="(max-width: 768px) 100vw, 50vw"
+        className="object-cover transition-transform duration-700 group-hover:scale-105"
       />
       <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
       <div className="absolute bottom-0 left-0 p-8 flex flex-col gap-2">

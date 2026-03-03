@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useMemo, useRef, useEffect } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { useLang } from '@/contexts/LangContext';
@@ -211,9 +212,12 @@ export default function Collection({
           {paged.map((product) => (
             <div key={product.id} className="group flex flex-col gap-3">
               <div className="relative aspect-square overflow-hidden rounded-xl bg-[#f5f0e8]">
-                <div
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                  style={{ backgroundImage: `url('${product.image}')` }}
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  fill
+                  sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 {product.badgeText && (
                   <div

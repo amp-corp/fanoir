@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import LocaleTabs from './LocaleTabs';
 import ImageUpload from './ImageUpload';
+import { IMAGE_SPECS, formatBytes } from '@/lib/image-specs';
 
 const LOCALES = ['ko', 'en', 'zh-CN', 'zh-TW', 'ja'] as const;
 const CATEGORIES = [
@@ -164,7 +165,10 @@ export default function ProductForm({ id }: { id?: string }) {
         <h2 className="text-sm font-semibold text-gray-900">Basic Info</h2>
         <div>
           <label className="block text-xs font-medium text-gray-500 mb-1">Image</label>
-          <ImageUpload value={image} onChange={setImage} />
+          <p className="text-xs text-red-500 mb-1">
+            비율 {IMAGE_SPECS.product.ratioLabel} · 권장 {IMAGE_SPECS.product.width}x{IMAGE_SPECS.product.height}px · 최대 {formatBytes(IMAGE_SPECS.product.maxUploadSize)}
+          </p>
+          <ImageUpload value={image} onChange={setImage} variant="product" />
         </div>
         <div className="grid grid-cols-3 gap-4">
           <div>

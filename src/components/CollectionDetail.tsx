@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useLang } from '@/contexts/LangContext';
 import type { CollectionDetailForDisplay } from '@/lib/db-queries';
@@ -13,11 +14,15 @@ export default function CollectionDetail({
 
   return (
     <section className="bg-[#FAF8F5] min-h-screen">
-      {/* Hero Banner */}
-      <div className="relative w-full aspect-video md:aspect-21/9 overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url('${collection.image}')` }}
+      {/* Hero Banner — 21:9 */}
+      <div className="relative w-full aspect-[21/9] overflow-hidden">
+        <Image
+          src={collection.image}
+          alt={collection.title}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
         />
         <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 max-w-7xl mx-auto px-4 md:px-8 lg:px-12 pb-12 flex flex-col gap-2">
@@ -48,9 +53,12 @@ export default function CollectionDetail({
           {collection.products.map((product) => (
             <div key={product.id} className="group flex flex-col gap-3">
               <div className="relative aspect-square overflow-hidden rounded-xl bg-[#f5f0e8]">
-                <div
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                  style={{ backgroundImage: `url('${product.image}')` }}
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  fill
+                  sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <button className="absolute bottom-4 right-4 bg-white p-2 rounded-full shadow-lg opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:bg-[#d0b476] hover:text-white text-[#1e1b14]">
                   <span className="material-symbols-outlined text-[20px]!">

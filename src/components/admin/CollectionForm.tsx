@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import LocaleTabs from './LocaleTabs';
 import ImageUpload from './ImageUpload';
+import { IMAGE_SPECS, formatBytes } from '@/lib/image-specs';
 
 const LOCALES = ['ko', 'en', 'zh-CN', 'zh-TW', 'ja'] as const;
 
@@ -168,7 +169,10 @@ export default function CollectionForm({ id }: { id?: string }) {
         </div>
         <div>
           <label className="block text-xs font-medium text-gray-500 mb-1">Image</label>
-          <ImageUpload value={image} onChange={setImage} />
+          <p className="text-xs text-red-500 mb-1">
+            비율 {IMAGE_SPECS.banner.ratioLabel} · 권장 {IMAGE_SPECS.banner.width}x{IMAGE_SPECS.banner.height}px · 최대 {formatBytes(IMAGE_SPECS.banner.maxUploadSize)}
+          </p>
+          <ImageUpload value={image} onChange={setImage} variant="banner" />
         </div>
       </section>
 

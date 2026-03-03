@@ -1,25 +1,33 @@
 'use client';
 
 import { useState, useRef, useCallback } from 'react';
+import { IMAGE_SPECS, formatBytes, type ImageVariant } from '@/lib/image-specs';
 
 interface ImageUploadProps {
   value: string;
   onChange: (url: string) => void;
+  /** Image variant determines optimization settings and guidance shown */
+  variant?: ImageVariant;
 }
 
-export default function ImageUpload({ value, onChange }: ImageUploadProps) {
+export default function ImageUpload({ value, onChange, variant = 'product' }: ImageUploadProps) {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState('');
   const [dragOver, setDragOver] = useState(false);
+  const [optimizeInfo, setOptimizeInfo] = useState<{ originalSize: number; optimizedSize: number } | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const spec = IMAGE_SPECS[variant];
 
   const upload = useCallback(
     async (file: File) => {
       setError('');
+      setOptimizeInfo(null);
       setUploading(true);
 
       const formData = new FormData();
       formData.append('file', file);
+      formData.append('variant', variant);
 
       try {
         const res = await fetch('/api/admin/upload', {
@@ -34,13 +42,16 @@ export default function ImageUpload({ value, onChange }: ImageUploadProps) {
         }
 
         onChange(data.url);
+        if (data.originalSize && data.optimizedSize) {
+          setOptimizeInfo({ originalSize: data.originalSize, optimizedSize: data.optimizedSize });
+        }
       } catch {
         setError('Upload failed');
       } finally {
         setUploading(false);
       }
     },
-    [onChange],
+    [onChange, variant],
   );
 
   function handleDrop(e: React.DragEvent) {
@@ -55,15 +66,20 @@ export default function ImageUpload({ value, onChange }: ImageUploadProps) {
     if (file) upload(file);
   }
 
+  const guideLine = `${spec.ratioLabel} · ${spec.width}×${spec.height}px · max ${formatBytes(spec.maxUploadSize)}`;
+
   // Show preview with change button when URL exists
   if (value && !uploading) {
     return (
       <div className="flex flex-col gap-2">
-        <div className="relative w-full h-48 bg-gray-50 rounded-lg border border-gray-200 overflow-hidden">
+        <div
+          className="relative w-full bg-gray-50 rounded-lg border border-gray-200 overflow-hidden"
+          style={{ aspectRatio: variant === 'banner' ? '21/9' : '1/1', maxHeight: '240px' }}
+        >
           <img
             src={value}
             alt="Preview"
-            className="w-full h-full object-contain"
+            className="w-full h-full object-cover"
           />
         </div>
         <div className="flex items-center gap-2">
@@ -87,6 +103,13 @@ export default function ImageUpload({ value, onChange }: ImageUploadProps) {
             className="hidden"
           />
         </div>
+        {optimizeInfo && (
+          <p className="text-xs text-green-600">
+            Optimized: {formatBytes(optimizeInfo.originalSize)} → {formatBytes(optimizeInfo.optimizedSize)}
+            {' '}({Math.round((1 - optimizeInfo.optimizedSize / optimizeInfo.originalSize) * 100)}% reduced)
+          </p>
+        )}
+        <p className="text-xs text-gray-400">{guideLine}</p>
         {error && <p className="text-xs text-red-500">{error}</p>}
       </div>
     );
@@ -103,19 +126,20 @@ export default function ImageUpload({ value, onChange }: ImageUploadProps) {
         onDragLeave={() => setDragOver(false)}
         onDrop={handleDrop}
         onClick={() => !uploading && inputRef.current?.click()}
-        className={`flex flex-col items-center justify-center w-full h-40 border-2 border-dashed rounded-lg cursor-pointer transition-colors ${
+        className={`flex flex-col items-center justify-center w-full border-2 border-dashed rounded-lg cursor-pointer transition-colors ${
           dragOver
             ? 'border-[#d0b476] bg-[#d0b476]/5'
             : 'border-gray-300 hover:border-gray-400'
         } ${uploading ? 'pointer-events-none opacity-60' : ''}`}
+        style={{ aspectRatio: variant === 'banner' ? '21/9' : '1/1', maxHeight: '200px' }}
       >
         {uploading ? (
           <div className="flex flex-col items-center gap-2">
             <div className="w-6 h-6 border-2 border-gray-300 border-t-[#d0b476] rounded-full animate-spin" />
-            <span className="text-xs text-gray-500">Uploading...</span>
+            <span className="text-xs text-gray-500">Optimizing & uploading...</span>
           </div>
         ) : (
-          <div className="flex flex-col items-center gap-1">
+          <div className="flex flex-col items-center gap-1 p-4">
             <svg
               className="w-8 h-8 text-gray-400"
               fill="none"
@@ -133,7 +157,10 @@ export default function ImageUpload({ value, onChange }: ImageUploadProps) {
               Click or drag image here
             </span>
             <span className="text-xs text-gray-400">
-              JPEG, PNG, WebP (max 5MB)
+              {guideLine}
+            </span>
+            <span className="text-[10px] text-gray-300 mt-1">
+              Auto-optimized to WebP on upload
             </span>
           </div>
         )}

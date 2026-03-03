@@ -1,19 +1,28 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useLang } from '@/contexts/LangContext';
+import type { ProductForDisplay } from '@/lib/db-queries';
 
-const productImages = [
-  { image: '/products/product-1.jpg', aspect: 'aspect-3/4' },
-  { image: '/products/product-2.jpg' },
-  { image: '/products/product-3.jpg', aspect: 'aspect-4/5' },
-  { image: '/products/product-4.jpg', aspect: 'aspect-4/5' },
-  { image: '/products/product-5.jpg', aspect: 'aspect-4/5', comingSoon: true },
-];
-
-export default function Showcase() {
+export default function Showcase({
+  products,
+  signatureImage1,
+  signatureImage2,
+}: {
+  products: ProductForDisplay[];
+  signatureImage1?: string;
+  signatureImage2?: string;
+}) {
   const { t, localePath } = useLang();
-  const products = t.showcase.products;
+  const filters = t.collection.filters;
+
+  // Take up to 6 products for the grid
+  const gridProducts = products.slice(0, 6);
+
+  // Signature images: use dedicated images if set, fallback to top 2 product images
+  const sigImg1 = signatureImage1 || products[0]?.image;
+  const sigImg2 = signatureImage2 || products[1]?.image;
 
   return (
     <section id="products" className="bg-[#FAF8F5]">
@@ -30,103 +39,44 @@ export default function Showcase() {
         </p>
       </div>
 
-      {/* Editorial Grid */}
+      {/* 6-Product Square Grid: 2×3 mobile, 3×2 desktop */}
       <div className="w-full px-4 md:px-10 lg:px-20 pb-20 max-w-[1400px] mx-auto">
-        {/* Row 1: Portrait + Landscape */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mb-6">
-          {/* Product 1: Large Portrait */}
-          <div className="md:col-span-5 lg:col-span-4 group cursor-pointer">
-            <div className="relative w-full aspect-3/4 overflow-hidden rounded-xl mb-4">
-              <div className="absolute inset-0 bg-[#caa963]/0 group-hover:bg-[#caa963]/10 transition-colors duration-300 z-10" />
-              <div
-                className="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                style={{ backgroundImage: `url('${productImages[0].image}')` }}
-              />
-              <div className="absolute top-4 right-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <span className="material-symbols-outlined text-white bg-black/20 backdrop-blur-sm rounded-full p-2">
-                  arrow_outward
-                </span>
-              </div>
-            </div>
-            <div className="flex flex-col gap-1">
-              <div className="flex justify-between items-start">
-                <h3 className="text-xl font-bold text-[#1e1b14] group-hover:text-[#caa963] transition-colors">
-                  {products[0].name}
-                </h3>
-                <span className="text-[#8a8070] font-medium">
-                  {products[0].price}
-                </span>
-              </div>
-              <p className="text-[#8a8070] text-sm">{products[0].desc}</p>
-            </div>
-          </div>
-
-          {/* Product 2: Landscape Feature */}
-          <div className="md:col-span-7 lg:col-span-8 group cursor-pointer flex flex-col h-full">
-            <div className="relative w-full h-full min-h-[300px] overflow-hidden rounded-xl mb-4">
-              <div className="absolute inset-0 bg-[#caa963]/0 group-hover:bg-[#caa963]/10 transition-colors duration-300 z-10" />
-              <div
-                className="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                style={{ backgroundImage: `url('${productImages[1].image}')` }}
-              />
-              <div className="absolute bottom-6 left-6 z-20">
-                <span className="bg-[#caa963] text-[#1e1b14] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                  {t.showcase.bestseller}
-                </span>
-              </div>
-            </div>
-            <div className="flex flex-col gap-1">
-              <div className="flex justify-between items-start">
-                <h3 className="text-xl font-bold text-[#1e1b14] group-hover:text-[#caa963] transition-colors">
-                  {products[1].name}
-                </h3>
-                <span className="text-[#8a8070] font-medium">
-                  {products[1].price}
-                </span>
-              </div>
-              <p className="text-[#8a8070] text-sm">{products[1].desc}</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Row 2: Three Column Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
-          {productImages.slice(2).map((meta, i) => {
-            const product = products[i + 2];
-            return (
-              <div
-                key={i}
-                className={`group cursor-pointer${i === 2 ? ' sm:col-span-2 lg:col-span-1' : ''}`}
-              >
-                <div
-                  className={`relative w-full ${
-                    i === 2
-                      ? 'aspect-4/5 sm:aspect-2/1 lg:aspect-4/5'
-                      : 'aspect-4/5'
-                  } overflow-hidden rounded-xl mb-4`}
-                >
-                  <div className="absolute inset-0 bg-[#caa963]/0 group-hover:bg-[#caa963]/10 transition-colors duration-300 z-10" />
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-20">
+          {gridProducts.map((product) => (
+            <div key={product.id} className="group cursor-pointer">
+              <div className="relative aspect-square overflow-hidden rounded-xl bg-[#f5f0e8]">
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  fill
+                  sizes="(max-width: 768px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-[#caa963]/0 group-hover:bg-[#caa963]/10 transition-colors duration-300 z-10" />
+                {product.badgeText && (
                   <div
-                    className="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                    style={{ backgroundImage: `url('${meta.image}')` }}
-                  />
-                  {meta.comingSoon && (
-                    <div className="absolute top-4 left-4 z-20">
-                      <span className="bg-white/10 backdrop-blur-md text-white text-xs font-medium px-3 py-1 rounded-full border border-white/20">
-                        {t.showcase.comingSoon}
-                      </span>
-                    </div>
-                  )}
-                </div>
-                <div className="flex flex-col gap-1">
-                  <h3 className="text-lg font-bold text-[#1e1b14] group-hover:text-[#caa963] transition-colors">
+                    className="absolute top-3 left-3 z-20 text-white text-[10px] font-bold px-2 py-1 rounded"
+                    style={{ backgroundColor: product.badgeColor?.match(/^bg-\[(.+)\]$/)?.[1] || '#d0b476' }}
+                  >
+                    {product.badgeText}
+                  </div>
+                )}
+              </div>
+              <div className="mt-3 flex flex-col gap-1">
+                <div className="flex justify-between items-start">
+                  <h3 className="text-base md:text-lg font-bold text-[#1e1b14] group-hover:text-[#caa963] transition-colors truncate pr-2">
                     {product.name}
                   </h3>
-                  <p className="text-[#8a8070] text-sm">{product.desc}</p>
+                  <span className="text-[#8a8070] font-medium text-sm shrink-0">
+                    {product.price}
+                  </span>
                 </div>
+                <p className="text-[#8a8070] text-xs">
+                  {filters[product.category as keyof typeof filters] || product.category}
+                </p>
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
 
         {/* Signature Pieces Section */}
@@ -201,15 +151,18 @@ export default function Showcase() {
           {/* Image grid */}
           <div className="order-1 lg:order-2 grid grid-cols-2 gap-4">
             <div className="space-y-4 translate-y-8">
-              <div className="w-full aspect-3/4 rounded-lg overflow-hidden relative group">
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-500" />
-                <div
-                  className="w-full h-full bg-cover bg-center"
-                  style={{
-                    backgroundImage: "url('/products/signature-1.jpg')",
-                  }}
-                />
-              </div>
+              {sigImg1 && (
+                <div className="relative w-full aspect-square rounded-lg overflow-hidden group">
+                  <Image
+                    src={sigImg1}
+                    alt="Signature"
+                    fill
+                    sizes="(max-width: 1024px) 50vw, 25vw"
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-500" />
+                </div>
+              )}
               <div className="w-full aspect-square rounded-lg overflow-hidden bg-[#f5f0e8] flex items-center justify-center border border-[#e8e0d4]">
                 <div className="text-center p-4">
                   <span className="block text-3xl font-black text-[#1e1b14] mb-1">
@@ -232,15 +185,18 @@ export default function Showcase() {
                   </span>
                 </div>
               </div>
-              <div className="w-full aspect-3/4 rounded-lg overflow-hidden relative group">
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-500" />
-                <div
-                  className="w-full h-full bg-cover bg-center"
-                  style={{
-                    backgroundImage: "url('/products/signature-2.jpg')",
-                  }}
-                />
-              </div>
+              {sigImg2 && (
+                <div className="relative w-full aspect-square rounded-lg overflow-hidden group">
+                  <Image
+                    src={sigImg2}
+                    alt="Signature"
+                    fill
+                    sizes="(max-width: 1024px) 50vw, 25vw"
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-500" />
+                </div>
+              )}
             </div>
           </div>
         </div>

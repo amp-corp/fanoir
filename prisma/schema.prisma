@@ -44,3 +44,9 @@ model CollectionProduct {
 
   @@id([collectionId, productId])
 }
+
+model SiteSetting {
+  key       String   @id
+  value     String   @db.Text
+  updatedAt DateTime @updatedAt
+}

@@ -113,3 +113,39 @@ export async function getCollectionSlugs(): Promise<string[]> {
   });
   return collections.map((c) => c.slug);
 }
+
+// ── Site Settings ──────────────────────────────────────────
+
+export type SiteImages = {
+  hero_image: string;
+  signature_image_1: string;
+  signature_image_2: string;
+};
+
+const SITE_IMAGE_KEYS: (keyof SiteImages)[] = [
+  'hero_image',
+  'signature_image_1',
+  'signature_image_2',
+];
+
+export async function getSiteImages(): Promise<SiteImages> {
+  const rows = await prisma.siteSetting.findMany({
+    where: { key: { in: SITE_IMAGE_KEYS } },
+  });
+
+  const map = Object.fromEntries(rows.map((r) => [r.key, r.value]));
+
+  return {
+    hero_image: map.hero_image || '',
+    signature_image_1: map.signature_image_1 || '',
+    signature_image_2: map.signature_image_2 || '',
+  };
+}
+
+export async function upsertSiteSetting(key: string, value: string) {
+  return prisma.siteSetting.upsert({
+    where: { key },
+    update: { value },
+    create: { key, value },
+  });
+}

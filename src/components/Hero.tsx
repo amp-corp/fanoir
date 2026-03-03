@@ -1,18 +1,26 @@
 'use client';
 
+import Image from 'next/image';
 import { useLang } from '@/contexts/LangContext';
 
-export default function Hero() {
+export default function Hero({ heroImage }: { heroImage?: string }) {
   const { t, localePath } = useLang();
+
+  const bgSrc = heroImage || '/hero-bg.jpg';
 
   return (
     <section className="flex-1 flex flex-col pt-16">
       <div className="flex-1 flex flex-col relative min-h-[calc(100vh-64px)] justify-center items-center overflow-hidden">
         {/* Background image with overlay */}
-        <div
-          className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('/hero-bg.jpg')" }}
-        >
+        <div className="absolute inset-0 z-0">
+          <Image
+            src={bgSrc}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
           <div className="absolute inset-0 bg-[#1e1b14]/80 bg-linear-to-t from-[#1e1b14] via-[#1e1b14]/60 to-transparent" />
         </div>
 
