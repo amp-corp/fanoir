@@ -14,7 +14,7 @@ export default function AdminSidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="fixed left-0 top-0 h-full w-64 bg-[#FF6B6B] text-white flex flex-col">
+    <aside className="fixed left-0 top-0 h-full w-64 bg-[#565656] text-white flex flex-col">
       <div className="p-6 border-b border-white/10">
         <h1 className="text-lg font-bold">FANOIR</h1>
         <p className="text-xs text-gray-400 mt-1">Admin Panel</p>
