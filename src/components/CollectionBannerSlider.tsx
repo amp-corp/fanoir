@@ -98,10 +98,7 @@ function BannerCard({
   index: number;
   localePath: (path: string) => string;
 }) {
-  const labelStyle =
-    index === 0
-      ? 'bg-[#FF6B6B]/90 text-white'
-      : 'bg-white/20 backdrop-blur-md text-white';
+  const labelStyle = 'bg-white/20 backdrop-blur-md text-white';
 
   return (
     <div className="group relative overflow-hidden rounded-xl bg-[#FFF0F0] aspect-[21/9]">
