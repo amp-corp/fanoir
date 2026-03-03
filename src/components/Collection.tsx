@@ -209,52 +209,63 @@ export default function Collection({
 
         {/* Product Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10">
-          {paged.map((product) => (
-            <div key={product.id} className="group flex flex-col gap-3">
-              <div className="relative aspect-square overflow-hidden rounded-xl bg-[#FFF0F0]">
-                <Image
-                  src={product.image}
-                  alt={product.name}
-                  fill
-                  sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  className={`object-cover transition-transform duration-500 group-hover:scale-110 ${product.comingSoon ? 'blur-md scale-105' : ''}`}
-                />
-                {product.comingSoon && (
-                  <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/30 rounded-xl">
-                    <span className="text-white text-sm font-bold tracking-widest uppercase">
-                      {t.showcase.comingSoon}
-                    </span>
+          {paged.map((product) => {
+            const isClickable = !product.comingSoon && !!product.link;
+            const Wrapper = isClickable ? 'a' : 'div';
+            const wrapperProps = isClickable
+              ? { href: product.link!, target: '_blank' as const, rel: 'noopener noreferrer' }
+              : {};
+            return (
+              <Wrapper
+                key={product.id}
+                {...wrapperProps}
+                className={`group flex flex-col gap-3 ${product.comingSoon ? 'cursor-not-allowed' : product.link ? 'cursor-pointer' : ''}`}
+              >
+                <div className="relative aspect-square overflow-hidden rounded-xl bg-[#FFF0F0]">
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    fill
+                    sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    className={`object-cover transition-transform duration-500 group-hover:scale-110 ${product.comingSoon ? 'blur-md scale-105' : ''}`}
+                  />
+                  {product.comingSoon && (
+                    <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/30 rounded-xl">
+                      <span className="text-white text-sm font-bold tracking-widest uppercase">
+                        {t.showcase.comingSoon}
+                      </span>
+                    </div>
+                  )}
+                  {product.badgeText && (
+                    <div
+                      className="absolute top-3 left-3 text-white text-[10px] font-bold px-2 py-1 rounded"
+                      style={{
+                        backgroundColor:
+                          product.badgeColor?.match(/^bg-\[(.+)\]$/)?.[1] ||
+                          '#FF6B6B',
+                      }}
+                    >
+                      {product.badgeText}
+                    </div>
+                  )}
+                </div>
+                <div>
+                  <div className="flex justify-between items-start">
+                    <h3 className="font-medium text-base truncate pr-2 text-[#3D3D3D]">
+                      {product.name}
+                    </h3>
+                    <p className="font-bold text-sm text-[#3D3D3D]">
+                      {product.price}
+                    </p>
                   </div>
-                )}
-                {product.badgeText && (
-                  <div
-                    className="absolute top-3 left-3 text-white text-[10px] font-bold px-2 py-1 rounded"
-                    style={{
-                      backgroundColor:
-                        product.badgeColor?.match(/^bg-\[(.+)\]$/)?.[1] ||
-                        '#FF6B6B',
-                    }}
-                  >
-                    {product.badgeText}
-                  </div>
-                )}
-              </div>
-              <div>
-                <div className="flex justify-between items-start">
-                  <h3 className="font-medium text-base truncate pr-2 text-[#3D3D3D]">
-                    {product.name}
-                  </h3>
-                  <p className="font-bold text-sm text-[#3D3D3D]">
-                    {product.price}
+                  <p className="text-[#888888] text-xs mt-1">
+                    {filters[product.category as keyof typeof filters] ||
+                      product.category}
                   </p>
                 </div>
-                <p className="text-[#888888] text-xs mt-1">
-                  {filters[product.category as keyof typeof filters] ||
-                    product.category}
-                </p>
-              </div>
-            </div>
-          ))}
+              </Wrapper>
+            );
+          })}
         </div>
 
         {/* Pagination */}

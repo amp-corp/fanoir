@@ -52,6 +52,8 @@ export default function ProductForm({ id }: { id?: string }) {
   const [badgeColor, setBadgeColor] = useState('');
   const [category, setCategory] = useState('dolls');
   const [comingSoon, setComingSoon] = useState(false);
+  const [comingSoonUntil, setComingSoonUntil] = useState('');
+  const [link, setLink] = useState('');
   const [order, setOrder] = useState(0);
   const [translations, setTranslations] = useState<Record<string, ProductTranslation>>(emptyTranslations());
   const [activeLocale, setActiveLocale] = useState('ko');
@@ -72,6 +74,8 @@ export default function ProductForm({ id }: { id?: string }) {
         setBadgeColor(data.badgeColor || '');
         setCategory(data.category);
         setComingSoon(data.comingSoon ?? false);
+        setComingSoonUntil(data.comingSoonUntil ? new Date(data.comingSoonUntil).toISOString().slice(0, 16) : '');
+        setLink(data.link || '');
         setOrder(data.order);
         setTranslations(data.translations);
         const txs = data.translations as Record<string, ProductTranslation> | undefined;
@@ -136,7 +140,12 @@ export default function ProductForm({ id }: { id?: string }) {
     const finalTranslations = Object.fromEntries(
       LOCALES.map((l) => [l, { ...translations[l], price: formattedPrice }])
     );
-    const body = { image, badgeText, badgeColor, category, comingSoon, order, translations: finalTranslations };
+    const body = {
+      image, badgeText, badgeColor, category, comingSoon,
+      comingSoonUntil: comingSoonUntil || null,
+      link: link.trim() || null,
+      order, translations: finalTranslations,
+    };
     const url = isEdit ? `/api/admin/products/${id}` : '/api/admin/products';
     const method = isEdit ? 'PUT' : 'POST';
 
@@ -204,6 +213,16 @@ export default function ProductForm({ id }: { id?: string }) {
             />
           </div>
         </div>
+        <div>
+          <label className="block text-xs font-medium text-gray-500 mb-1">Product Link (URL)</label>
+          <input
+            type="url"
+            value={link}
+            onChange={(e) => setLink(e.target.value)}
+            placeholder="https://shop.example.com/product"
+            className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]"
+          />
+        </div>
         <label className="flex items-center gap-2 cursor-pointer">
           <input
             type="checkbox"
@@ -213,6 +232,22 @@ export default function ProductForm({ id }: { id?: string }) {
           />
           <span className="text-sm font-medium text-gray-700">Coming Soon</span>
         </label>
+        {comingSoon && (
+          <div className="ml-6">
+            <label className="block text-xs font-medium text-gray-500 mb-1">
+              Auto-release date (optional)
+            </label>
+            <input
+              type="datetime-local"
+              value={comingSoonUntil}
+              onChange={(e) => setComingSoonUntil(e.target.value)}
+              className="w-64 px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]"
+            />
+            <p className="text-xs text-gray-400 mt-1">
+              Set a date to automatically release this product. Leave empty for manual control.
+            </p>
+          </div>
+        )}
         <div>
           <label className="block text-xs font-medium text-gray-500 mb-1">Badge Color</label>
           <div className="flex items-center gap-2 flex-wrap">

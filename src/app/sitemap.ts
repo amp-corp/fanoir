@@ -1,12 +1,13 @@
 import type { MetadataRoute } from "next";
 import { locales } from "@/lib/i18n";
+import { getCollectionSlugs } from "@/lib/db-queries";
 
 const SITE_URL = "https://fanoir.vercel.app";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const pages = ["", "/collection", "/service/terms"];
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const staticPages = ["", "/collection", "/service/terms"];
 
-  return pages.flatMap((page) =>
+  const staticEntries = staticPages.flatMap((page) =>
     locales.map((locale) => ({
       url: `${SITE_URL}/${locale}${page}`,
       lastModified: new Date(),
@@ -19,4 +20,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
       },
     }))
   );
+
+  const slugs = await getCollectionSlugs();
+  const collectionEntries = slugs.flatMap((slug) =>
+    locales.map((locale) => ({
+      url: `${SITE_URL}/${locale}/collection/${slug}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+      alternates: {
+        languages: Object.fromEntries(
+          locales.map((l) => [l, `${SITE_URL}/${l}/collection/${slug}`])
+        ),
+      },
+    }))
+  );
+
+  return [...staticEntries, ...collectionEntries];
 }

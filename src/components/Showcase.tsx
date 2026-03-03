@@ -42,53 +42,64 @@ export default function Showcase({
       {/* 6-Product Square Grid: 2×3 mobile, 3×2 desktop */}
       <div className="w-full px-4 md:px-10 lg:px-20 pb-20 max-w-[1400px] mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-20">
-          {gridProducts.map((product) => (
-            <div key={product.id} className="group cursor-pointer">
-              <div className="relative aspect-square overflow-hidden rounded-xl bg-[#FFF0F0]">
-                <Image
-                  src={product.image}
-                  alt={product.name}
-                  fill
-                  sizes="(max-width: 768px) 50vw, 33vw"
-                  className={`object-cover transition-transform duration-700 group-hover:scale-105 ${product.comingSoon ? 'blur-md scale-105' : ''}`}
-                />
-                {product.comingSoon && (
-                  <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/30 rounded-xl">
-                    <span className="text-white text-sm font-bold tracking-widest uppercase">
-                      {t.showcase.comingSoon}
+          {gridProducts.map((product) => {
+            const isClickable = !product.comingSoon && !!product.link;
+            const Wrapper = isClickable ? 'a' : 'div';
+            const wrapperProps = isClickable
+              ? { href: product.link!, target: '_blank' as const, rel: 'noopener noreferrer' }
+              : {};
+            return (
+              <Wrapper
+                key={product.id}
+                {...wrapperProps}
+                className={`group block ${product.comingSoon ? 'cursor-not-allowed' : product.link ? 'cursor-pointer' : ''}`}
+              >
+                <div className="relative aspect-square overflow-hidden rounded-xl bg-[#FFF0F0]">
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    fill
+                    sizes="(max-width: 768px) 50vw, 33vw"
+                    className={`object-cover transition-transform duration-700 group-hover:scale-105 ${product.comingSoon ? 'blur-md scale-105' : ''}`}
+                  />
+                  {product.comingSoon && (
+                    <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/30 rounded-xl">
+                      <span className="text-white text-sm font-bold tracking-widest uppercase">
+                        {t.showcase.comingSoon}
+                      </span>
+                    </div>
+                  )}
+                  <div className="absolute inset-0 transition-colors duration-300 z-10" />
+                  {product.badgeText && (
+                    <div
+                      className="absolute top-3 left-3 z-20 text-white text-[10px] font-bold px-2 py-1 rounded"
+                      style={{
+                        backgroundColor:
+                          product.badgeColor?.match(/^bg-\[(.+)\]$/)?.[1] ||
+                          '#FF6B6B',
+                      }}
+                    >
+                      {product.badgeText}
+                    </div>
+                  )}
+                </div>
+                <div className="mt-3 flex flex-col gap-1">
+                  <div className="flex justify-between items-start">
+                    <h3 className="text-base md:text-lg font-bold text-[#3D3D3D] group-hover:text-[#FF6B6B] transition-colors truncate pr-2">
+                      {product.name}
+                    </h3>
+                    <span className="text-[#888888] font-medium text-sm shrink-0">
+                      {product.price}
                     </span>
                   </div>
-                )}
-                <div className="absolute inset-0 transition-colors duration-300 z-10" />
-                {product.badgeText && (
-                  <div
-                    className="absolute top-3 left-3 z-20 text-white text-[10px] font-bold px-2 py-1 rounded"
-                    style={{
-                      backgroundColor:
-                        product.badgeColor?.match(/^bg-\[(.+)\]$/)?.[1] ||
-                        '#FF6B6B',
-                    }}
-                  >
-                    {product.badgeText}
-                  </div>
-                )}
-              </div>
-              <div className="mt-3 flex flex-col gap-1">
-                <div className="flex justify-between items-start">
-                  <h3 className="text-base md:text-lg font-bold text-[#3D3D3D] group-hover:text-[#FF6B6B] transition-colors truncate pr-2">
-                    {product.name}
-                  </h3>
-                  <span className="text-[#888888] font-medium text-sm shrink-0">
-                    {product.price}
-                  </span>
+                  <p className="text-[#888888] text-xs">
+                    {filters[product.category as keyof typeof filters] ||
+                      product.category}
+                  </p>
                 </div>
-                <p className="text-[#888888] text-xs">
-                  {filters[product.category as keyof typeof filters] ||
-                    product.category}
-                </p>
-              </div>
-            </div>
-          ))}
+              </Wrapper>
+            );
+          })}
         </div>
 
         {/* Signature Pieces Section */}

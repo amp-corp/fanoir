@@ -10,6 +10,7 @@ export type ProductForDisplay = {
   name: string;
   price: string;
   comingSoon: boolean;
+  link: string | null;
 };
 
 export type CollectionForDisplay = {
@@ -42,7 +43,8 @@ export async function getProducts(locale: string): Promise<ProductForDisplay[]> 
       category: p.category,
       name: t.name,
       price: t.price,
-      comingSoon: p.comingSoon,
+      comingSoon: p.comingSoon && (!p.comingSoonUntil || new Date() < new Date(p.comingSoonUntil)),
+      link: p.link,
     };
   });
 }
@@ -94,7 +96,8 @@ export async function getCollectionBySlug(slug: string, locale: string): Promise
       category: cp.product.category,
       name: pt.name,
       price: pt.price,
-      comingSoon: cp.product.comingSoon,
+      comingSoon: cp.product.comingSoon && (!cp.product.comingSoonUntil || new Date() < new Date(cp.product.comingSoonUntil)),
+      link: cp.product.link,
     };
   });
 

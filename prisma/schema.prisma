@@ -13,8 +13,10 @@ model Product {
   badgeText    String?
   badgeColor   String?
   category     String
-  comingSoon   Boolean             @default(false)
-  order        Int                 @default(0)
+  comingSoon      Boolean             @default(false)
+  comingSoonUntil DateTime?
+  link            String?
+  order           Int                 @default(0)
   translations Json
   createdAt    DateTime            @default(now())
   updatedAt    DateTime            @updatedAt
