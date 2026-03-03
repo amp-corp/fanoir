@@ -75,7 +75,7 @@ export default function CollectionBannerSlider({
             key={i}
             onClick={() => scrollToPage(i)}
             className={`size-2 rounded-full transition-colors ${
-              currentPage === i ? 'bg-[#d0b476]' : 'bg-[#e8e0d4]'
+              currentPage === i ? 'bg-[#FF6B6B]' : 'bg-[#FFE0E0]'
             }`}
           />
         ))}
@@ -95,11 +95,11 @@ function BannerCard({
 }) {
   const labelStyle =
     index === 0
-      ? 'bg-[#d0b476]/90 text-white'
+      ? 'bg-[#FF6B6B]/90 text-white'
       : 'bg-white/20 backdrop-blur-md text-white';
 
   return (
-    <div className="group relative overflow-hidden rounded-xl bg-[#f5f0e8] aspect-[21/9]">
+    <div className="group relative overflow-hidden rounded-xl bg-[#FFF0F0] aspect-[21/9]">
       <Image
         src={banner.image}
         alt={banner.title}
@@ -122,7 +122,7 @@ function BannerCard({
         </p>
         <Link
           href={localePath(`/collection/${banner.slug}`)}
-          className="mt-4 bg-white text-black px-6 py-2.5 rounded-lg text-sm font-bold hover:bg-[#d0b476] hover:text-white transition-all w-fit"
+          className="mt-4 bg-white text-black px-6 py-2.5 rounded-lg text-sm font-bold hover:bg-[#FF6B6B] hover:text-white transition-all w-fit"
         >
           {banner.cta}
         </Link>

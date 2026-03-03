@@ -28,10 +28,10 @@ function parseRawPrice(formatted: string): string {
 
 const BADGE_PRESETS = [
   { label: 'None', hex: '' },
-  { label: 'Gold', hex: '#d0b476' },
+  { label: 'Coral', hex: '#FF6B6B' },
   { label: 'Red', hex: '#ef4444' },
   { label: 'Blue', hex: '#3b82f6' },
-  { label: 'Black', hex: '#1e1b14' },
+  { label: 'Black', hex: '#3D3D3D' },
   { label: 'Green', hex: '#22c55e' },
 ] as const;
 
@@ -176,7 +176,7 @@ export default function ProductForm({ id }: { id?: string }) {
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#d0b476]"
+              className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]"
             >
               {CATEGORIES.map((c) => (
                 <option key={c.key} value={c.key}>{c.label}</option>
@@ -189,7 +189,7 @@ export default function ProductForm({ id }: { id?: string }) {
               type="number"
               value={order}
               onChange={(e) => setOrder(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#d0b476]"
+              className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]"
             />
           </div>
           <div>
@@ -197,7 +197,7 @@ export default function ProductForm({ id }: { id?: string }) {
             <input
               value={badgeText}
               onChange={(e) => setBadgeText(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#d0b476]"
+              className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]"
               placeholder="HOT, NEW, etc."
             />
           </div>
@@ -214,7 +214,7 @@ export default function ProductForm({ id }: { id?: string }) {
                   title={preset.label}
                   onClick={() => setBadgeColor(preset.hex ? `bg-[${preset.hex}]` : '')}
                   className={`relative w-8 h-8 rounded-full border-2 transition-all ${
-                    isSelected ? 'border-[#d0b476] scale-110' : 'border-gray-200 hover:border-gray-400'
+                    isSelected ? 'border-[#FF6B6B] scale-110' : 'border-gray-200 hover:border-gray-400'
                   }`}
                   style={preset.hex ? { backgroundColor: preset.hex } : undefined}
                 >
@@ -236,7 +236,7 @@ export default function ProductForm({ id }: { id?: string }) {
                     <button
                       type="button"
                       title={currentHex}
-                      className="relative w-8 h-8 rounded-full border-2 border-[#d0b476] scale-110 transition-all"
+                      className="relative w-8 h-8 rounded-full border-2 border-[#FF6B6B] scale-110 transition-all"
                       style={{ backgroundColor: currentHex }}
                       onClick={() => {/* already selected */}}
                     >
@@ -246,7 +246,7 @@ export default function ProductForm({ id }: { id?: string }) {
                   <label className="relative w-8 h-8 rounded-full border-2 border-dashed border-gray-300 hover:border-gray-400 cursor-pointer overflow-hidden transition-all" title="Custom color">
                     <input
                       type="color"
-                      value={currentHex || '#d0b476'}
+                      value={currentHex || '#FF6B6B'}
                       onChange={(e) => setBadgeColor(`bg-[${e.target.value}]`)}
                       className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                     />
@@ -269,7 +269,7 @@ export default function ProductForm({ id }: { id?: string }) {
             value={rawPrice}
             onChange={(e) => setRawPrice(e.target.value.replace(/\D/g, ''))}
             placeholder="45000"
-            className="w-48 px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#d0b476]"
+            className="w-48 px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]"
           />
           {rawPrice && (
             <span className="text-sm text-gray-500">{formatKRW(rawPrice)}</span>
@@ -286,7 +286,7 @@ export default function ProductForm({ id }: { id?: string }) {
             type="button"
             onClick={handleAutoTranslate}
             disabled={translating}
-            className="px-3 py-1.5 text-xs font-medium rounded-lg border border-[#d0b476] text-[#d0b476] hover:bg-[#d0b476]/10 disabled:opacity-50 transition-colors"
+            className="px-3 py-1.5 text-xs font-medium rounded-lg border border-[#FF6B6B] text-[#FF6B6B] hover:bg-[#FF6B6B]/10 disabled:opacity-50 transition-colors"
           >
             {translating ? 'Translating...' : 'Auto Translate'}
           </button>
@@ -300,7 +300,7 @@ export default function ProductForm({ id }: { id?: string }) {
           <input
             value={t.name}
             onChange={(e) => updateTranslation('name', e.target.value)}
-            className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#d0b476]"
+            className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]"
           />
         </div>
       </section>
@@ -310,7 +310,7 @@ export default function ProductForm({ id }: { id?: string }) {
         <button
           type="submit"
           disabled={saving}
-          className="px-6 py-2.5 bg-[#1e1b14] text-white text-sm font-medium rounded-lg hover:bg-[#1e1b14]/90 disabled:opacity-50 transition-colors"
+          className="px-6 py-2.5 bg-[#FF6B6B] text-white text-sm font-medium rounded-lg hover:bg-[#FF8585] disabled:opacity-50 transition-colors"
         >
           {saving ? 'Saving...' : isEdit ? 'Update' : 'Create'}
         </button>

@@ -265,7 +265,7 @@ function Step({
   return (
     <div className="flex flex-col gap-2 p-4 bg-gray-50 rounded-lg">
       <div className="flex items-center gap-2">
-        <span className="flex items-center justify-center w-6 h-6 rounded-full bg-[#d0b476] text-white text-xs font-bold">
+        <span className="flex items-center justify-center w-6 h-6 rounded-full bg-[#FF6B6B] text-white text-xs font-bold">
           {step}
         </span>
         <span className="text-sm font-bold text-gray-900">{title}</span>

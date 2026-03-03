@@ -118,17 +118,17 @@ export default function Collection({
   }
 
   return (
-    <section className="bg-[#FAF8F5] min-h-screen">
+    <section className="bg-[#FFFFFF] min-h-screen">
       <div className="max-w-7xl w-full mx-auto px-4 md:px-8 lg:px-12 py-24 flex flex-col gap-10">
         {/* Featured Collaborations */}
         <div>
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-[#1e1b14]">
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-[#3D3D3D]">
               {t.collection.title}
             </h2>
             <Link
               href={localePath('/collection/all')}
-              className="text-sm font-medium text-[#d0b476] hover:text-[#d0b476]/80 flex items-center gap-1"
+              className="text-sm font-medium text-[#FF6B6B] hover:text-[#FF6B6B]/80 flex items-center gap-1"
             >
               {t.collection.viewAll}
               <span className="material-symbols-outlined text-[16px]!">
@@ -141,7 +141,7 @@ export default function Collection({
         </div>
 
         {/* Filter & Sort Bar */}
-        <div className="sticky top-[73px] z-40 bg-[#FAF8F5]/95 backdrop-blur-sm py-4 border-b border-[#e8e0d4]">
+        <div className="sticky top-[73px] z-40 bg-[#FFFFFF]/95 backdrop-blur-sm py-4 border-b border-[#FFE0E0]">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             {/* Categories */}
             <div className="flex overflow-x-auto pb-2 md:pb-0 gap-2">
@@ -154,8 +154,8 @@ export default function Collection({
                   }}
                   className={`whitespace-nowrap px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${
                     activeFilter === key
-                      ? 'bg-[#d0b476] text-white'
-                      : 'bg-[#f5f0e8] text-[#6b6355] hover:bg-[#e8e0d4]'
+                      ? 'bg-[#FF6B6B] text-white'
+                      : 'bg-[#FFF0F0] text-[#666666] hover:bg-[#FFE0E0]'
                   }`}
                 >
                   {filters[key]}
@@ -167,7 +167,7 @@ export default function Collection({
             <div className="relative flex items-center gap-3" ref={sortRef}>
               <button
                 onClick={() => setSortOpen((v) => !v)}
-                className="flex items-center gap-2 px-4 py-2 bg-[#f5f0e8] rounded-lg text-sm font-medium text-[#6b6355]"
+                className="flex items-center gap-2 px-4 py-2 bg-[#FFF0F0] rounded-lg text-sm font-medium text-[#666666]"
               >
                 <span className="material-symbols-outlined text-[18px]!">
                   sort
@@ -181,15 +181,15 @@ export default function Collection({
               </button>
 
               {sortOpen && (
-                <div className="absolute top-full right-0 mt-1 bg-white rounded-lg shadow-lg border border-[#e8e0d4] py-1 min-w-[180px] z-50">
+                <div className="absolute top-full right-0 mt-1 bg-white rounded-lg shadow-lg border border-[#FFE0E0] py-1 min-w-[180px] z-50">
                   {SORT_KEYS.map((key) => (
                     <button
                       key={key}
                       onClick={() => handleSort(key)}
                       className={`w-full text-left px-4 py-2.5 text-sm transition-colors ${
                         sort === key
-                          ? 'bg-[#f5f0e8] text-[#d0b476] font-semibold'
-                          : 'text-[#6b6355] hover:bg-[#FAF8F5]'
+                          ? 'bg-[#FFF0F0] text-[#FF6B6B] font-semibold'
+                          : 'text-[#666666] hover:bg-[#FFFFFF]'
                       }`}
                     >
                       {sortOptions[key]}
@@ -198,7 +198,7 @@ export default function Collection({
                 </div>
               )}
 
-              <button className="flex md:hidden items-center justify-center p-2 bg-[#f5f0e8] rounded-lg text-[#6b6355]">
+              <button className="flex md:hidden items-center justify-center p-2 bg-[#FFF0F0] rounded-lg text-[#666666]">
                 <span className="material-symbols-outlined text-[20px]!">
                   filter_list
                 </span>
@@ -211,7 +211,7 @@ export default function Collection({
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10">
           {paged.map((product) => (
             <div key={product.id} className="group flex flex-col gap-3">
-              <div className="relative aspect-square overflow-hidden rounded-xl bg-[#f5f0e8]">
+              <div className="relative aspect-square overflow-hidden rounded-xl bg-[#FFF0F0]">
                 <Image
                   src={product.image}
                   alt={product.name}
@@ -222,7 +222,7 @@ export default function Collection({
                 {product.badgeText && (
                   <div
                     className="absolute top-3 left-3 text-white text-[10px] font-bold px-2 py-1 rounded"
-                    style={{ backgroundColor: product.badgeColor?.match(/^bg-\[(.+)\]$/)?.[1] || '#d0b476' }}
+                    style={{ backgroundColor: product.badgeColor?.match(/^bg-\[(.+)\]$/)?.[1] || '#FF6B6B' }}
                   >
                     {product.badgeText}
                   </div>
@@ -230,14 +230,14 @@ export default function Collection({
               </div>
               <div>
                 <div className="flex justify-between items-start">
-                  <h3 className="font-medium text-base truncate pr-2 text-[#1e1b14]">
+                  <h3 className="font-medium text-base truncate pr-2 text-[#3D3D3D]">
                     {product.name}
                   </h3>
-                  <p className="font-bold text-sm text-[#1e1b14]">
+                  <p className="font-bold text-sm text-[#3D3D3D]">
                     {product.price}
                   </p>
                 </div>
-                <p className="text-[#8a7b5c] text-xs mt-1">
+                <p className="text-[#888888] text-xs mt-1">
                   {filters[product.category as keyof typeof filters] ||
                     product.category}
                 </p>
@@ -252,7 +252,7 @@ export default function Collection({
             <button
               disabled={currentPage <= 1}
               onClick={() => handlePage(currentPage - 1)}
-              className="flex items-center justify-center size-10 rounded-lg text-[#8a7b5c] hover:bg-[#f5f0e8] disabled:opacity-50"
+              className="flex items-center justify-center size-10 rounded-lg text-[#888888] hover:bg-[#FFF0F0] disabled:opacity-50"
             >
               <span className="material-symbols-outlined text-[20px]!">
                 chevron_left
@@ -263,7 +263,7 @@ export default function Collection({
               p === '...' ? (
                 <span
                   key={`dots-${i}`}
-                  className="flex items-center justify-center size-10 text-[#8a7b5c]"
+                  className="flex items-center justify-center size-10 text-[#888888]"
                 >
                   ...
                 </span>
@@ -273,8 +273,8 @@ export default function Collection({
                   onClick={() => handlePage(p)}
                   className={`flex items-center justify-center size-10 rounded-lg font-medium text-sm transition-colors ${
                     currentPage === p
-                      ? 'bg-[#d0b476] text-white font-bold shadow-md shadow-[#d0b476]/30'
-                      : 'text-[#1e1b14] hover:bg-[#f5f0e8]'
+                      ? 'bg-[#FF6B6B] text-white font-bold shadow-md shadow-[#FF6B6B]/30'
+                      : 'text-[#3D3D3D] hover:bg-[#FFF0F0]'
                   }`}
                 >
                   {p}
@@ -285,7 +285,7 @@ export default function Collection({
             <button
               disabled={currentPage >= totalPages}
               onClick={() => handlePage(currentPage + 1)}
-              className="flex items-center justify-center size-10 rounded-lg text-[#1e1b14] hover:bg-[#f5f0e8] hover:text-[#d0b476] disabled:opacity-50 transition-colors"
+              className="flex items-center justify-center size-10 rounded-lg text-[#3D3D3D] hover:bg-[#FFF0F0] hover:text-[#FF6B6B] disabled:opacity-50 transition-colors"
             >
               <span className="material-symbols-outlined text-[20px]!">
                 chevron_right

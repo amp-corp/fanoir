@@ -29,7 +29,7 @@ export default function Header() {
   ];
 
   return (
-    <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-white/10 px-4 py-4 md:px-10 lg:px-40 fixed top-0 w-full z-50 backdrop-blur-md bg-[#1e1b14]/90">
+    <header className="flex items-center justify-between whitespace-nowrap border-b border-gray-100 px-4 py-4 md:px-10 lg:px-40 fixed top-0 w-full z-50 backdrop-blur-md bg-white/95">
       {/* Logo */}
       <a href={localePath('/')} className="flex items-center">
         <Image
@@ -38,6 +38,7 @@ export default function Header() {
           width={120}
           height={40}
           className="h-5 w-auto"
+          style={{ filter: 'brightness(0) invert(52%) sepia(96%) saturate(1932%) hue-rotate(326deg) brightness(102%) contrast(103%)' }}
           priority
         />
       </a>
@@ -48,7 +49,7 @@ export default function Header() {
           <a
             key={l.href}
             href={l.href}
-            className="text-white hover:text-[#caa963] transition-colors text-sm font-medium leading-normal tracking-wide"
+            className="text-[#3D3D3D] hover:text-[#FF6B6B] transition-colors text-sm font-medium leading-normal tracking-wide"
           >
             {l.label}
           </a>
@@ -58,7 +59,7 @@ export default function Header() {
       {/* Right icons */}
       <div className="flex items-center gap-4">
         <button
-          className="flex items-center justify-center rounded-full size-10 text-white hover:text-[#caa963] transition-colors"
+          className="flex items-center justify-center rounded-full size-10 text-[#3D3D3D] hover:text-[#FF6B6B] transition-colors"
           aria-label="Search"
         >
           <span className="material-symbols-outlined">search</span>
@@ -67,12 +68,12 @@ export default function Header() {
         <div ref={langRef} className="relative hidden md:block">
           <button
             onClick={() => setLangOpen(!langOpen)}
-            className="flex items-center justify-start rounded-full size-10 text-white hover:text-[#caa963] transition-colors text-xs font-bold tracking-wider"
+            className="flex items-center justify-start rounded-full size-10 text-[#3D3D3D] hover:text-[#FF6B6B] transition-colors text-xs font-bold tracking-wider"
           >
             {localeLabels[locale]}
           </button>
           {langOpen && (
-            <div className="absolute right-0 top-full mt-1 bg-[#1e1b14] border border-white/10 rounded-lg py-1 min-w-[48px]">
+            <div className="absolute right-0 top-full mt-1 bg-white border border-gray-100 rounded-lg py-1 min-w-[48px] shadow-lg">
               {locales
                 .filter((l) => l !== locale)
                 .map((l) => (
@@ -82,7 +83,7 @@ export default function Header() {
                       switchLocale(l);
                       setLangOpen(false);
                     }}
-                    className="block w-full px-3 py-1.5 text-xs font-bold text-white hover:text-[#caa963] transition-colors tracking-wider text-center"
+                    className="block w-full px-3 py-1.5 text-xs font-bold text-[#3D3D3D] hover:text-[#FF6B6B] transition-colors tracking-wider text-center"
                   >
                     {localeLabels[l]}
                   </button>
@@ -93,7 +94,7 @@ export default function Header() {
         {/* Mobile menu */}
         <button
           onClick={() => setOpen(!open)}
-          className="md:hidden flex items-center justify-center rounded-full size-10 text-white hover:text-[#caa963] transition-colors"
+          className="md:hidden flex items-center justify-center rounded-full size-10 text-[#3D3D3D] hover:text-[#FF6B6B] transition-colors"
           aria-label="Menu"
         >
           <span className="material-symbols-outlined">
@@ -104,13 +105,13 @@ export default function Header() {
 
       {/* Mobile menu dropdown */}
       {open && (
-        <nav className="absolute top-full left-0 right-0 bg-[#1e1b14] border-t border-white/10 px-6 py-6 flex flex-col gap-5 md:hidden">
+        <nav className="absolute top-full left-0 right-0 bg-white border-t border-gray-100 px-6 py-6 flex flex-col gap-5 md:hidden shadow-lg">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
-              className="text-white hover:text-[#caa963] transition-colors text-sm font-medium tracking-wide"
+              className="text-[#3D3D3D] hover:text-[#FF6B6B] transition-colors text-sm font-medium tracking-wide"
             >
               {l.label}
             </a>
@@ -125,7 +126,7 @@ export default function Header() {
                     switchLocale(l);
                     setOpen(false);
                   }}
-                  className="text-white hover:text-[#caa963] transition-colors text-xs font-bold tracking-wider"
+                  className="text-[#3D3D3D] hover:text-[#FF6B6B] transition-colors text-xs font-bold tracking-wider"
                 >
                   {localeLabels[l]}
                 </button>

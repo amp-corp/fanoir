@@ -43,18 +43,18 @@ export default function CollectionAll({
   }
 
   return (
-    <section className="bg-[#FAF8F5] min-h-screen">
+    <section className="bg-[#FFFFFF] min-h-screen">
       <div className="max-w-7xl w-full mx-auto px-4 md:px-8 lg:px-12 py-24 flex flex-col gap-10">
         {/* Header */}
         <div>
-          <nav className="text-sm text-[#8a7b5c] mb-4 flex items-center gap-1">
-            <Link href={localePath('/collection')} className="hover:text-[#d0b476]">
+          <nav className="text-sm text-[#888888] mb-4 flex items-center gap-1">
+            <Link href={localePath('/collection')} className="hover:text-[#FF6B6B]">
               {t.collection.title}
             </Link>
             <span className="material-symbols-outlined text-[14px]!">chevron_right</span>
-            <span className="text-[#1e1b14]">{t.collection.viewAllTitle}</span>
+            <span className="text-[#3D3D3D]">{t.collection.viewAllTitle}</span>
           </nav>
-          <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-[#1e1b14]">
+          <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-[#3D3D3D]">
             {t.collection.viewAllTitle}
           </h1>
         </div>
@@ -65,7 +65,7 @@ export default function CollectionAll({
             <Link
               key={collab.slug}
               href={localePath(`/collection/${collab.slug}`)}
-              className="group relative overflow-hidden rounded-xl bg-[#f5f0e8] aspect-video md:aspect-4/3 lg:aspect-16/7"
+              className="group relative overflow-hidden rounded-xl bg-[#FFF0F0] aspect-video md:aspect-4/3 lg:aspect-16/7"
             >
               <div
                 className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
@@ -73,7 +73,7 @@ export default function CollectionAll({
               />
               <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
               <div className="absolute bottom-0 left-0 p-6 flex flex-col gap-2">
-                <span className="bg-[#d0b476]/90 text-white text-xs font-bold px-2 py-1 rounded w-fit uppercase tracking-wider">
+                <span className="bg-[#FF6B6B]/90 text-white text-xs font-bold px-2 py-1 rounded w-fit uppercase tracking-wider">
                   {collab.label}
                 </span>
                 <h3 className="text-white text-xl md:text-2xl font-bold italic">
@@ -91,7 +91,7 @@ export default function CollectionAll({
               <button
                 disabled={currentPage <= 1}
                 onClick={() => handlePage(currentPage - 1)}
-                className="flex items-center justify-center size-10 rounded-lg text-[#8a7b5c] hover:bg-[#f5f0e8] disabled:opacity-50"
+                className="flex items-center justify-center size-10 rounded-lg text-[#888888] hover:bg-[#FFF0F0] disabled:opacity-50"
               >
                 <span className="material-symbols-outlined text-[20px]!">
                   chevron_left
@@ -100,7 +100,7 @@ export default function CollectionAll({
 
               {getPageNumbers().map((p, i) =>
                 p === '...' ? (
-                  <span key={`dots-${i}`} className="flex items-center justify-center size-10 text-[#8a7b5c]">
+                  <span key={`dots-${i}`} className="flex items-center justify-center size-10 text-[#888888]">
                     ...
                   </span>
                 ) : (
@@ -109,8 +109,8 @@ export default function CollectionAll({
                     onClick={() => handlePage(p)}
                     className={`flex items-center justify-center size-10 rounded-lg font-medium text-sm transition-colors ${
                       currentPage === p
-                        ? 'bg-[#d0b476] text-white font-bold shadow-md shadow-[#d0b476]/30'
-                        : 'text-[#1e1b14] hover:bg-[#f5f0e8]'
+                        ? 'bg-[#FF6B6B] text-white font-bold shadow-md shadow-[#FF6B6B]/30'
+                        : 'text-[#3D3D3D] hover:bg-[#FFF0F0]'
                     }`}
                   >
                     {p}
@@ -121,7 +121,7 @@ export default function CollectionAll({
               <button
                 disabled={currentPage >= totalPages}
                 onClick={() => handlePage(currentPage + 1)}
-                className="flex items-center justify-center size-10 rounded-lg text-[#1e1b14] hover:bg-[#f5f0e8] hover:text-[#d0b476] disabled:opacity-50 transition-colors"
+                className="flex items-center justify-center size-10 rounded-lg text-[#3D3D3D] hover:bg-[#FFF0F0] hover:text-[#FF6B6B] disabled:opacity-50 transition-colors"
               >
                 <span className="material-symbols-outlined text-[20px]!">
                   chevron_right

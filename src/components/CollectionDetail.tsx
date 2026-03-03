@@ -13,7 +13,7 @@ export default function CollectionDetail({
   const { t, localePath } = useLang();
 
   return (
-    <section className="bg-[#FAF8F5] min-h-screen">
+    <section className="bg-[#FFFFFF] min-h-screen">
       {/* Hero Banner — 21:9 */}
       <div className="relative w-full aspect-[21/9] overflow-hidden">
         <Image
@@ -26,7 +26,7 @@ export default function CollectionDetail({
         />
         <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 max-w-7xl mx-auto px-4 md:px-8 lg:px-12 pb-12 flex flex-col gap-2">
-          <span className="bg-[#d0b476]/90 text-white text-xs font-bold px-2 py-1 rounded w-fit uppercase tracking-wider">
+          <span className="bg-[#FF6B6B]/90 text-white text-xs font-bold px-2 py-1 rounded w-fit uppercase tracking-wider">
             {collection.label}
           </span>
           <h1 className="text-white text-3xl md:text-5xl font-bold italic">
@@ -40,19 +40,19 @@ export default function CollectionDetail({
 
       <div className="max-w-7xl w-full mx-auto px-4 md:px-8 lg:px-12 py-12 flex flex-col gap-10">
         {/* Breadcrumb */}
-        <nav className="text-sm text-[#8a7b5c] flex items-center gap-1">
-          <Link href={localePath('/collection')} className="hover:text-[#d0b476]">
+        <nav className="text-sm text-[#888888] flex items-center gap-1">
+          <Link href={localePath('/collection')} className="hover:text-[#FF6B6B]">
             {t.collection.title}
           </Link>
           <span className="material-symbols-outlined text-[14px]!">chevron_right</span>
-          <span className="text-[#1e1b14]">{collection.title}</span>
+          <span className="text-[#3D3D3D]">{collection.title}</span>
         </nav>
 
         {/* Product Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10">
           {collection.products.map((product) => (
             <div key={product.id} className="group flex flex-col gap-3">
-              <div className="relative aspect-square overflow-hidden rounded-xl bg-[#f5f0e8]">
+              <div className="relative aspect-square overflow-hidden rounded-xl bg-[#FFF0F0]">
                 <Image
                   src={product.image}
                   alt={product.name}
@@ -60,7 +60,7 @@ export default function CollectionDetail({
                   sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                <button className="absolute bottom-4 right-4 bg-white p-2 rounded-full shadow-lg opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:bg-[#d0b476] hover:text-white text-[#1e1b14]">
+                <button className="absolute bottom-4 right-4 bg-white p-2 rounded-full shadow-lg opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:bg-[#FF6B6B] hover:text-white text-[#3D3D3D]">
                   <span className="material-symbols-outlined text-[20px]!">
                     add_shopping_cart
                   </span>
@@ -68,7 +68,7 @@ export default function CollectionDetail({
                 {product.badgeText && (
                   <div
                     className="absolute top-3 left-3 text-white text-[10px] font-bold px-2 py-1 rounded"
-                    style={{ backgroundColor: product.badgeColor?.match(/^bg-\[(.+)\]$/)?.[1] || '#d0b476' }}
+                    style={{ backgroundColor: product.badgeColor?.match(/^bg-\[(.+)\]$/)?.[1] || '#FF6B6B' }}
                   >
                     {product.badgeText}
                   </div>
@@ -76,14 +76,14 @@ export default function CollectionDetail({
               </div>
               <div>
                 <div className="flex justify-between items-start">
-                  <h3 className="font-medium text-base truncate pr-2 text-[#1e1b14]">
+                  <h3 className="font-medium text-base truncate pr-2 text-[#3D3D3D]">
                     {product.name}
                   </h3>
-                  <p className="font-bold text-sm text-[#1e1b14]">
+                  <p className="font-bold text-sm text-[#3D3D3D]">
                     {product.price}
                   </p>
                 </div>
-                <p className="text-[#8a7b5c] text-xs mt-1">
+                <p className="text-[#888888] text-xs mt-1">
                   {t.collection.filters[product.category as keyof typeof t.collection.filters] || product.category}
                 </p>
               </div>

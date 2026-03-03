@@ -147,7 +147,7 @@ export default function CollectionForm({ id }: { id?: string }) {
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="block text-xs font-medium text-gray-500 mb-1">URL 경로</label>
-            <div className="flex items-center gap-0 border border-gray-200 rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-[#d0b476]">
+            <div className="flex items-center gap-0 border border-gray-200 rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-[#FF6B6B]">
               <span className="pl-3 pr-1 py-2 text-sm text-gray-400 select-none whitespace-nowrap">/collections/</span>
               <input
                 value={slug}
@@ -163,7 +163,7 @@ export default function CollectionForm({ id }: { id?: string }) {
               type="number"
               value={order}
               onChange={(e) => setOrder(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#d0b476]"
+              className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]"
             />
           </div>
         </div>
@@ -184,7 +184,7 @@ export default function CollectionForm({ id }: { id?: string }) {
             type="button"
             onClick={handleAutoTranslate}
             disabled={translating}
-            className="px-3 py-1.5 text-xs font-medium rounded-lg border border-[#d0b476] text-[#d0b476] hover:bg-[#d0b476]/10 disabled:opacity-50 transition-colors"
+            className="px-3 py-1.5 text-xs font-medium rounded-lg border border-[#FF6B6B] text-[#FF6B6B] hover:bg-[#FF6B6B]/10 disabled:opacity-50 transition-colors"
           >
             {translating ? 'Translating...' : 'Auto Translate'}
           </button>
@@ -198,7 +198,7 @@ export default function CollectionForm({ id }: { id?: string }) {
           <input
             value={t.label}
             onChange={(e) => updateTranslation('label', e.target.value)}
-            className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#d0b476]"
+            className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]"
             placeholder="NEW DROP"
           />
         </div>
@@ -207,7 +207,7 @@ export default function CollectionForm({ id }: { id?: string }) {
           <input
             value={t.title}
             onChange={(e) => updateTranslation('title', e.target.value)}
-            className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#d0b476]"
+            className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]"
           />
         </div>
         <div>
@@ -216,7 +216,7 @@ export default function CollectionForm({ id }: { id?: string }) {
             value={t.desc}
             onChange={(e) => updateTranslation('desc', e.target.value)}
             rows={3}
-            className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#d0b476] resize-none"
+            className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B] resize-none"
           />
         </div>
       </section>
@@ -250,7 +250,7 @@ export default function CollectionForm({ id }: { id?: string }) {
         <button
           type="submit"
           disabled={saving}
-          className="px-6 py-2.5 bg-[#1e1b14] text-white text-sm font-medium rounded-lg hover:bg-[#1e1b14]/90 disabled:opacity-50 transition-colors"
+          className="px-6 py-2.5 bg-[#FF6B6B] text-white text-sm font-medium rounded-lg hover:bg-[#FF8585] disabled:opacity-50 transition-colors"
         >
           {saving ? 'Saving...' : isEdit ? 'Update' : 'Create'}
         </button>

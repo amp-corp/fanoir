@@ -24,17 +24,17 @@ export default function Identity() {
   ];
 
   return (
-    <section id="identity" className="bg-[#FAF8F5]">
+    <section id="identity" className="bg-[#FFFFFF]">
       <div className="max-w-6xl mx-auto px-6 py-24 md:py-32">
         {/* Header */}
         <div className="mb-16">
-          <p className="text-xs tracking-[0.3em] text-[#caa963] uppercase mb-4">
+          <p className="text-xs tracking-[0.3em] text-[#FF6B6B] uppercase mb-4">
             {t.identity.label}
           </p>
-          <h2 className="text-2xl md:text-4xl font-black text-[#1e1b14] tracking-tight mb-6 leading-tight">
+          <h2 className="text-2xl md:text-4xl font-black text-[#3D3D3D] tracking-tight mb-6 leading-tight">
             {t.identity.title}
           </h2>
-          <p className="text-[#6b6355] leading-relaxed">{t.identity.desc}</p>
+          <p className="text-[#666666] leading-relaxed">{t.identity.desc}</p>
         </div>
 
         {/* Cards */}
@@ -42,27 +42,27 @@ export default function Identity() {
           {cards.map((card) => (
             <div
               key={card.title}
-              className="group relative bg-white border border-[#e8e0d4] rounded-2xl p-8 hover:border-[#caa963]/40 shadow-sm hover:shadow-md transition-all overflow-hidden"
+              className="group relative bg-white border border-[#FFE0E0] rounded-2xl p-8 hover:border-[#FF6B6B]/40 shadow-sm hover:shadow-md transition-all overflow-hidden"
             >
               {/* Decorative hover circle */}
-              <div className="absolute -right-10 -top-10 w-32 h-32 bg-[#caa963]/5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="absolute -right-10 -top-10 w-32 h-32 bg-[#FF6B6B]/5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
 
               {/* Icon */}
               <div className="relative z-10 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-[#f5f0e8] ring-1 ring-[#caa963]/20 flex items-center justify-center">
-                  <span className="material-symbols-outlined text-[#caa963] text-xl!">
+                <div className="w-12 h-12 rounded-xl bg-[#FFF0F0] ring-1 ring-[#FF6B6B]/20 flex items-center justify-center">
+                  <span className="material-symbols-outlined text-[#FF6B6B] text-xl!">
                     {card.icon}
                   </span>
                 </div>
               </div>
 
               {/* Gold separator */}
-              <div className="w-8 h-0.5 bg-linear-to-r from-[#caa963] to-transparent mb-5" />
+              <div className="w-8 h-0.5 bg-linear-to-r from-[#FF6B6B] to-transparent mb-5" />
 
-              <h3 className="relative z-10 text-[#1e1b14] text-lg font-semibold mb-3 tracking-wide">
+              <h3 className="relative z-10 text-[#3D3D3D] text-lg font-semibold mb-3 tracking-wide">
                 {card.title}
               </h3>
-              <p className="relative z-10 text-[#8a8070] text-sm leading-relaxed">
+              <p className="relative z-10 text-[#888888] text-sm leading-relaxed">
                 {card.desc}
               </p>
             </div>
@@ -71,31 +71,28 @@ export default function Identity() {
 
         {/* Join CTA - Image background card */}
         <div className="relative rounded-2xl overflow-hidden">
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: "url('/identity-bg.jpg')" }}
-          />
-          <div className="absolute inset-0 bg-linear-to-r from-[#1e1b14]/90 via-[#1e1b14]/75 to-[#1e1b14]/30" />
+          <div className="absolute inset-0 bg-cover bg-center" />
+          <div className="absolute inset-0 bg-linear-to-r from-[#FF6B6B] via-[#fc7a7a] to-[#ff8d8d]" />
 
           <div className="relative z-10 p-10 md:p-14">
             <div className="max-w-lg">
               <div className="flex items-center gap-2 mb-4">
-                <span className="material-symbols-outlined text-[#caa963] text-base!">
+                <span className="material-symbols-outlined text-white text-base!">
                   diamond
                 </span>
-                <span className="text-xs tracking-[0.3em] text-[#caa963] uppercase">
+                <span className="text-xs tracking-[0.3em] text-white/90 uppercase">
                   {t.identity.noirMovement}
                 </span>
               </div>
-              <h3 className="text-2xl md:text-3xl font-black text-[#F8F8F8] mb-4 tracking-tight">
+              <h3 className="text-2xl md:text-3xl font-black text-white mb-4 tracking-tight">
                 {t.identity.joinTitle}
               </h3>
-              <p className="text-[#beb39d] mb-8 leading-relaxed">
+              <p className="text-white/80 mb-8 leading-relaxed">
                 {t.identity.joinDesc}
               </p>
               <a
                 href={localePath('/collection')}
-                className="inline-flex items-center gap-2 bg-[#caa963] text-[#1e1b14] px-7 py-3.5 text-sm tracking-wider font-bold hover:bg-[#d4b975] transition-colors rounded-full"
+                className="inline-flex items-center gap-2 bg-white text-[#FF6B6B] px-7 py-3.5 text-sm tracking-wider font-bold hover:bg-[#FFF0F0] transition-colors rounded-full"
               >
                 {t.identity.joinCta}
                 <span className="material-symbols-outlined text-lg!">

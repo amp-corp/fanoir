@@ -30,7 +30,7 @@ export default async function Image({
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#1A1A1A",
+          backgroundColor: "#3D3D3D",
           fontFamily: "Georgia, serif",
         }}
       >
@@ -41,11 +41,11 @@ export default async function Image({
           fill="none"
           style={{ marginBottom: 16 }}
         >
-          <line x1="20" y1="2" x2="20" y2="38" stroke="#C9A962" strokeWidth="1.5" />
-          <line x1="2" y1="20" x2="38" y2="20" stroke="#C9A962" strokeWidth="1.5" />
-          <line x1="7" y1="7" x2="33" y2="33" stroke="#C9A962" strokeWidth="1.5" />
-          <line x1="33" y1="7" x2="7" y2="33" stroke="#C9A962" strokeWidth="1.5" />
-          <circle cx="20" cy="20" r="2.5" fill="#C9A962" />
+          <line x1="20" y1="2" x2="20" y2="38" stroke="#FF6B6B" strokeWidth="1.5" />
+          <line x1="2" y1="20" x2="38" y2="20" stroke="#FF6B6B" strokeWidth="1.5" />
+          <line x1="7" y1="7" x2="33" y2="33" stroke="#FF6B6B" strokeWidth="1.5" />
+          <line x1="33" y1="7" x2="7" y2="33" stroke="#FF6B6B" strokeWidth="1.5" />
+          <circle cx="20" cy="20" r="2.5" fill="#FF6B6B" />
         </svg>
 
         <div
@@ -63,7 +63,7 @@ export default async function Image({
           style={{
             fontSize: 24,
             letterSpacing: "0.15em",
-            color: "#C9A962",
+            color: "#FF6B6B",
             marginBottom: 12,
           }}
         >
@@ -85,7 +85,7 @@ export default async function Image({
             bottom: 40,
             width: 60,
             height: 1,
-            backgroundColor: "#C9A962",
+            backgroundColor: "#FF6B6B",
           }}
         />
       </div>

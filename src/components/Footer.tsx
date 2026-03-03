@@ -9,7 +9,7 @@ export default function Footer() {
   return (
     <footer
       id="contact"
-      className="bg-[#1e1b14] border-t border-[#40392b] py-16"
+      className="bg-[#FAFAFA] border-t border-gray-200 py-16"
     >
       <div className="max-w-6xl mx-auto px-6">
         {/* Logo centered */}
@@ -21,7 +21,7 @@ export default function Footer() {
               width={120}
               height={40}
               className="h-6 w-auto"
-              style={{ filter: 'brightness(0) invert(1)' }}
+              style={{ filter: 'brightness(0) invert(52%) sepia(96%) saturate(1932%) hue-rotate(326deg) brightness(102%) contrast(103%)' }}
             />
           </a>
         </div>
@@ -30,7 +30,7 @@ export default function Footer() {
         <div className="flex items-center justify-center gap-6 mb-8">
           <a
             href={localePath('/service/terms')}
-            className="text-sm text-[#6b6355] hover:text-[#beb39d] transition-colors"
+            className="text-sm text-gray-500 hover:text-[#FF6B6B] transition-colors"
           >
             {t.footer.terms}
           </a>
@@ -43,7 +43,7 @@ export default function Footer() {
             href="https://www.instagram.com/fanoir_official"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#6b6355] hover:text-[#caa963] transition-colors"
+            className="text-gray-400 hover:text-[#FF6B6B] transition-colors"
             aria-label="Instagram"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -55,7 +55,7 @@ export default function Footer() {
             href="https://x.com/fanoir_official"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#6b6355] hover:text-[#caa963] transition-colors"
+            className="text-gray-400 hover:text-[#FF6B6B] transition-colors"
             aria-label="X"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -67,7 +67,7 @@ export default function Footer() {
             href="https://www.tiktok.com/@fanoir_official"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#6b6355] hover:text-[#caa963] transition-colors"
+            className="text-gray-400 hover:text-[#FF6B6B] transition-colors"
             aria-label="TikTok"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -79,7 +79,7 @@ export default function Footer() {
             href="https://www.youtube.com/@fanoir_official"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#6b6355] hover:text-[#caa963] transition-colors"
+            className="text-gray-400 hover:text-[#FF6B6B] transition-colors"
             aria-label="YouTube"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -89,7 +89,7 @@ export default function Footer() {
         </div>
 
         {/* Copyright */}
-        <p className="text-center text-[#6b6355] text-xs">
+        <p className="text-center text-gray-400 text-xs">
           &copy; 2025 FANOIR. {t.footer.copyright}
         </p>
       </div>
