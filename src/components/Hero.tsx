@@ -60,7 +60,7 @@ export default function Hero({ heroImage }: { heroImage?: string }) {
             style={{ textShadow: 'none' }}
           >
             <a
-              href={localePath('/#products')}
+              href={localePath('/products')}
               className="group flex items-center justify-center rounded-full h-14 px-8 bg-[#FF6B6B] text-white text-sm font-bold leading-normal tracking-wide hover:bg-[#FF8585] transition-all transform hover:scale-105"
             >
               <span>{t.hero.cta1}</span>

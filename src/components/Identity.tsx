@@ -91,7 +91,7 @@ export default function Identity() {
                 {t.identity.joinDesc}
               </p>
               <a
-                href={localePath('/collection')}
+                href={localePath('/products')}
                 className="inline-flex items-center gap-2 bg-white text-[#FF6B6B] px-7 py-3.5 text-sm tracking-wider font-bold hover:bg-[#FFF0F0] transition-colors rounded-full"
               >
                 {t.identity.joinCta}

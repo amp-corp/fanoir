@@ -55,7 +55,8 @@ export default function ProductForm({ id }: { id?: string }) {
   const [comingSoonUntil, setComingSoonUntil] = useState('');
   const [link, setLink] = useState('');
   const [order, setOrder] = useState(0);
-  const [translations, setTranslations] = useState<Record<string, ProductTranslation>>(emptyTranslations());
+  const [translations, setTranslations] =
+    useState<Record<string, ProductTranslation>>(emptyTranslations());
   const [activeLocale, setActiveLocale] = useState('ko');
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -74,12 +75,21 @@ export default function ProductForm({ id }: { id?: string }) {
         setBadgeColor(data.badgeColor || '');
         setCategory(data.category);
         setComingSoon(data.comingSoon ?? false);
-        setComingSoonUntil(data.comingSoonUntil ? new Date(data.comingSoonUntil).toISOString().slice(0, 16) : '');
+        setComingSoonUntil(
+          data.comingSoonUntil
+            ? new Date(data.comingSoonUntil).toISOString().slice(0, 16)
+            : '',
+        );
         setLink(data.link || '');
         setOrder(data.order);
         setTranslations(data.translations);
-        const txs = data.translations as Record<string, ProductTranslation> | undefined;
-        const anyPrice = txs?.ko?.price || Object.values(txs || {}).find((t) => t.price)?.price || '';
+        const txs = data.translations as
+          | Record<string, ProductTranslation>
+          | undefined;
+        const anyPrice =
+          txs?.ko?.price ||
+          Object.values(txs || {}).find((t) => t.price)?.price ||
+          '';
         setRawPrice(parseRawPrice(anyPrice));
       })
       .finally(() => setLoading(false));
@@ -109,7 +119,11 @@ export default function ProductForm({ id }: { id?: string }) {
       const res = await fetch('/api/admin/translate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ texts: textsToTranslate, sourceLocale: activeLocale, targetLocales }),
+        body: JSON.stringify({
+          texts: textsToTranslate,
+          sourceLocale: activeLocale,
+          targetLocales,
+        }),
       });
 
       if (!res.ok) {
@@ -121,7 +135,8 @@ export default function ProductForm({ id }: { id?: string }) {
       setTranslations((prev) => {
         const next = { ...prev };
         for (const locale of targetLocales) {
-          if (result[locale]) next[locale] = { ...prev[locale], ...result[locale] };
+          if (result[locale])
+            next[locale] = { ...prev[locale], ...result[locale] };
         }
         return next;
       });
@@ -138,13 +153,18 @@ export default function ProductForm({ id }: { id?: string }) {
 
     const formattedPrice = formatKRW(rawPrice);
     const finalTranslations = Object.fromEntries(
-      LOCALES.map((l) => [l, { ...translations[l], price: formattedPrice }])
+      LOCALES.map((l) => [l, { ...translations[l], price: formattedPrice }]),
     );
     const body = {
-      image, badgeText, badgeColor, category, comingSoon,
+      image,
+      badgeText,
+      badgeColor,
+      category,
+      comingSoon,
       comingSoonUntil: comingSoonUntil || null,
       link: link.trim() || null,
-      order, translations: finalTranslations,
+      order,
+      translations: finalTranslations,
     };
     const url = isEdit ? `/api/admin/products/${id}` : '/api/admin/products';
     const method = isEdit ? 'PUT' : 'POST';
@@ -175,27 +195,37 @@ export default function ProductForm({ id }: { id?: string }) {
       <section className="bg-white rounded-xl border border-gray-200 p-6 flex flex-col gap-4">
         <h2 className="text-sm font-semibold text-gray-900">Basic Info</h2>
         <div>
-          <label className="block text-xs font-medium text-gray-500 mb-1">Image</label>
+          <label className="block text-xs font-medium text-gray-500 mb-1">
+            Image
+          </label>
           <p className="text-xs text-red-500 mb-1">
-            비율 {IMAGE_SPECS.product.ratioLabel} · 권장 {IMAGE_SPECS.product.width}x{IMAGE_SPECS.product.height}px · 최대 {formatBytes(IMAGE_SPECS.product.maxUploadSize)}
+            비율 {IMAGE_SPECS.product.ratioLabel} · 권장{' '}
+            {IMAGE_SPECS.product.width}x{IMAGE_SPECS.product.height}px · 최대{' '}
+            {formatBytes(IMAGE_SPECS.product.maxUploadSize)}
           </p>
           <ImageUpload value={image} onChange={setImage} variant="product" />
         </div>
         <div className="grid grid-cols-3 gap-4">
           <div>
-            <label className="block text-xs font-medium text-gray-500 mb-1">Category</label>
+            <label className="block text-xs font-medium text-gray-500 mb-1">
+              Category
+            </label>
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
               className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]"
             >
               {CATEGORIES.map((c) => (
-                <option key={c.key} value={c.key}>{c.label}</option>
+                <option key={c.key} value={c.key}>
+                  {c.label}
+                </option>
               ))}
             </select>
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-500 mb-1">Order</label>
+            <label className="block text-xs font-medium text-gray-500 mb-1">
+              Order
+            </label>
             <input
               type="number"
               value={order}
@@ -204,7 +234,9 @@ export default function ProductForm({ id }: { id?: string }) {
             />
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-500 mb-1">Badge Text</label>
+            <label className="block text-xs font-medium text-gray-500 mb-1">
+              Badge Text
+            </label>
             <input
               value={badgeText}
               onChange={(e) => setBadgeText(e.target.value)}
@@ -214,12 +246,14 @@ export default function ProductForm({ id }: { id?: string }) {
           </div>
         </div>
         <div>
-          <label className="block text-xs font-medium text-gray-500 mb-1">Product Link (URL)</label>
+          <label className="block text-xs font-medium text-gray-500 mb-1">
+            Product Link (URL)
+          </label>
           <input
             type="url"
             value={link}
             onChange={(e) => setLink(e.target.value)}
-            placeholder="https://shop.example.com/product"
+            placeholder="https://shop.duckzill.com/goods/goods_view.php?goodsNo=상품번호"
             className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]"
           />
         </div>
@@ -244,38 +278,55 @@ export default function ProductForm({ id }: { id?: string }) {
               className="w-64 px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]"
             />
             <p className="text-xs text-gray-400 mt-1">
-              Set a date to automatically release this product. Leave empty for manual control.
+              Set a date to automatically release this product. Leave empty for
+              manual control.
             </p>
           </div>
         )}
         <div>
-          <label className="block text-xs font-medium text-gray-500 mb-1">Badge Color</label>
+          <label className="block text-xs font-medium text-gray-500 mb-1">
+            Badge Color
+          </label>
           <div className="flex items-center gap-2 flex-wrap">
             {BADGE_PRESETS.map((preset) => {
-              const isSelected = preset.hex === '' ? badgeColor === '' : badgeColor === `bg-[${preset.hex}]`;
+              const isSelected =
+                preset.hex === ''
+                  ? badgeColor === ''
+                  : badgeColor === `bg-[${preset.hex}]`;
               return (
                 <button
                   key={preset.label}
                   type="button"
                   title={preset.label}
-                  onClick={() => setBadgeColor(preset.hex ? `bg-[${preset.hex}]` : '')}
+                  onClick={() =>
+                    setBadgeColor(preset.hex ? `bg-[${preset.hex}]` : '')
+                  }
                   className={`relative w-8 h-8 rounded-full border-2 transition-all ${
-                    isSelected ? 'border-[#FF6B6B] scale-110' : 'border-gray-200 hover:border-gray-400'
+                    isSelected
+                      ? 'border-[#FF6B6B] scale-110'
+                      : 'border-gray-200 hover:border-gray-400'
                   }`}
-                  style={preset.hex ? { backgroundColor: preset.hex } : undefined}
+                  style={
+                    preset.hex ? { backgroundColor: preset.hex } : undefined
+                  }
                 >
                   {!preset.hex && (
-                    <span className="absolute inset-0 flex items-center justify-center text-gray-400 text-xs">&#x2205;</span>
+                    <span className="absolute inset-0 flex items-center justify-center text-gray-400 text-xs">
+                      &#x2205;
+                    </span>
                   )}
                   {isSelected && preset.hex && (
-                    <span className="absolute inset-0 flex items-center justify-center text-white text-xs font-bold drop-shadow">&#10003;</span>
+                    <span className="absolute inset-0 flex items-center justify-center text-white text-xs font-bold drop-shadow">
+                      &#10003;
+                    </span>
                   )}
                 </button>
               );
             })}
             {(() => {
               const currentHex = hexFromBadgeColor(badgeColor);
-              const isCustom = currentHex && !BADGE_PRESETS.some((p) => p.hex === currentHex);
+              const isCustom =
+                currentHex && !BADGE_PRESETS.some((p) => p.hex === currentHex);
               return (
                 <>
                   {isCustom && (
@@ -284,19 +335,28 @@ export default function ProductForm({ id }: { id?: string }) {
                       title={currentHex}
                       className="relative w-8 h-8 rounded-full border-2 border-[#FF6B6B] scale-110 transition-all"
                       style={{ backgroundColor: currentHex }}
-                      onClick={() => {/* already selected */}}
+                      onClick={() => {
+                        /* already selected */
+                      }}
                     >
-                      <span className="absolute inset-0 flex items-center justify-center text-white text-xs font-bold drop-shadow">&#10003;</span>
+                      <span className="absolute inset-0 flex items-center justify-center text-white text-xs font-bold drop-shadow">
+                        &#10003;
+                      </span>
                     </button>
                   )}
-                  <label className="relative w-8 h-8 rounded-full border-2 border-dashed border-gray-300 hover:border-gray-400 cursor-pointer overflow-hidden transition-all" title="Custom color">
+                  <label
+                    className="relative w-8 h-8 rounded-full border-2 border-dashed border-gray-300 hover:border-gray-400 cursor-pointer overflow-hidden transition-all"
+                    title="Custom color"
+                  >
                     <input
                       type="color"
                       value={currentHex || '#FF6B6B'}
                       onChange={(e) => setBadgeColor(`bg-[${e.target.value}]`)}
                       className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                     />
-                    <span className="absolute inset-0 flex items-center justify-center text-gray-400 text-xs">+</span>
+                    <span className="absolute inset-0 flex items-center justify-center text-gray-400 text-xs">
+                      +
+                    </span>
                   </label>
                 </>
               );
@@ -321,7 +381,9 @@ export default function ProductForm({ id }: { id?: string }) {
             <span className="text-sm text-gray-500">{formatKRW(rawPrice)}</span>
           )}
         </div>
-        <p className="text-xs text-gray-400">숫자만 입력하면 모든 로케일에 ₩ 포맷으로 저장됩니다.</p>
+        <p className="text-xs text-gray-400">
+          숫자만 입력하면 모든 로케일에 ₩ 포맷으로 저장됩니다.
+        </p>
       </section>
 
       {/* Translations */}
@@ -342,7 +404,9 @@ export default function ProductForm({ id }: { id?: string }) {
         )}
         <LocaleTabs activeLocale={activeLocale} onChange={setActiveLocale} />
         <div>
-          <label className="block text-xs font-medium text-gray-500 mb-1">Name</label>
+          <label className="block text-xs font-medium text-gray-500 mb-1">
+            Name
+          </label>
           <input
             value={t.name}
             onChange={(e) => updateTranslation('name', e.target.value)}

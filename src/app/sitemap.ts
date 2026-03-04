@@ -5,7 +5,7 @@ import { getCollectionSlugs } from "@/lib/db-queries";
 const SITE_URL = "https://fanoir.vercel.app";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const staticPages = ["", "/collection", "/service/terms"];
+  const staticPages = ["", "/products", "/collection", "/service/terms"];
 
   const staticEntries = staticPages.flatMap((page) =>
     locales.map((locale) => ({

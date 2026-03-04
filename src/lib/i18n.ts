@@ -32,13 +32,13 @@ export const translations = {
     identity: {
       label: 'WHO WE ARE',
       title: '마음에 드는 게 없어서 직접 만들기로 했어요',
-      desc: '콘서트 전날 응원봉 꾸미고 인형한테 새 옷 입히는 그 시간이 제일 좋잖아요. 그래서 그 순간에 쓸 것들을 우리가 직접 만들게 됐어요.',
+      desc: 'FANOIR는 콘서트 전날의 설렘에서 시작됐어요. 응원봉 꾸미고, 인형한테 새 옷 입히는 그 시간 — 그 순간에 쓸 케이팝 팬덤 굿즈를 우리가 직접 만들게 됐어요.',
       meaningTitle: 'Fan + Noir',
       meaningDesc:
         "Fan(팬) + Noir(프랑스어로 '검정'). 좋아하는 마음은 진심인데 표현까지 멋있으면 더 좋잖아요.",
       roleTitle: '우리가 하는 일',
       roleDesc:
-        '인형한테 딱 맞는 옷 콘서트장에서 빛나는 응원 소품. 직접 써보고 괜찮은 것만 내놓아요.',
+        '인형옷, 미니슬로건, 응원봉 꾸미기, 스크런치, 키링 등 — 직접 써보고 괜찮은 것만 내놓아요.',
       visionTitle: '우리가 바라는 것',
       visionDesc:
         '응원도, 꾸미기도, 일상도 — 좋아하는 마음이 눈에 보일 때가 제일 행복하잖아요.',
@@ -50,34 +50,7 @@ export const translations = {
     showcase: {
       label: '이런 거 만들어요',
       title: '자신 있는 것들만 올려요',
-      desc: '콘서트장에 들고 가봤는데 진짜 괜찮더라고요. 그런 것만 모았어요.',
-      products: [
-        {
-          name: '인형 원피스 세트',
-          price: '₩45,000',
-          desc: '20cm 인형용 · 벨벳 소재 · 레이스 디테일',
-        },
-        {
-          name: '라이트스틱 스트랩',
-          price: '₩18,000',
-          desc: '조절 가능 · 골드 참 장식 · 콘서트 필수템',
-        },
-        {
-          name: '미니슬로건',
-          price: '₩15,000',
-          desc: '양면 인쇄 · 멤버 컬러 맞춤 · 총공용',
-        },
-        {
-          name: '벨벳 스크런치',
-          price: '₩12,000',
-          desc: '순수 벨벳 소재 · 모발 손상 없는 착용감',
-        },
-        {
-          name: '우치와커버',
-          price: '₩8,000',
-          desc: '투명 보호 커버 · 표준 사이즈 호환',
-        },
-      ],
+      desc: '인형옷부터 응원용품, 키링까지 — 콘서트장에 직접 들고 가서 써본 것들만 모았어요.',
       bestseller: 'Bestseller',
       comingSoon: 'Coming Soon',
       karatValue: '100%',
@@ -85,16 +58,16 @@ export const translations = {
       premiumQuality: '우리가 직접 써본 것들',
       signatureLabel: 'HOW WE MAKE',
       signatureTitle: '하나하나, 손이 가는 대로',
-      signatureDesc: '소재 고르는 것부터 마무리까지, 전부 직접 챙겨요.',
+      signatureDesc: '소재 고르는 것부터 마무리까지, 하나하나 핸드메이드로 직접 챙겨요.',
       feature1Title: '멤버별 컬러 매칭',
       feature1Desc: '최애 컬러에 맞춰서 하나하나 골랐어요',
       feature2Title: '검증된 소재',
       feature2Desc: '써보고 괜찮은 것만 고집해요',
-      viewMore: '전부 보기',
+      viewMore: '더 보기',
     },
-    collection: {
-      title: '컬렉션',
-      viewAll: '전체 보기',
+    product: {
+      title: '상품',
+      viewAll: '더 보기',
       filters: {
         all: '전체',
         dolls: '인형',
@@ -102,13 +75,16 @@ export const translations = {
         fashion: '패션소품',
         keyrings: '키링/참',
       },
-      viewAllTitle: '모든 컬렉션',
       sortPrefix: '정렬',
       sortOptions: {
         newest: '최신순',
         'price-asc': '가격 낮은순',
         'price-desc': '가격 높은순',
       },
+    },
+    collection: {
+      title: '컬렉션',
+      viewMore: '컬렉션 모두 보기',
     },
     termsPage: {
       title: '이용약관',
@@ -176,14 +152,15 @@ export const translations = {
     },
     identity: {
       label: 'WHO WE ARE',
-      title: "We couldn't find what we wanted so we started making it ourselves",
-      desc: "The night before a concert — decorating your lightstick, picking a new outfit for your doll. That's our favorite part too. So we started making things for those exact moments.",
+      title:
+        "We couldn't find what we wanted so we started making it ourselves",
+      desc: "FANOIR started from the excitement the night before a concert — decorating lightsticks, dressing up dolls. We started making K-pop fan goods for those exact moments ourselves.",
       meaningTitle: 'Fan + Noir',
       meaningDesc:
         "Fan + Noir (French for 'black'). We mean it when we say we love something — and it's even better when it looks good too.",
       roleTitle: 'What We Do',
       roleDesc:
-        'Outfits that fit your dolls perfectly, cheering items that shine at concerts. We only put out what we actually like using.',
+        'Doll clothes, mini slogans, lightstick accessories, scrunchies, keyrings — we only put out what we actually love using.',
       visionTitle: 'What We Believe',
       visionDesc:
         'Cheering, styling, everyday life — the happiest moments are when your love for something shows.',
@@ -195,34 +172,7 @@ export const translations = {
     showcase: {
       label: 'WHAT WE MAKE',
       title: 'Only the good stuff',
-      desc: "We brought these to a concert and they were actually great. That's all we put up.",
-      products: [
-        {
-          name: 'Doll Dress Set',
-          price: '$40',
-          desc: 'For 20cm dolls · Velvet fabric · Lace details',
-        },
-        {
-          name: 'Lightstick Strap',
-          price: '$15',
-          desc: 'Adjustable · Gold charm · Concert essential',
-        },
-        {
-          name: 'Mini Slogan Banner',
-          price: '$12',
-          desc: 'Double-sided print · Member color matching',
-        },
-        {
-          name: 'Velvet Scrunchie',
-          price: '$10',
-          desc: 'Pure velvet · Gentle on hair',
-        },
-        {
-          name: 'Uchiwa Fan Cover',
-          price: '$7',
-          desc: 'Clear protective cover · Standard size compatible',
-        },
-      ],
+      desc: "Doll clothes, cheering items, keyrings and more — we brought them to concerts and only kept what actually works.",
       bestseller: 'Bestseller',
       comingSoon: 'Coming Soon',
       karatValue: '100%',
@@ -231,16 +181,16 @@ export const translations = {
       signatureLabel: 'HOW WE MAKE',
       signatureTitle: 'One by one, by hand',
       signatureDesc:
-        'From choosing materials to the final touch — we handle every step ourselves.',
+        'From choosing materials to the final touch — every piece is handmade and handled by us.',
       feature1Title: 'Bias Color Matching',
       feature1Desc: 'Carefully picked to match your bias colors',
       feature2Title: 'Tested Materials',
       feature2Desc: "We only use what we've tried and trust",
       viewMore: 'See All',
     },
-    collection: {
-      title: 'Collection',
-      viewAll: 'View All',
+    product: {
+      title: 'Products',
+      viewAll: 'See All',
       filters: {
         all: 'All',
         dolls: 'Dolls',
@@ -248,13 +198,16 @@ export const translations = {
         fashion: 'Fashion',
         keyrings: 'Keyrings & Charms',
       },
-      viewAllTitle: 'All Collections',
       sortPrefix: 'Sort by',
       sortOptions: {
         newest: 'Newest',
         'price-asc': 'Price: Low to High',
         'price-desc': 'Price: High to Low',
       },
+    },
+    collection: {
+      title: 'Collection',
+      viewMore: 'View All Collections',
     },
     termsPage: {
       title: 'Terms of Service',
@@ -323,13 +276,13 @@ export const translations = {
     identity: {
       label: 'WHO WE ARE',
       title: '找不到满意的 就自己动手做了',
-      desc: '演唱会前一晚装饰应援棒 给娃娃换上新衣服 那段时间最开心了吧。所以那些时刻要用的东西 我们就自己做了。',
+      desc: 'FANOIR始于演唱会前夜的那份期待。装饰应援棒、给娃娃换新衣——那些时刻用的K-pop粉丝周边，我们自己来做。',
       meaningTitle: 'Fan + Noir',
       meaningDesc:
-        "Fan（粉丝）+ Noir（法语里的「黑」）。喜欢是认真的 表达也好看的话就更好了。",
+        'Fan（粉丝）+ Noir（法语里的「黑」）。喜欢是认真的 表达也好看的话就更好了。',
       roleTitle: '我们做的事',
       roleDesc:
-        '给娃娃做刚好合身的衣服 做在演唱会上会发光的应援物。用过觉得好的才放出来。',
+        '娃衣、迷你横幅、应援棒配饰、发圈、钥匙扣等——自己用过觉得好的才放出来。',
       visionTitle: '我们的想法',
       visionDesc:
         '应援也好、打扮也好、日常也好——喜欢的心情能被看见的那一刻 最幸福。',
@@ -341,34 +294,7 @@ export const translations = {
     showcase: {
       label: '我们做这些',
       title: '有底气的才上架',
-      desc: '带去演唱会用过觉得真不错 就只把那些放上来了。',
-      products: [
-        {
-          name: '娃衣连衣裙套装',
-          price: '¥230',
-          desc: '20cm娃娃用 · 丝绒面料 · 蕾丝细节',
-        },
-        {
-          name: '荧光棒挂绳',
-          price: '¥90',
-          desc: '可调节 · 金色吊饰 · 演唱会必备',
-        },
-        {
-          name: '迷你横幅',
-          price: '¥75',
-          desc: '双面印刷 · 成员色定制 · 团体应援',
-        },
-        {
-          name: '丝绒发圈',
-          price: '¥60',
-          desc: '纯丝绒材质 · 不伤发质',
-        },
-        {
-          name: '团扇保护套',
-          price: '¥40',
-          desc: '透明保护套 · 标准尺寸兼容',
-        },
-      ],
+      desc: '娃衣、应援用品、钥匙扣等——带去演唱会用过，觉得真不错的才放上来。',
       bestseller: 'Bestseller',
       comingSoon: 'Coming Soon',
       karatValue: '100%',
@@ -376,16 +302,16 @@ export const translations = {
       premiumQuality: '我们自己试过的',
       signatureLabel: 'HOW WE MAKE',
       signatureTitle: '一件一件 亲手打磨',
-      signatureDesc: '从选材到最后一步 全都自己盯着。',
+      signatureDesc: '从选材到最后一步，每一件都手工制作，全程自己把关。',
       feature1Title: '成员色配色',
       feature1Desc: '按担当色一个个挑的',
       feature2Title: '验证过的材料',
       feature2Desc: '用过觉得好的才坚持用',
       viewMore: '看全部',
     },
-    collection: {
-      title: '系列',
-      viewAll: '查看全部',
+    product: {
+      title: '商品',
+      viewAll: '看全部',
       filters: {
         all: '全部',
         dolls: '娃娃',
@@ -393,13 +319,16 @@ export const translations = {
         fashion: '时尚配饰',
         keyrings: '钥匙扣/吊饰',
       },
-      viewAllTitle: '所有系列',
       sortPrefix: '排序',
       sortOptions: {
         newest: '最新',
         'price-asc': '价格从低到高',
         'price-desc': '价格从高到低',
       },
+    },
+    collection: {
+      title: '系列',
+      viewMore: '查看全部系列',
     },
     termsPage: {
       title: '使用条款',
@@ -468,13 +397,13 @@ export const translations = {
     identity: {
       label: 'WHO WE ARE',
       title: '找不到滿意的 就自己動手做了',
-      desc: '演唱會前一晚裝飾應援棒 幫娃娃換上新衣服 那段時間最開心了吧。所以那些時刻要用的東西 我們就自己做了。',
+      desc: 'FANOIR始於演唱會前夜的那份期待。裝飾應援棒、幫娃娃換新衣——那些時刻用的K-pop粉絲周邊，我們自己來做。',
       meaningTitle: 'Fan + Noir',
       meaningDesc:
-        "Fan（粉絲）+ Noir（法語裡的「黑」）。喜歡是認真的 表達也好看的話就更好了。",
+        'Fan（粉絲）+ Noir（法語裡的「黑」）。喜歡是認真的 表達也好看的話就更好了。',
       roleTitle: '我們做的事',
       roleDesc:
-        '幫娃娃做剛好合身的衣服 做在演唱會上會發光的應援物。用過覺得好的才放出來。',
+        '娃衣、迷你橫幅、應援棒配飾、髮圈、鑰匙圈等——自己用過覺得好的才放出來。',
       visionTitle: '我們的想法',
       visionDesc:
         '應援也好、打扮也好、日常也好——喜歡的心情能被看見的那一刻 最幸福。',
@@ -486,34 +415,7 @@ export const translations = {
     showcase: {
       label: '我們做這些',
       title: '有底氣的才上架',
-      desc: '帶去演唱會用過覺得真不錯 就只把那些放上來了。',
-      products: [
-        {
-          name: '娃衣洋裝套組',
-          price: 'NT$1,350',
-          desc: '20cm娃娃用 · 絲絨布料 · 蕾絲細節',
-        },
-        {
-          name: '螢光棒掛繩',
-          price: 'NT$540',
-          desc: '可調節 · 金色吊飾 · 演唱會必備',
-        },
-        {
-          name: '迷你橫幅',
-          price: 'NT$450',
-          desc: '雙面印刷 · 成員色訂製 · 團體應援',
-        },
-        {
-          name: '絲絨髮圈',
-          price: 'NT$360',
-          desc: '純絲絨材質 · 不傷髮質',
-        },
-        {
-          name: '團扇保護套',
-          price: 'NT$240',
-          desc: '透明保護套 · 標準尺寸相容',
-        },
-      ],
+      desc: '娃衣、應援用品、鑰匙圈等——帶去演唱會用過，覺得真不錯的才放上來。',
       bestseller: 'Bestseller',
       comingSoon: 'Coming Soon',
       karatValue: '100%',
@@ -521,16 +423,16 @@ export const translations = {
       premiumQuality: '我們自己試過的',
       signatureLabel: 'HOW WE MAKE',
       signatureTitle: '一件一件 親手打磨',
-      signatureDesc: '從選材到最後一步 全都自己盯著。',
+      signatureDesc: '從選材到最後一步，每一件都手工製作，全程自己把關。',
       feature1Title: '成員色配色',
       feature1Desc: '按擔當色一個個挑的',
       feature2Title: '驗證過的材料',
       feature2Desc: '用過覺得好的才堅持用',
       viewMore: '看全部',
     },
-    collection: {
-      title: '系列',
-      viewAll: '查看全部',
+    product: {
+      title: '商品',
+      viewAll: '看全部',
       filters: {
         all: '全部',
         dolls: '娃娃',
@@ -538,13 +440,16 @@ export const translations = {
         fashion: '時尚配飾',
         keyrings: '鑰匙圈/吊飾',
       },
-      viewAllTitle: '所有系列',
       sortPrefix: '排序',
       sortOptions: {
         newest: '最新',
         'price-asc': '價格從低到高',
         'price-desc': '價格從高到低',
       },
+    },
+    collection: {
+      title: '系列',
+      viewMore: '查看全部系列',
     },
     termsPage: {
       title: '使用條款',
@@ -613,13 +518,13 @@ export const translations = {
     identity: {
       label: 'WHO WE ARE',
       title: '気に入るものがなくて 自分たちで作ることにしました',
-      desc: 'ライブの前の夜 ペンラをデコって ぬいに新しい服を着せる あの時間がいちばん好きでしょ。だからその瞬間に使うものを 自分たちで作るようになりました。',
+      desc: 'FANOIRはライブ前夜のワクワクから始まりました。ペンラをデコって、ぬいに新しい服を着せて——あの瞬間に使うK-popファンダムグッズを自分たちで作るようになりました。',
       meaningTitle: 'Fan + Noir',
       meaningDesc:
-        "Fan（ファン）+ Noir（フランス語で「黒」）。好きな気持ちは本気 見た目もおしゃれならもっといいよね。",
+        'Fan（ファン）+ Noir（フランス語で「黒」）。好きな気持ちは本気 見た目もおしゃれならもっといいよね。',
       roleTitle: '私たちがやること',
       roleDesc:
-        'ぬいにぴったりの服 ライブで光る応援グッズ。使ってみてよかったものだけ出してます。',
+        'ぬい服、ミニスローガン、ペンラデコ、シュシュ、キーリングなど——使ってみてよかったものだけ出してます。',
       visionTitle: '私たちが思うこと',
       visionDesc:
         '応援も デコも 日常も——好きな気持ちが見える瞬間がいちばん幸せ。',
@@ -631,34 +536,7 @@ export const translations = {
     showcase: {
       label: 'こんなの作ってます',
       title: '自信あるものだけ',
-      desc: 'ライブに持っていってほんとによかったものだけ 載せてます。',
-      products: [
-        {
-          name: 'ぬいワンピースセット',
-          price: '¥5,500',
-          desc: '20cmぬい用 · ベルベット素材 · レースディテール',
-        },
-        {
-          name: 'ペンライトストラップ',
-          price: '¥2,200',
-          desc: '調節可能 · ゴールドチャーム · ライブ必須アイテム',
-        },
-        {
-          name: 'ミニスローガン',
-          price: '¥1,800',
-          desc: '両面印刷 · メンバーカラー対応 · 集団応援用',
-        },
-        {
-          name: 'ベルベットシュシュ',
-          price: '¥1,500',
-          desc: 'ベルベット素材 · 髪に優しい着け心地',
-        },
-        {
-          name: 'うちわカバー',
-          price: '¥1,000',
-          desc: '透明保護カバー · 標準サイズ対応',
-        },
-      ],
+      desc: 'ぬい服、応援グッズ、キーリングなど——ライブに持っていって本当によかったものだけ載せてます。',
       bestseller: 'Bestseller',
       comingSoon: 'Coming Soon',
       karatValue: '100%',
@@ -666,17 +544,16 @@ export const translations = {
       premiumQuality: '自分たちで使ってみたもの',
       signatureLabel: 'HOW WE MAKE',
       signatureTitle: 'ひとつひとつ 自分たちの手で',
-      signatureDesc:
-        '素材選びから仕上げまで 全部自分たちで見てます。',
+      signatureDesc: '素材選びから仕上げまで、一つ一つハンドメイドで仕上げてます。',
       feature1Title: '推しカラーマッチング',
       feature1Desc: '推しカラーに合わせてひとつずつ選びました',
       feature2Title: '検証済みの素材',
       feature2Desc: '使ってみて納得したものだけ使ってます',
       viewMore: '全部見る',
     },
-    collection: {
-      title: 'コレクション',
-      viewAll: 'すべて見る',
+    product: {
+      title: '商品',
+      viewAll: '全部見る',
       filters: {
         all: 'すべて',
         dolls: 'ぬいぐるみ',
@@ -684,13 +561,16 @@ export const translations = {
         fashion: 'ファッション小物',
         keyrings: 'キーリング/チャーム',
       },
-      viewAllTitle: 'すべてのコレクション',
       sortPrefix: '並び替え',
       sortOptions: {
         newest: '新着順',
         'price-asc': '価格が安い順',
         'price-desc': '価格が高い順',
       },
+    },
+    collection: {
+      title: 'コレクション',
+      viewMore: 'コレクションをすべて見る',
     },
     termsPage: {
       title: '利用規約',

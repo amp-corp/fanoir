@@ -15,7 +15,7 @@ export default function Showcase({
   signatureImage2?: string;
 }) {
   const { t, localePath } = useLang();
-  const filters = t.collection.filters;
+  const filters = t.product.filters;
 
   // Take up to 6 products for the grid
   const gridProducts = products.slice(0, 6);
@@ -27,7 +27,7 @@ export default function Showcase({
   return (
     <section id="products" className="bg-[#FFFFFF]">
       {/* Header */}
-      <div className="w-full px-4 md:px-8 lg:px-32 py-10 md:py-16 flex flex-col items-center text-center">
+      <div className="relative w-full px-4 md:px-8 lg:px-32 py-10 md:py-16 flex flex-col items-center text-center">
         <h2 className="text-[#FF6B6B] text-sm font-bold tracking-widest uppercase mb-4">
           {t.showcase.label}
         </h2>
@@ -37,6 +37,14 @@ export default function Showcase({
         <p className="text-[#666666] max-w-3xl leading-relaxed">
           {t.showcase.desc}
         </p>
+        <div className="w-full px-4 md:px-10 lg:px-20 max-w-[1400px] mx-auto pt-14">
+          <Link
+            href={localePath('/products')}
+            className="inline-flex h-12 items-center justify-center rounded-full border border-[#FF6B6B] px-8 text-[#FF6B6B] text-base font-semibold transition-transform hover:scale-105 active:scale-95"
+          >
+            <span>{t.showcase.viewMore}</span>
+          </Link>
+        </div>
       </div>
 
       {/* 6-Product Square Grid: 2×3 mobile, 3×2 desktop */}
@@ -46,7 +54,11 @@ export default function Showcase({
             const isClickable = !product.comingSoon && !!product.link;
             const Wrapper = isClickable ? 'a' : 'div';
             const wrapperProps = isClickable
-              ? { href: product.link!, target: '_blank' as const, rel: 'noopener noreferrer' }
+              ? {
+                  href: product.link!,
+                  target: '_blank' as const,
+                  rel: 'noopener noreferrer',
+                }
               : {};
             return (
               <Wrapper
@@ -160,8 +172,8 @@ export default function Showcase({
             {/* CTA */}
             <div className="mt-4">
               <Link
-                href={localePath('/collection')}
-                className="inline-flex h-12 items-center justify-center rounded-lg bg-[#FF6B6B] px-8 text-white text-base font-bold transition-transform hover:scale-105 active:scale-95"
+                href={localePath('/products')}
+                className="inline-flex h-12 items-center justify-center rounded-full bg-[#FF6B6B] px-8 text-white text-base font-bold transition-transform hover:scale-105 active:scale-95"
               >
                 <span>{t.showcase.viewMore}</span>
                 <span className="material-symbols-outlined ml-2 text-lg!">

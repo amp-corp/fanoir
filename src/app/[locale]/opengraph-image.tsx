@@ -1,9 +1,9 @@
-import { ImageResponse } from "next/og";
+import { ImageResponse } from 'next/og';
 
-export const runtime = "edge";
-export const alt = "FANOIR — Fandom, refined.";
+export const runtime = 'edge';
+export const alt = 'FANOIR — By Fans, For The Moment';
 export const size = { width: 1200, height: 630 };
-export const contentType = "image/png";
+export const contentType = 'image/png';
 
 export default async function Image({
   params,
@@ -11,85 +11,100 @@ export default async function Image({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const subtitleMap: Record<string, string> = {
-    ko: "세련되고 품격 있는 팬덤 굿즈 브랜드",
-    en: "Premium K-Pop Fandom Goods Brand",
-    'zh-CN': "精致高端的K-Pop粉丝周边品牌",
-    'zh-TW': "精緻高端的K-Pop粉絲周邊品牌",
-    ja: "洗練されたプレミアムK-Popファンダムグッズブランド",
+
+  const copyMap: Record<string, { tagline: string; subtitle: string }> = {
+    ko: {
+      tagline: '응원하는 모든 순간, 파누아와 함께',
+      subtitle: '좋아하는 마음, 가장 예쁘게',
+    },
+    en: {
+      tagline: 'Every moment you cheer, with FANOIR',
+      subtitle: 'Your love, beautifully made',
+    },
+    'zh-CN': {
+      tagline: '应援的每个瞬间，与FANOIR一起',
+      subtitle: '喜欢的心情，最好看地呈现',
+    },
+    'zh-TW': {
+      tagline: '應援的每個瞬間，與FANOIR一起',
+      subtitle: '喜歡的心情，最好看地呈現',
+    },
+    ja: {
+      tagline: '応援するすべての瞬間、FANOIRと一緒に',
+      subtitle: '好きな気持ち、いちばんかわいく',
+    },
   };
-  const subtitle = subtitleMap[locale] ?? subtitleMap.en;
+
+  const copy = copyMap[locale] ?? copyMap.en;
 
   return new ImageResponse(
-    (
+    <div
+      style={{
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#FFFFFF',
+        fontFamily: 'Georgia, serif',
+      }}
+    >
       <div
         style={{
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "#3D3D3D",
-          fontFamily: "Georgia, serif",
+          fontSize: 14,
+          letterSpacing: '0.25em',
+          color: '#FF6B6B',
+          marginBottom: 28,
+          fontWeight: 500,
         }}
       >
-        <svg
-          width="40"
-          height="40"
-          viewBox="0 0 40 40"
-          fill="none"
-          style={{ marginBottom: 16 }}
-        >
-          <line x1="20" y1="2" x2="20" y2="38" stroke="#FF6B6B" strokeWidth="1.5" />
-          <line x1="2" y1="20" x2="38" y2="20" stroke="#FF6B6B" strokeWidth="1.5" />
-          <line x1="7" y1="7" x2="33" y2="33" stroke="#FF6B6B" strokeWidth="1.5" />
-          <line x1="33" y1="7" x2="7" y2="33" stroke="#FF6B6B" strokeWidth="1.5" />
-          <circle cx="20" cy="20" r="2.5" fill="#FF6B6B" />
-        </svg>
-
-        <div
-          style={{
-            fontSize: 72,
-            letterSpacing: "0.3em",
-            color: "#F8F8F8",
-            fontWeight: 300,
-            marginBottom: 24,
-          }}
-        >
-          FANOIR
-        </div>
-        <div
-          style={{
-            fontSize: 24,
-            letterSpacing: "0.15em",
-            color: "#FF6B6B",
-            marginBottom: 12,
-          }}
-        >
-          Fandom, refined.
-        </div>
-        <div
-          style={{
-            fontSize: 16,
-            color: "#4A4A4A",
-            letterSpacing: "0.1em",
-          }}
-        >
-          {subtitle}
-        </div>
-
-        <div
-          style={{
-            position: "absolute",
-            bottom: 40,
-            width: 60,
-            height: 1,
-            backgroundColor: "#FF6B6B",
-          }}
-        />
+        BY FANS, FOR THE MOMENT
       </div>
-    ),
-    { ...size }
+
+      <div
+        style={{
+          fontSize: 72,
+          letterSpacing: '0.3em',
+          color: '#FF6B6B',
+          fontWeight: 700,
+          marginBottom: 28,
+        }}
+      >
+        FANOIR
+      </div>
+
+      <div
+        style={{
+          width: 100,
+          height: 1,
+          backgroundColor: '#FF6B6B',
+          marginBottom: 28,
+        }}
+      />
+
+      <div
+        style={{
+          fontSize: 22,
+          letterSpacing: '0.08em',
+          color: '#3D3D3D',
+          marginBottom: 12,
+          textShadow: '0 2px 2px rgba(0, 1, 1, 0.5)',
+        }}
+      >
+        {copy.tagline}
+      </div>
+      <div
+        style={{
+          fontSize: 16,
+          color: '#888888',
+          fontWeight: 500,
+          letterSpacing: '0.05em',
+        }}
+      >
+        {copy.subtitle}
+      </div>
+    </div>,
+    { ...size },
   );
 }

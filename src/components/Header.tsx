@@ -23,7 +23,7 @@ export default function Header() {
 
   const links = [
     { href: localePath('/#identity'), label: t.nav.identity },
-    { href: localePath('/#products'), label: t.nav.products },
+    { href: localePath('/products'), label: t.nav.products },
     { href: localePath('/collection'), label: t.nav.collection },
     // { href: localePath('/#contact'), label: t.nav.contact },
   ];

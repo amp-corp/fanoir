@@ -59,7 +59,11 @@ export default function CollectionDetail({
             const isClickable = !product.comingSoon && !!product.link;
             const Wrapper = isClickable ? 'a' : 'div';
             const wrapperProps = isClickable
-              ? { href: product.link!, target: '_blank' as const, rel: 'noopener noreferrer' }
+              ? {
+                  href: product.link!,
+                  target: '_blank' as const,
+                  rel: 'noopener noreferrer',
+                }
               : {};
             return (
               <Wrapper
@@ -112,8 +116,8 @@ export default function CollectionDetail({
                     </p>
                   </div>
                   <p className="text-[#888888] text-xs mt-1">
-                    {t.collection.filters[
-                      product.category as keyof typeof t.collection.filters
+                    {t.product.filters[
+                      product.category as keyof typeof t.product.filters
                     ] || product.category}
                   </p>
                 </div>

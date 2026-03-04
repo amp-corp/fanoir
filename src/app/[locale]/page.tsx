@@ -14,26 +14,36 @@ const faqMap: Record<Locale, { q: string; a: string }[]> = {
     { q: "FANOIR(파누아)는 어떤 브랜드인가요?", a: "FANOIR(파누아)는 팬이 직접 만드는 K-pop 팬덤 굿즈 브랜드입니다. 인형옷, 응원용품, 미니슬로건, 스크런치, 키링 등 핸드메이드 아이템을 제작합니다." },
     { q: "어떤 상품을 판매하나요?", a: "인형옷(돌 클로즈), 응원봉 꾸미기 용품, 미니슬로건, 우치와 커버, 스크런치, 키링 등 다양한 팬덤 굿즈를 판매합니다." },
     { q: "해외 배송이 가능한가요?", a: "네, FANOIR는 해외 배송을 지원합니다. 한국어, 영어, 중국어(간체/번체), 일본어 5개 언어로 서비스를 제공합니다." },
+    { q: "FANOIR 상품은 어떻게 만들어지나요?", a: "FANOIR의 모든 상품은 소재 선정부터 마무리까지 직접 기획하고 핸드메이드로 제작합니다. 멤버별 컬러 매칭과 검증된 소재만 사용합니다." },
+    { q: "FANOIR는 어떤 아이돌 팬덤 굿즈를 만드나요?", a: "FANOIR는 특정 아이돌에 국한되지 않고, 모든 K-pop 팬이 사용할 수 있는 범용 팬덤 굿즈를 제작합니다. 최애 컬러에 맞춰 커스터마이징 가능한 상품도 있습니다." },
   ],
   en: [
     { q: "What is FANOIR?", a: "FANOIR is a K-pop fandom goods brand made by fans, for fans. We create handmade doll clothes, cheering items, mini slogans, scrunchies, keyrings and more." },
     { q: "What products does FANOIR sell?", a: "We sell doll clothes, lightstick accessories, mini slogans, uchiwa covers, scrunchies, keyrings, and various fan merchandise for K-pop fans." },
     { q: "Does FANOIR ship internationally?", a: "Yes, FANOIR supports international shipping. Our website is available in Korean, English, Chinese (Simplified/Traditional), and Japanese." },
+    { q: "How are FANOIR products made?", a: "Every FANOIR product is designed in-house and handmade from material selection to finishing. We use bias color matching and only tested, quality materials." },
+    { q: "Which K-pop fandoms does FANOIR make goods for?", a: "FANOIR creates universal K-pop fan goods that work for any fandom. We offer items that can be customized to match your bias colors, not limited to specific idol groups." },
   ],
   'zh-CN': [
     { q: "FANOIR是什么品牌？", a: "FANOIR是由粉丝为粉丝打造的K-pop周边品牌。我们制作手工娃衣、应援用品、迷你横幅、发圈、钥匙扣等。" },
     { q: "FANOIR卖什么产品？", a: "我们销售娃衣、应援棒配饰、迷你横幅、团扇套、发圈、钥匙扣等各种K-pop粉丝周边。" },
     { q: "FANOIR支持国际配送吗？", a: "是的，FANOIR支持国际配送。网站提供韩语、英语、中文（简体/繁体）和日语服务。" },
+    { q: "FANOIR的产品是怎么制作的？", a: "FANOIR所有产品从选材到完成均为自主企划、手工制作。我们采用成员色配色，只使用经过验证的优质材料。" },
+    { q: "FANOIR为哪些K-pop粉丝制作周边？", a: "FANOIR制作的是适用于所有K-pop粉丝的通用周边商品，不局限于特定偶像团体。部分商品可按担当色定制。" },
   ],
   'zh-TW': [
     { q: "FANOIR是什麼品牌？", a: "FANOIR是由粉絲為粉絲打造的K-pop周邊品牌。我們製作手工娃衣、應援用品、迷你橫幅、髮圈、鑰匙圈等。" },
     { q: "FANOIR賣什麼產品？", a: "我們銷售娃衣、應援棒配飾、迷你橫幅、團扇套、髮圈、鑰匙圈等各種K-pop粉絲周邊。" },
     { q: "FANOIR支持國際配送嗎？", a: "是的，FANOIR支持國際配送。網站提供韓語、英語、中文（簡體/繁體）和日語服務。" },
+    { q: "FANOIR的產品是怎麼製作的？", a: "FANOIR所有產品從選材到完成均為自主企劃、手工製作。我們採用成員色配色，只使用經過驗證的優質材料。" },
+    { q: "FANOIR為哪些K-pop粉絲製作周邊？", a: "FANOIR製作的是適用於所有K-pop粉絲的通用周邊商品，不局限於特定偶像團體。部分商品可按擔當色定制。" },
   ],
   ja: [
     { q: "FANOIRとはどんなブランドですか？", a: "FANOIRはファンがファンのために作るK-popファンダムグッズブランドです。ぬい服、応援グッズ、ミニスローガン、シュシュ、キーリングなどを制作しています。" },
     { q: "どんな商品を販売していますか？", a: "ぬい服、ペンライトデコ用品、ミニスローガン、うちわカバー、シュシュ、キーリングなど様々なファンダムグッズを販売しています。" },
     { q: "海外配送は可能ですか？", a: "はい、FANOIRは海外配送に対応しています。韓国語、英語、中国語（簡体/繁体）、日本語の5言語でサービスを提供しています。" },
+    { q: "FANOIRの商品はどのように作られていますか？", a: "FANOIRの全商品は素材選びから仕上げまで自主企画・ハンドメイドで制作しています。推しカラーマッチングと検証済みの素材のみを使用しています。" },
+    { q: "FANOIRはどのK-popファンダム向けのグッズを作っていますか？", a: "FANOIRは特定のアイドルグループに限定せず、すべてのK-popファンが使える汎用ファンダムグッズを制作しています。推しカラーに合わせたカスタマイズも可能です。" },
   ],
 };
 

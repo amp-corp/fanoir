@@ -124,7 +124,7 @@ function BannerCard({
         </p>
         <Link
           href={localePath(`/collection/${banner.slug}`)}
-          className="mt-4 bg-white text-black px-6 py-2.5 rounded-lg text-sm font-bold hover:bg-[#FF6B6B] hover:text-white transition-all w-fit"
+          className="mt-4 bg-white text-black px-6 py-2.5 rounded-full text-sm font-bold hover:bg-[#FF6B6B] hover:text-white transition-all w-fit"
         >
           {banner.cta}
         </Link>
