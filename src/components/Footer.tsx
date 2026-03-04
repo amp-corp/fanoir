@@ -21,7 +21,7 @@ export default function Footer() {
               width={120}
               height={40}
               className="h-6 w-auto"
-              style={{ filter: 'brightness(0) invert(52%) sepia(96%) saturate(1932%) hue-rotate(326deg) brightness(102%) contrast(103%)' }}
+              style={{ filter: 'brightness(0)' }}
             />
           </a>
         </div>
