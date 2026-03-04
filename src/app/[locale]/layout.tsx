@@ -110,7 +110,6 @@ export async function generateMetadata({
     },
     icons: {
       icon: "/favicon.ico",
-      apple: "/icon.svg",
     },
     openGraph: {
       type: "website",
