@@ -77,7 +77,7 @@ export default function Collection({
               />
               <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
               <div className="absolute bottom-0 left-0 p-6 flex flex-col gap-2">
-                <span className="bg-[#222222]/90 text-white text-xs font-bold px-2 py-1 rounded w-fit uppercase tracking-wider">
+                <span className="bg-white/20 backdrop-blur-md text-white text-xs font-bold px-2 py-1 rounded w-fit uppercase tracking-wider">
                   {collab.label}
                 </span>
                 <h3 className="text-white text-xl md:text-2xl font-bold italic">

@@ -32,7 +32,7 @@ export default function Hero({ heroImage }: { heroImage?: string }) {
           <div className="flex flex-col items-center gap-6">
             {/* Badge */}
             <span
-              className="px-3 py-1 rounded-full  text-[#222222] text-xs font-bold uppercase tracking-widest"
+              className="px-3 py-1 rounded-full  text-white text-xs font-bold uppercase tracking-widest"
               style={{ textShadow: 'none' }}
             >
               {t.hero.label}

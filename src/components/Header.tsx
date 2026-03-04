@@ -31,7 +31,7 @@ export default function Header() {
   ];
 
   return (
-    <header className="flex items-center justify-between whitespace-nowrap border-b border-gray-100 px-4 py-4 md:px-10 lg:px-40 fixed top-0 w-full z-50 backdrop-blur-md bg-white/95">
+    <header className="flex items-center justify-between whitespace-nowrap border-b border-gray-100 px-4 py-4 md:px-10 lg:px-40 fixed top-0 w-full z-50 backdrop-blur-md bg-white/75">
       {/* Logo */}
       <a href={localePath('/')} className="flex items-center">
         <Image
@@ -118,7 +118,8 @@ export default function Header() {
       {open && (
         <nav className="absolute top-full left-0 right-0 bg-white border-t border-gray-100 px-6 py-6 flex flex-col gap-5 md:hidden shadow-lg">
           {links.map((l) => {
-            const isActive = !l.href.includes('#') && pathname.startsWith(l.href);
+            const isActive =
+              !l.href.includes('#') && pathname.startsWith(l.href);
             return (
               <a
                 key={l.href}
