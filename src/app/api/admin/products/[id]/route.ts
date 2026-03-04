@@ -31,7 +31,7 @@ export async function PUT(
   try {
     const { id } = await params;
     const body = await request.json();
-    const { image, badgeText, badgeColor, category, order, translations, comingSoon, comingSoonUntil, link } = body;
+    const { image, badgeText, badgeColor, categoryId, order, translations, comingSoon, comingSoonUntil, link } = body;
 
     const product = await prisma.product.update({
       where: { id },
@@ -39,7 +39,7 @@ export async function PUT(
         ...(image !== undefined && { image }),
         ...(badgeText !== undefined && { badgeText: badgeText || null }),
         ...(badgeColor !== undefined && { badgeColor: badgeColor || null }),
-        ...(category !== undefined && { category }),
+        ...(categoryId !== undefined && { categoryId }),
         ...(comingSoon !== undefined && { comingSoon }),
         ...(comingSoonUntil !== undefined && { comingSoonUntil: comingSoonUntil ? new Date(comingSoonUntil) : null }),
         ...(link !== undefined && { link: link || null }),

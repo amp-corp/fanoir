@@ -15,8 +15,6 @@ export default function Showcase({
   signatureImage2?: string;
 }) {
   const { t, localePath } = useLang();
-  const filters = t.product.filters;
-
   // Take up to 6 products for the grid
   const gridProducts = products.slice(0, 6);
 
@@ -105,8 +103,7 @@ export default function Showcase({
                     </span>
                   </div>
                   <p className="text-[#888888] text-xs">
-                    {filters[product.category as keyof typeof filters] ||
-                      product.category}
+                    {product.categoryName}
                   </p>
                 </div>
               </Wrapper>

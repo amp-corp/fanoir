@@ -70,10 +70,6 @@ export const translations = {
       viewAll: '더 보기',
       filters: {
         all: '전체',
-        dolls: '인형',
-        cheering: '응원용품',
-        fashion: '패션소품',
-        keyrings: '키링/참',
       },
       sortPrefix: '정렬',
       sortOptions: {
@@ -193,10 +189,6 @@ export const translations = {
       viewAll: 'See All',
       filters: {
         all: 'All',
-        dolls: 'Dolls',
-        cheering: 'Cheering',
-        fashion: 'Fashion',
-        keyrings: 'Keyrings & Charms',
       },
       sortPrefix: 'Sort by',
       sortOptions: {
@@ -314,10 +306,6 @@ export const translations = {
       viewAll: '看全部',
       filters: {
         all: '全部',
-        dolls: '娃娃',
-        cheering: '应援用品',
-        fashion: '时尚配饰',
-        keyrings: '钥匙扣/吊饰',
       },
       sortPrefix: '排序',
       sortOptions: {
@@ -435,10 +423,6 @@ export const translations = {
       viewAll: '看全部',
       filters: {
         all: '全部',
-        dolls: '娃娃',
-        cheering: '應援用品',
-        fashion: '時尚配飾',
-        keyrings: '鑰匙圈/吊飾',
       },
       sortPrefix: '排序',
       sortOptions: {
@@ -556,10 +540,6 @@ export const translations = {
       viewAll: '全部見る',
       filters: {
         all: 'すべて',
-        dolls: 'ぬいぐるみ',
-        cheering: '応援グッズ',
-        fashion: 'ファッション小物',
-        keyrings: 'キーリング/チャーム',
       },
       sortPrefix: '並び替え',
       sortOptions: {

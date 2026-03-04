@@ -1,5 +1,10 @@
 import { prisma } from './db';
-import type { ProductTranslations, CollectionTranslations } from './db-types';
+import type { ProductTranslations, CollectionTranslations, CategoryTranslations } from './db-types';
+
+export type CategoryForDisplay = {
+  key: string;
+  name: string;
+};
 
 export type ProductForDisplay = {
   id: string;
@@ -7,6 +12,7 @@ export type ProductForDisplay = {
   badgeText: string | null;
   badgeColor: string | null;
   category: string;
+  categoryName: string;
   name: string;
   price: string;
   comingSoon: boolean;
@@ -27,20 +33,39 @@ export type CollectionDetailForDisplay = CollectionForDisplay & {
   products: ProductForDisplay[];
 };
 
+export async function getCategories(locale: string): Promise<CategoryForDisplay[]> {
+  const categories = await prisma.category.findMany({
+    orderBy: { order: 'asc' },
+  });
+
+  return categories.map((c) => {
+    const t = (c.translations as CategoryTranslations)[locale as keyof CategoryTranslations] ||
+              (c.translations as CategoryTranslations).ko;
+    return {
+      key: c.key,
+      name: t.name,
+    };
+  });
+}
+
 export async function getProducts(locale: string): Promise<ProductForDisplay[]> {
   const products = await prisma.product.findMany({
+    include: { category: true },
     orderBy: { order: 'asc' },
   });
 
   return products.map((p) => {
     const t = (p.translations as ProductTranslations)[locale as keyof ProductTranslations] ||
               (p.translations as ProductTranslations).ko;
+    const ct = (p.category.translations as CategoryTranslations)[locale as keyof CategoryTranslations] ||
+               (p.category.translations as CategoryTranslations).ko;
     return {
       id: p.id,
       image: p.image,
       badgeText: p.badgeText,
       badgeColor: p.badgeColor,
-      category: p.category,
+      category: p.category.key,
+      categoryName: ct.name,
       name: t.name,
       price: t.price,
       comingSoon: p.comingSoon && (!p.comingSoonUntil || new Date() < new Date(p.comingSoonUntil)),
@@ -74,7 +99,7 @@ export async function getCollectionBySlug(slug: string, locale: string): Promise
     where: { slug },
     include: {
       products: {
-        include: { product: true },
+        include: { product: { include: { category: true } } },
         orderBy: { order: 'asc' },
       },
     },
@@ -88,12 +113,15 @@ export async function getCollectionBySlug(slug: string, locale: string): Promise
   const products: ProductForDisplay[] = collection.products.map((cp) => {
     const pt = (cp.product.translations as ProductTranslations)[locale as keyof ProductTranslations] ||
                (cp.product.translations as ProductTranslations).ko;
+    const ct = (cp.product.category.translations as CategoryTranslations)[locale as keyof CategoryTranslations] ||
+               (cp.product.category.translations as CategoryTranslations).ko;
     return {
       id: cp.product.id,
       image: cp.product.image,
       badgeText: cp.product.badgeText,
       badgeColor: cp.product.badgeColor,
-      category: cp.product.category,
+      category: cp.product.category.key,
+      categoryName: ct.name,
       name: pt.name,
       price: pt.price,
       comingSoon: cp.product.comingSoon && (!cp.product.comingSoonUntil || new Date() < new Date(cp.product.comingSoonUntil)),

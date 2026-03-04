@@ -5,22 +5,36 @@ import { useRouter } from 'next/navigation';
 import { useState, useTransition } from 'react';
 import DataTable, { Column } from '@/components/admin/DataTable';
 
+type CategoryRow = {
+  id: string;
+  key: string;
+  translations: Record<string, { name: string }>;
+};
+
 type ProductRow = {
   id: string;
   image: string;
   badgeText: string | null;
-  category: string;
+  categoryId: string;
+  category: CategoryRow;
   order: number;
   translations: Record<string, { name: string; price: string }>;
 };
 
-export default function ProductsTableClient({ data }: { data: ProductRow[] }) {
+export default function ProductsTableClient({
+  data,
+  categories,
+}: {
+  data: ProductRow[];
+  categories: CategoryRow[];
+}) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [orderChanges, setOrderChanges] = useState<Record<string, number>>({});
+  const [categoryChanges, setCategoryChanges] = useState<Record<string, string>>({});
   const [saving, setSaving] = useState(false);
 
-  const hasChanges = Object.keys(orderChanges).length > 0;
+  const hasChanges = Object.keys(orderChanges).length > 0 || Object.keys(categoryChanges).length > 0;
 
   function handleInputChange(id: string, originalOrder: number, value: string) {
     const val = parseInt(value, 10);
@@ -34,19 +48,39 @@ export default function ProductsTableClient({ data }: { data: ProductRow[] }) {
     });
   }
 
+  function handleCategoryChange(id: string, originalCategoryId: string, value: string) {
+    setCategoryChanges((prev) => {
+      if (value === originalCategoryId) {
+        const { [id]: _, ...rest } = prev;
+        return rest;
+      }
+      return { ...prev, [id]: value };
+    });
+  }
+
   async function handleBatchSave() {
     setSaving(true);
     try {
+      // Collect all changed product IDs
+      const changedIds = new Set([
+        ...Object.keys(orderChanges),
+        ...Object.keys(categoryChanges),
+      ]);
+
       await Promise.all(
-        Object.entries(orderChanges).map(([id, order]) =>
-          fetch(`/api/admin/products/${id}`, {
+        Array.from(changedIds).map((id) => {
+          const body: Record<string, unknown> = {};
+          if (id in orderChanges) body.order = orderChanges[id];
+          if (id in categoryChanges) body.categoryId = categoryChanges[id];
+          return fetch(`/api/admin/products/${id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ order }),
-          }),
-        ),
+            body: JSON.stringify(body),
+          });
+        }),
       );
       setOrderChanges({});
+      setCategoryChanges({});
       router.refresh();
     } finally {
       setSaving(false);
@@ -77,9 +111,18 @@ export default function ProductsTableClient({ data }: { data: ProductRow[] }) {
       key: 'category',
       label: 'Category',
       render: (item) => (
-        <span className="px-2 py-0.5 bg-gray-100 rounded text-xs">
-          {item.category}
-        </span>
+        <select
+          defaultValue={item.categoryId}
+          disabled={saving}
+          className="px-2 py-1 text-xs border border-gray-200 rounded-lg bg-white focus:outline-none focus:border-gray-400 disabled:opacity-50"
+          onChange={(e) => handleCategoryChange(item.id, item.categoryId, e.target.value)}
+        >
+          {categories.map((c) => (
+            <option key={c.id} value={c.id}>
+              {c.translations?.ko?.name || c.key}
+            </option>
+          ))}
+        </select>
       ),
     },
     {
@@ -114,7 +157,7 @@ export default function ProductsTableClient({ data }: { data: ProductRow[] }) {
               disabled={saving}
               className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
             >
-              {saving ? '저장 중...' : '순서 변경하기'}
+              {saving ? '저장 중...' : '변경사항 저장'}
             </button>
           )}
           <Link

@@ -21,14 +21,14 @@ export async function POST(request: NextRequest) {
 
   try {
     const body = await request.json();
-    const { image, badgeText, badgeColor, category, order, translations, comingSoon, comingSoonUntil, link } = body;
+    const { image, badgeText, badgeColor, categoryId, order, translations, comingSoon, comingSoonUntil, link } = body;
 
     const product = await prisma.product.create({
       data: {
         image,
         badgeText: badgeText || null,
         badgeColor: badgeColor || null,
-        category,
+        categoryId,
         comingSoon: comingSoon ?? false,
         comingSoonUntil: comingSoonUntil ? new Date(comingSoonUntil) : null,
         link: link || null,

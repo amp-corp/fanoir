@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import Products from '@/components/Products';
-import { getProducts, getCollections } from '@/lib/db-queries';
+import { getProducts, getCollections, getCategories } from '@/lib/db-queries';
 import { locales, type Locale } from '@/lib/i18n';
 import type { ProductForDisplay } from '@/lib/db-queries';
 
@@ -131,9 +131,10 @@ export default async function ProductsPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const [products, collections] = await Promise.all([
+  const [products, collections, categories] = await Promise.all([
     getProducts(locale),
     getCollections(locale),
+    getCategories(locale),
   ]);
 
   return (
@@ -145,7 +146,7 @@ export default async function ProductsPage({
         }}
       />
       <Suspense>
-        <Products products={products} collections={collections} />
+        <Products products={products} collections={collections} categories={categories} />
       </Suspense>
     </div>
   );

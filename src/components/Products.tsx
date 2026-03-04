@@ -6,15 +6,7 @@ import Link from 'next/link';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { useLang } from '@/contexts/LangContext';
 import CollectionBannerSlider from './CollectionBannerSlider';
-import type { ProductForDisplay, CollectionForDisplay } from '@/lib/db-queries';
-
-const FILTER_KEYS = [
-  'all',
-  'dolls',
-  'cheering',
-  'fashion',
-  'keyrings',
-] as const;
+import type { ProductForDisplay, CollectionForDisplay, CategoryForDisplay } from '@/lib/db-queries';
 
 const SORT_KEYS = ['newest', 'price-asc', 'price-desc'] as const;
 type SortKey = (typeof SORT_KEYS)[number];
@@ -28,9 +20,11 @@ function parsePrice(price: string): number {
 export default function Products({
   products,
   collections,
+  categories,
 }: {
   products: ProductForDisplay[];
   collections: CollectionForDisplay[];
+  categories: CategoryForDisplay[];
 }) {
   const { t, localePath } = useLang();
   const searchParams = useSearchParams();
@@ -43,7 +37,11 @@ export default function Products({
   const [sortOpen, setSortOpen] = useState(false);
   const sortRef = useRef<HTMLDivElement>(null);
 
-  const filters = t.product.filters;
+  const allLabel = t.product.filters.all;
+  const filterTabs = useMemo(() => [
+    { key: 'all', name: allLabel },
+    ...categories,
+  ], [categories, allLabel]);
   const sortOptions = t.product.sortOptions;
 
   // Close dropdown on outside click
@@ -145,20 +143,20 @@ export default function Products({
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             {/* Categories */}
             <div className="flex overflow-x-auto pb-2 md:pb-0 gap-2">
-              {FILTER_KEYS.map((key) => (
+              {filterTabs.map((tab) => (
                 <button
-                  key={key}
+                  key={tab.key}
                   onClick={() => {
-                    setActiveFilter(key);
+                    setActiveFilter(tab.key);
                     updateParams({ page: null });
                   }}
                   className={`whitespace-nowrap px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${
-                    activeFilter === key
+                    activeFilter === tab.key
                       ? 'bg-[#FF6B6B] text-white'
                       : 'bg-[#FFF0F0] text-[#666666] hover:bg-[#FFE0E0]'
                   }`}
                 >
-                  {filters[key]}
+                  {tab.name}
                 </button>
               ))}
             </div>
@@ -263,8 +261,7 @@ export default function Products({
                     </p>
                   </div>
                   <p className="text-[#888888] text-xs mt-1">
-                    {filters[product.category as keyof typeof filters] ||
-                      product.category}
+                    {product.categoryName}
                   </p>
                 </div>
               </Wrapper>

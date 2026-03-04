@@ -8,19 +8,33 @@ datasource db {
 }
 
 model Product {
-  id           String              @id @default(cuid())
-  image        String
-  badgeText    String?
-  badgeColor   String?
-  category     String
+  id              String              @id @default(cuid())
+  image           String
+  badgeText       String?
+  badgeColor      String?
+  categoryId      String
+  category        Category            @relation(fields: [categoryId], references: [id])
   comingSoon      Boolean             @default(false)
   comingSoonUntil DateTime?
   link            String?
   order           Int                 @default(0)
+  translations    Json
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+  collections     CollectionProduct[]
+
+  @@index([order])
+  @@index([categoryId])
+}
+
+model Category {
+  id           String    @id @default(cuid())
+  key          String    @unique
+  order        Int       @default(0)
   translations Json
-  createdAt    DateTime            @default(now())
-  updatedAt    DateTime            @updatedAt
-  collections  CollectionProduct[]
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  products     Product[]
 
   @@index([order])
 }

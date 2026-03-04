@@ -164,11 +164,29 @@ const locales = ['ko', 'en', 'zh-CN', 'zh-TW', 'ja'] as const;
 async function main() {
   console.log('Seeding database...');
 
+  // Seed categories
+  const categorySeeds = [
+    { id: 'cat-dolls', key: 'dolls', order: 0, translations: { ko: { name: '인형' }, en: { name: 'Dolls' }, 'zh-CN': { name: '娃娃' }, 'zh-TW': { name: '娃娃' }, ja: { name: 'ぬいぐるみ' } } },
+    { id: 'cat-cheering', key: 'cheering', order: 1, translations: { ko: { name: '응원용품' }, en: { name: 'Cheering' }, 'zh-CN': { name: '应援用品' }, 'zh-TW': { name: '應援用品' }, ja: { name: '応援グッズ' } } },
+    { id: 'cat-fashion', key: 'fashion', order: 2, translations: { ko: { name: '패션소품' }, en: { name: 'Fashion' }, 'zh-CN': { name: '时尚配饰' }, 'zh-TW': { name: '時尚配飾' }, ja: { name: 'ファッション小物' } } },
+    { id: 'cat-keyrings', key: 'keyrings', order: 3, translations: { ko: { name: '키링/참' }, en: { name: 'Keyrings & Charms' }, 'zh-CN': { name: '钥匙扣/吊饰' }, 'zh-TW': { name: '鑰匙圈/吊飾' }, ja: { name: 'キーリング/チャーム' } } },
+  ];
+
+  for (const cat of categorySeeds) {
+    await prisma.category.upsert({
+      where: { id: cat.id },
+      update: { key: cat.key, order: cat.order, translations: cat.translations },
+      create: cat,
+    });
+    console.log(`  Category: ${cat.key}`);
+  }
+
   // Create products
   const productIds: string[] = [];
   for (let i = 0; i < 8; i++) {
     const koProduct = productsPerLocale.ko[i];
-    const category = categoryMap[koProduct.category] || koProduct.category;
+    const categoryKey = categoryMap[koProduct.category] || koProduct.category;
+    const categoryId = `cat-${categoryKey}`;
 
     const translations: Record<string, { name: string; price: string }> = {};
     for (const locale of locales) {
@@ -182,7 +200,7 @@ async function main() {
         image: productImages[i].image,
         badgeText: koProduct.badge || null,
         badgeColor: productImages[i].badgeColor,
-        category,
+        categoryId,
         order: i,
         translations,
       },
@@ -191,7 +209,7 @@ async function main() {
         image: productImages[i].image,
         badgeText: koProduct.badge || null,
         badgeColor: productImages[i].badgeColor,
-        category,
+        categoryId,
         order: i,
         translations,
       },

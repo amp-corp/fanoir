@@ -7,12 +7,8 @@ import ImageUpload from './ImageUpload';
 import { IMAGE_SPECS, formatBytes } from '@/lib/image-specs';
 
 const LOCALES = ['ko', 'en', 'zh-CN', 'zh-TW', 'ja'] as const;
-const CATEGORIES = [
-  { key: 'dolls', label: 'Dolls (인형)' },
-  { key: 'cheering', label: 'Cheering (응원용품)' },
-  { key: 'fashion', label: 'Fashion (패션소품)' },
-  { key: 'keyrings', label: 'Keyrings (키링/참)' },
-];
+
+type CategoryOption = { id: string; key: string; translations: Record<string, { name: string }> };
 
 type ProductTranslation = { name: string; price: string };
 
@@ -50,7 +46,8 @@ export default function ProductForm({ id }: { id?: string }) {
   const [image, setImage] = useState('');
   const [badgeText, setBadgeText] = useState('');
   const [badgeColor, setBadgeColor] = useState('');
-  const [category, setCategory] = useState('dolls');
+  const [categoryId, setCategoryId] = useState('');
+  const [categories, setCategories] = useState<CategoryOption[]>([]);
   const [comingSoon, setComingSoon] = useState(false);
   const [comingSoonUntil, setComingSoonUntil] = useState('');
   const [link, setLink] = useState('');
@@ -65,34 +62,47 @@ export default function ProductForm({ id }: { id?: string }) {
   const [rawPrice, setRawPrice] = useState('');
 
   useEffect(() => {
-    if (!isEdit) return;
     setLoading(true);
-    fetch(`/api/admin/products/${id}`)
-      .then((r) => r.json())
-      .then((data) => {
-        setImage(data.image);
-        setBadgeText(data.badgeText || '');
-        setBadgeColor(data.badgeColor || '');
-        setCategory(data.category);
-        setComingSoon(data.comingSoon ?? false);
-        setComingSoonUntil(
-          data.comingSoonUntil
-            ? new Date(data.comingSoonUntil).toISOString().slice(0, 16)
-            : '',
-        );
-        setLink(data.link || '');
-        setOrder(data.order);
-        setTranslations(data.translations);
-        const txs = data.translations as
-          | Record<string, ProductTranslation>
-          | undefined;
-        const anyPrice =
-          txs?.ko?.price ||
-          Object.values(txs || {}).find((t) => t.price)?.price ||
-          '';
-        setRawPrice(parseRawPrice(anyPrice));
-      })
-      .finally(() => setLoading(false));
+    const fetches: Promise<void>[] = [
+      fetch('/api/admin/categories')
+        .then((r) => r.json())
+        .then((data) => {
+          setCategories(data);
+          if (!isEdit && data.length > 0) setCategoryId(data[0].id);
+        }),
+    ];
+
+    if (isEdit) {
+      fetches.push(
+        fetch(`/api/admin/products/${id}`)
+          .then((r) => r.json())
+          .then((data) => {
+            setImage(data.image);
+            setBadgeText(data.badgeText || '');
+            setBadgeColor(data.badgeColor || '');
+            setCategoryId(data.categoryId);
+            setComingSoon(data.comingSoon ?? false);
+            setComingSoonUntil(
+              data.comingSoonUntil
+                ? new Date(data.comingSoonUntil).toISOString().slice(0, 16)
+                : '',
+            );
+            setLink(data.link || '');
+            setOrder(data.order);
+            setTranslations(data.translations);
+            const txs = data.translations as
+              | Record<string, ProductTranslation>
+              | undefined;
+            const anyPrice =
+              txs?.ko?.price ||
+              Object.values(txs || {}).find((t) => t.price)?.price ||
+              '';
+            setRawPrice(parseRawPrice(anyPrice));
+          }),
+      );
+    }
+
+    Promise.all(fetches).finally(() => setLoading(false));
   }, [id, isEdit]);
 
   function updateTranslation(field: keyof ProductTranslation, value: string) {
@@ -159,7 +169,7 @@ export default function ProductForm({ id }: { id?: string }) {
       image,
       badgeText,
       badgeColor,
-      category,
+      categoryId,
       comingSoon,
       comingSoonUntil: comingSoonUntil || null,
       link: link.trim() || null,
@@ -211,13 +221,13 @@ export default function ProductForm({ id }: { id?: string }) {
               Category
             </label>
             <select
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
+              value={categoryId}
+              onChange={(e) => setCategoryId(e.target.value)}
               className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]"
             >
-              {CATEGORIES.map((c) => (
-                <option key={c.key} value={c.key}>
-                  {c.label}
+              {categories.map((c) => (
+                <option key={c.id} value={c.id}>
+                  {c.translations?.ko?.name || c.key}
                 </option>
               ))}
             </select>

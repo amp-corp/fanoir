@@ -116,9 +116,7 @@ export default function CollectionDetail({
                     </p>
                   </div>
                   <p className="text-[#888888] text-xs mt-1">
-                    {t.product.filters[
-                      product.category as keyof typeof t.product.filters
-                    ] || product.category}
+                    {product.categoryName}
                   </p>
                 </div>
               </Wrapper>
