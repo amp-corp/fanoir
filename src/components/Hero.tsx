@@ -1,92 +1,125 @@
 'use client';
 
+import { useState, useEffect, useCallback, useSyncExternalStore } from 'react';
 import Image from 'next/image';
 import { useLang } from '@/contexts/LangContext';
+import { useSwipe } from '@/hooks/useSwipe';
 
-export default function Hero({ heroImage }: { heroImage?: string }) {
-  const { t, localePath } = useLang();
+const SLIDE_INTERVAL = 5000;
 
-  const bgSrc = heroImage || '/hero-bg.jpg';
+const MQ = '(max-width: 767px)';
+function subscribeMQ(cb: () => void) {
+  const mql = window.matchMedia(MQ);
+  mql.addEventListener('change', cb);
+  return () => mql.removeEventListener('change', cb);
+}
+function getSnapshotMQ() {
+  return window.matchMedia(MQ).matches;
+}
+function getServerSnapshotMQ() {
+  return false;
+}
+
+// Raw image pairs (desktop shows 2 per slide, mobile shows 1 per slide)
+const IMAGE_PAIRS: [string, string][] = [
+  ['/brand/00.jpg', '/brand/10.jpg'],
+  ['/brand/01.jpg', '/brand/02.jpg'],
+  ['/brand/03.jpg', '/brand/07.jpg'],
+];
+
+const DESKTOP_SLIDES = IMAGE_PAIRS.map((pair) => pair);
+const MOBILE_SLIDES = IMAGE_PAIRS.flat().map((src) => [src]);
+
+export default function Hero() {
+  const { t } = useLang();
+  const isMobile = useSyncExternalStore(subscribeMQ, getSnapshotMQ, getServerSnapshotMQ);
+  const slides = isMobile ? MOBILE_SLIDES : DESKTOP_SLIDES;
+
+  const [current, setCurrent] = useState(0);
+  const safeIndex = current >= slides.length ? 0 : current;
+
+  const goTo = useCallback((index: number) => setCurrent(index), []);
+  const goPrev = useCallback(
+    () => setCurrent((p) => (p - 1 + slides.length) % slides.length),
+    [slides.length],
+  );
+  const goNext = useCallback(
+    () => setCurrent((p) => (p + 1) % slides.length),
+    [slides.length],
+  );
+  const swipe = useSwipe(goPrev, goNext);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % slides.length);
+    }, SLIDE_INTERVAL);
+    return () => clearInterval(timer);
+  }, [slides.length]);
 
   return (
-    <section className="flex-1 flex flex-col pt-16">
-      <div className="flex-1 flex flex-col relative min-h-[calc(100vh-64px)] justify-center items-center overflow-hidden">
-        {/* Background image with overlay */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src={bgSrc}
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-          />
-          <div className="absolute inset-0 " />
-        </div>
-
-        {/* Content */}
-        <div
-          className="relative z-10 flex flex-col items-center justify-center px-4 max-w-[960px] text-center gap-8"
-          style={{ textShadow: '0 2px 8px rgba(15, 1, 1, 0.3)' }}
-        >
-          <div className="flex flex-col items-center gap-6">
-            {/* Badge */}
-            <span
-              className="px-3 py-1 rounded-full  text-white text-xs font-bold uppercase tracking-widest"
-              style={{ textShadow: 'none' }}
-            >
-              {t.hero.label}
-            </span>
-
-            {/* Heading */}
-            <div className="space-y-2">
-              <h1 className="text-white text-3xl md:text-5xl lg:text-6xl font-semibold leading-tight tracking-tight">
-                {t.hero.title}
-                <br className="sm:hidden" /> {t.hero.titleBefore}
-                <span className="font-extrabold">{t.hero.titleAccent}</span>
-                {t.hero.titleAfter}
-              </h1>
-              <p
-                className="text-white text-base md:text-lg lg:text-xl font-semibold  "
-                style={{ textShadow: '0 2px 8px rgba(15, 1, 1, 0.3)' }}
-              >
-                {t.hero.subtitle}
-              </p>
-            </div>
-          </div>
-
-          {/* CTAs */}
+    <section className="relative w-full pt-16 overflow-hidden">
+      <div
+        className="relative w-full aspect-[3/4] md:aspect-[16/7] cursor-grab active:cursor-grabbing select-none"
+        {...swipe}
+      >
+        {slides.map((images, i) => (
           <div
-            className="flex flex-col sm:flex-row gap-4 mt-8 w-full sm:w-auto"
-            style={{ textShadow: 'none' }}
+            key={`${isMobile ? 'm' : 'd'}-${i}`}
+            className="absolute inset-0 transition-opacity duration-1000 pointer-events-none"
+            style={{ opacity: safeIndex === i ? 1 : 0 }}
           >
-            <a
-              href={localePath('/products')}
-              className="group flex items-center justify-center rounded-full h-14 px-8 bg-[#222222] text-white text-sm font-bold leading-normal tracking-wide hover:bg-[#393939] transition-all transform hover:scale-105"
+            <div
+              className={`grid h-full ${
+                images.length === 2 ? 'grid-cols-2' : 'grid-cols-1'
+              }`}
             >
-              <span>{t.hero.cta1}</span>
-              <span className="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform text-xl">
-                arrow_forward
-              </span>
-            </a>
-            <a
-              href={localePath('/#identity')}
-              className="group flex items-center justify-center rounded-full h-14 px-8 bg-white text-[#222222] text-sm font-bold leading-normal tracking-wide hover:bg-white/90  transition-all"
-            >
-              <span>{t.hero.cta2}</span>
-            </a>
-          </div>
-        </div>
+              {images.map((src, j) => (
+                <div key={j} className="relative w-full h-full overflow-hidden">
+                  <Image
+                    src={src}
+                    alt=""
+                    fill
+                    priority={i === 0 && j === 0}
+                    sizes={images.length === 2 ? '50vw' : '100vw'}
+                    className="object-cover"
+                  />
+                </div>
+              ))}
+            </div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white animate-bounce">
-          <span className="text-xs uppercase tracking-widest font-medium">
-            {t.hero.scroll}
-          </span>
-          <span className="material-symbols-outlined text-white">
-            keyboard_arrow_down
-          </span>
-        </div>
+            {i === 0 && (
+              <div className="absolute inset-0 flex items-end justify-start p-8 md:p-14">
+                <div>
+                  <h1
+                    className="text-white text-2xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight"
+                    style={{ textShadow: '0 2px 8px rgba(0,0,0,0.4)' }}
+                  >
+                    {t.hero.title}
+                  </h1>
+                  <p
+                    className="text-white text-sm md:text-base lg:text-lg font-medium mt-2"
+                    style={{ textShadow: '0 2px 8px rgba(0,0,0,0.4)' }}
+                  >
+                    {t.hero.subtitle}
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* Dot indicators */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+        {slides.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => goTo(i)}
+            className={`w-2 h-2 rounded-full transition-colors ${
+              safeIndex === i ? 'bg-[#222222]' : 'bg-[#222222]/30'
+            }`}
+          />
+        ))}
       </div>
     </section>
   );

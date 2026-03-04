@@ -1,102 +1,139 @@
 'use client';
 
+import { useState, useEffect, useCallback } from 'react';
+import Image from 'next/image';
 import { useLang } from '@/contexts/LangContext';
+import { useSwipe } from '@/hooks/useSwipe';
+import type { ProductForDisplay } from '@/lib/db-queries';
 
-export default function Identity() {
+const GALLERY_SLIDE_INTERVAL = 4000;
+
+export default function Identity({
+  products,
+  signatureImage1,
+  signatureImage2,
+}: {
+  products: ProductForDisplay[];
+  signatureImage1?: string;
+  signatureImage2?: string;
+}) {
   const { t, localePath } = useLang();
+  const spotlight = products[0];
+  const [gallerySlide, setGallerySlide] = useState(0);
 
-  const cards = [
-    {
-      icon: 'favorite',
-      title: t.identity.meaningTitle,
-      desc: t.identity.meaningDesc,
-    },
-    {
-      icon: 'stars',
-      title: t.identity.roleTitle,
-      desc: t.identity.roleDesc,
-    },
-    {
-      icon: 'visibility',
-      title: t.identity.visionTitle,
-      desc: t.identity.visionDesc,
-    },
-  ];
+  // Free-scroll row images
+  const scrollImages = ['/brand/04.jpg', '/brand/05.jpg', '/brand/06.jpg'];
+
+  // Left-column slider images
+  const sliderImages = [signatureImage1, signatureImage2];
+
+  const goToSlide = useCallback((i: number) => setGallerySlide(i), []);
+  const slidePrev = useCallback(
+    () => setGallerySlide((p) => (p - 1 + sliderImages.length) % sliderImages.length),
+    [sliderImages.length],
+  );
+  const slideNext = useCallback(
+    () => setGallerySlide((p) => (p + 1) % sliderImages.length),
+    [sliderImages.length],
+  );
+  const swipe = useSwipe(slidePrev, slideNext);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setGallerySlide((prev) => (prev + 1) % sliderImages.length);
+    }, GALLERY_SLIDE_INTERVAL);
+    return () => clearInterval(timer);
+  }, [sliderImages.length]);
 
   return (
-    <section id="identity" className="bg-[#FFFFFF]">
-      <div className="max-w-6xl mx-auto px-6 py-24 md:py-32">
-        {/* Header */}
-        <div className="mb-16">
-          <p className="text-xs tracking-[0.3em] text-[#222222] uppercase mb-4">
-            {t.identity.label}
+    <section id="identity">
+      {/* sec-comment — Brand Story */}
+      <div className="py-56 md:py-72">
+        <div className="max-w-3xl mx-auto px-6 text-center">
+          <p className="text-[#666666] text-base md:text-lg font-bold leading-[1.8] mb-3">
+            {t.identity.storyLine1}
           </p>
-          <h2 className="text-2xl md:text-4xl font-black text-[#3D3D3D] tracking-tight mb-6 leading-tight">
-            {t.identity.title}
-          </h2>
-          <p className="text-[#666666] leading-relaxed">{t.identity.desc}</p>
+          <p className="text-[#666666] text-sm md:text-base leading-[1.8] mb-3">
+            {t.identity.storyLine2}
+          </p>
+          <p className="text-[#666666] text-sm md:text-base leading-[1.8] mb-3">
+            {t.identity.storyLine3}
+          </p>
+        </div>
+      </div>
+
+      {/* sec-place — Visual Gallery */}
+      <div>
+        {/* Row 1: Horizontal free-scroll gallery */}
+        <div className="overflow-x-auto scrollbar-hide">
+          <div className="flex gap-0">
+            {scrollImages.map((src, i) => (
+              <div
+                key={i}
+                className="shrink-0 w-[80vw] md:w-[33.333vw] aspect-square relative"
+              >
+                <Image
+                  src={src}
+                  alt=""
+                  fill
+                  sizes="(max-width: 768px) 80vw, 33vw"
+                  className="object-cover"
+                />
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Cards */}
-        <div className="grid md:grid-cols-3 gap-4 mb-20">
-          {cards.map((card) => (
-            <div
-              key={card.title}
-              className="group relative bg-white border border-[#E0E0E0] rounded-2xl p-8 hover:border-[#222222]/40 shadow-sm hover:shadow-md transition-all overflow-hidden"
-            >
-              {/* Decorative hover circle */}
-              <div className="absolute -right-10 -top-10 w-32 h-32 bg-[#222222]/5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
-
-              {/* Icon */}
-              <div className="relative z-10 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-[#F5F5F5] ring-1 ring-[#222222]/20 flex items-center justify-center">
-                  <span className="material-symbols-outlined text-[#222222] text-xl!">
-                    {card.icon}
-                  </span>
-                </div>
+        {/* Row 2: 2-column (left: image fade slider + dots, right: product CTA card) */}
+        <div className="grid grid-cols-1 md:grid-cols-2">
+          {/* Left: fade slider */}
+          <div
+            className="relative aspect-square overflow-hidden cursor-grab active:cursor-grabbing select-none"
+            {...swipe}
+          >
+            {sliderImages.map((src, i) => (
+              <div
+                key={i}
+                className="absolute inset-0 transition-opacity duration-1000 pointer-events-none"
+                style={{ opacity: gallerySlide === i ? 1 : 0 }}
+              >
+                <Image
+                  src={src || ''}
+                  alt=""
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover"
+                />
               </div>
-
-              {/* Gold separator */}
-              <div className="w-8 h-0.5 bg-linear-to-r from-[#222222] to-transparent mb-5" />
-
-              <h3 className="relative z-10 text-[#3D3D3D] text-lg font-semibold mb-3 tracking-wide">
-                {card.title}
-              </h3>
-              <p className="relative z-10 text-[#888888] text-sm leading-relaxed">
-                {card.desc}
-              </p>
+            ))}
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+              {sliderImages.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => goToSlide(i)}
+                  className={`w-2 h-2 rounded-full transition-colors ${
+                    gallerySlide === i ? 'bg-white' : 'bg-white/40'
+                  }`}
+                />
+              ))}
             </div>
-          ))}
-        </div>
+          </div>
 
-        {/* Join CTA - Image background card */}
-        <div className="relative rounded-2xl overflow-hidden">
-          <div className="absolute inset-0 bg-cover bg-center" />
-          <div className="absolute inset-0 bg-linear-to-r from-[#222222] via-[#444444] to-[#555555]" />
-
-          <div className="relative z-10 p-10 md:p-14">
-            <div className="max-w-lg">
-              <div className="flex items-center gap-2 mb-4">
-                <span className="material-symbols-outlined text-white text-base!">
-                  diamond
-                </span>
-                <span className="text-xs tracking-[0.3em] text-white/90 uppercase">
-                  {t.identity.noirMovement}
-                </span>
-              </div>
-              <h3 className="text-2xl md:text-3xl font-black text-white mb-4 tracking-tight">
-                {t.identity.joinTitle}
-              </h3>
-              <p className="text-white/80 mb-8 leading-relaxed">
-                {t.identity.joinDesc}
+          {/* Right: product CTA card */}
+          <div className="relative aspect-square flex items-center justify-center bg-[#F5F5F0] overflow-hidden">
+            <div className="relative z-10 flex flex-col items-start gap-4 px-10 md:px-14 max-w-md">
+              <p className="text-[#3D3D3D] text-xl md:text-2xl font-bold leading-snug whitespace-pre-line">
+                {t.identity.spotlightDesc}
               </p>
               <a
                 href={localePath('/products')}
-                className="inline-flex items-center gap-2 bg-white text-[#222222] px-7 py-3.5 text-sm tracking-wider font-bold hover:bg-[#F5F5F5] transition-colors rounded-full"
+                className="inline-flex items-center gap-3 mt-2 text-sm font-medium text-[#222222] group"
               >
-                {t.identity.joinCta}
-                <span className="material-symbols-outlined text-lg!">
-                  arrow_forward
+                <span>{t.identity.spotlightCta}</span>
+                <span className="inline-flex items-center justify-center w-10 h-10 rounded-full border border-[#222222] group-hover:bg-[#222222] group-hover:text-white transition-colors">
+                  <span className="material-symbols-outlined text-lg!">
+                    arrow_forward
+                  </span>
                 </span>
               </a>
             </div>

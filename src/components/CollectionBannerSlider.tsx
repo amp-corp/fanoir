@@ -13,8 +13,10 @@ export default function CollectionBannerSlider({
 }: {
   collections: CollectionForDisplay[];
 }) {
-  const { localePath } = useLang();
+  const { t, localePath } = useLang();
   const scrollRef = useRef<HTMLDivElement>(null);
+  const dragStartX = useRef(0);
+  const isDragging = useRef(false);
   const [currentPage, setCurrentPage] = useState(0);
 
   const totalPages = Math.ceil(collections.length / PER_PAGE);
@@ -27,6 +29,26 @@ export default function CollectionBannerSlider({
     el.scrollTo({ left: targetChild.offsetLeft, behavior: 'smooth' });
     setCurrentPage(page);
   }, []);
+
+  const handlePointerDown = useCallback((e: React.PointerEvent) => {
+    dragStartX.current = e.clientX;
+    isDragging.current = true;
+    e.currentTarget.setPointerCapture(e.pointerId);
+  }, []);
+
+  const handlePointerUp = useCallback(
+    (e: React.PointerEvent) => {
+      if (!isDragging.current) return;
+      isDragging.current = false;
+      const diff = e.clientX - dragStartX.current;
+      if (diff > 50 && currentPage > 0) {
+        scrollToPage(currentPage - 1);
+      } else if (diff < -50 && currentPage < totalPages - 1) {
+        scrollToPage(currentPage + 1);
+      }
+    },
+    [currentPage, totalPages, scrollToPage],
+  );
 
   // Auto-slide when there are multiple pages
   useEffect(() => {
@@ -51,6 +73,7 @@ export default function CollectionBannerSlider({
             banner={banner}
             index={i}
             localePath={localePath}
+            ctaText={t.collection.to}
           />
         ))}
       </div>
@@ -62,14 +85,16 @@ export default function CollectionBannerSlider({
     <div className="relative">
       <div
         ref={scrollRef}
-        className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide"
+        className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide cursor-grab active:cursor-grabbing select-none"
+        onPointerDown={handlePointerDown}
+        onPointerUp={handlePointerUp}
       >
         {collections.map((banner, i) => (
           <div
             key={banner.slug}
             className="snap-start shrink-0 w-[calc(50%-12px)]"
           >
-            <BannerCard banner={banner} index={i} localePath={localePath} />
+            <BannerCard banner={banner} index={i} localePath={localePath} ctaText={t.collection.to} />
           </div>
         ))}
       </div>
@@ -93,15 +118,17 @@ function BannerCard({
   banner,
   index,
   localePath,
+  ctaText,
 }: {
   banner: CollectionForDisplay;
   index: number;
   localePath: (path: string) => string;
+  ctaText: string;
 }) {
   const labelStyle = 'bg-white/20 backdrop-blur-md text-white';
 
   return (
-    <div className="group relative overflow-hidden rounded-xl bg-[#F5F5F5] aspect-[21/9]">
+    <div className="group relative overflow-hidden rounded-xl bg-[#F5F5F5] aspect-[21/9] pointer-events-none [&_a]:pointer-events-auto">
       <Image
         src={banner.image}
         alt={banner.title}
@@ -126,7 +153,7 @@ function BannerCard({
           href={localePath(`/collection/${banner.slug}`)}
           className="mt-4 bg-white text-black px-6 py-2.5 rounded-full text-sm font-bold hover:bg-[#222222] hover:text-white transition-all w-fit"
         >
-          {banner.cta}
+          {ctaText}
         </Link>
       </div>
     </div>

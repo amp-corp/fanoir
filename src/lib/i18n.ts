@@ -19,52 +19,34 @@ export const translations = {
       contact: '문의',
     },
     hero: {
-      label: 'BY FANS, FOR THE MOMENT',
       title: '응원하는 모든 순간,',
-      titleBefore: '',
-      titleAccent: '파누아',
-      titleAfter: '와 함께',
       subtitle: '좋아하는 마음 가장 예쁘게',
-      cta1: '구경하러 가기',
-      cta2: '우리 이야기',
-      scroll: 'Scroll',
     },
     identity: {
       label: 'WHO WE ARE',
       title: '마음에 드는 게 없어서 직접 만들기로 했어요',
       desc: 'FANOIR는 콘서트 전날의 설렘에서 시작됐어요. 응원봉 꾸미고, 인형한테 새 옷 입히는 그 시간 — 그 순간에 쓸 케이팝 팬덤 굿즈를 우리가 직접 만들게 됐어요.',
-      meaningTitle: 'Fan + Noir',
-      meaningDesc:
-        "Fan(팬) + Noir(프랑스어로 '검정'). 좋아하는 마음은 진심인데 표현까지 멋있으면 더 좋잖아요.",
-      roleTitle: '우리가 하는 일',
-      roleDesc:
-        '인형옷, 미니슬로건, 응원봉 꾸미기, 스크런치, 키링 등 — 직접 써보고 괜찮은 것만 내놓아요.',
-      visionTitle: '우리가 바라는 것',
-      visionDesc:
+      storyLine1: 'Fan + Noir — 좋아하는 마음에 블랙을 더해, 누구보다 멋지게.',
+      storyLine2:
+        '인형옷, 미니슬로건, 응원봉 꾸미기 — 직접 써보고 괜찮은 것만 내놓아요.',
+      storyLine3:
         '응원도, 꾸미기도, 일상도 — 좋아하는 마음이 눈에 보일 때가 제일 행복하잖아요.',
-      noirMovement: 'NEXT WITH FANOIR',
-      joinTitle: '다음 콘서트, 같이 준비할까요?',
-      joinDesc: '새 상품이랑 콜라보 소식 제일 먼저 알려드릴게요.',
-      joinCta: '구경하러 가기',
+      spotlightLabel: '추천 상품',
+      spotlightDesc:
+        '좋아하는 마음을 더 예쁘게.\n우리가 직접 만든 것들, 구경해 볼래요?',
+      spotlightCta: '보러 가기',
     },
     showcase: {
       label: '이런 거 만들어요',
       title: '자신 있는 것들만 올려요',
       desc: '인형옷부터 응원용품, 키링까지 — 콘서트장에 직접 들고 가서 써본 것들만 모았어요.',
-      bestseller: 'Bestseller',
       comingSoon: 'Coming Soon',
-      karatValue: '100%',
-      karatLabel: '직접 기획',
-      premiumQuality: '우리가 직접 써본 것들',
-      signatureLabel: 'HOW WE MAKE',
-      signatureTitle: '하나하나, 손이 가는 대로',
-      signatureDesc:
-        '소재 고르는 것부터 마무리까지, 하나하나 핸드메이드로 직접 챙겨요.',
-      feature1Title: '멤버별 컬러 매칭',
-      feature1Desc: '최애 컬러에 맞춰서 하나하나 골랐어요',
-      feature2Title: '검증된 소재',
-      feature2Desc: '써보고 괜찮은 것만 고집해요',
       viewMore: '더 보기',
+      philosophyLabel: 'OUR PHILOSOPHY',
+      philosophyQuote: '다음 콘서트, 같이 준비할까요?',
+      philosophyDesc:
+        '새 상품이랑 콜라보 소식 제일 먼저 알려드릴게요. 좋아하는 마음이 눈에 보이는 순간을 함께 만들어요.',
+      philosophyCta: '구경하러 가기',
     },
     product: {
       title: '상품',
@@ -82,6 +64,7 @@ export const translations = {
     collection: {
       title: '컬렉션',
       desc: '팬덤에서 사랑받는 크리에이터들과 함께했어요. 파누아만의 특별한 콜라보 라인업!',
+      to: '컬렉션 보기',
       viewMore: '컬렉션 모두 보기',
     },
     termsPage: {
@@ -138,53 +121,36 @@ export const translations = {
       contact: 'Contact',
     },
     hero: {
-      label: 'BY FANS, FOR THE MOMENT',
       title: 'Every moment you cheer,',
-      titleBefore: 'with ',
-      titleAccent: 'FANOIR',
-      titleAfter: '',
       subtitle: 'Your love, beautifully made',
-      cta1: 'Browse Products',
-      cta2: 'Our Story',
-      scroll: 'Scroll',
     },
     identity: {
       label: 'WHO WE ARE',
       title:
         "We couldn't find what we wanted so we started making it ourselves",
       desc: 'FANOIR started from the excitement the night before a concert — decorating lightsticks, dressing up dolls. We started making K-pop fan goods for those exact moments ourselves.',
-      meaningTitle: 'Fan + Noir',
-      meaningDesc:
-        "Fan + Noir (French for 'black'). We mean it when we say we love something — and it's even better when it looks good too.",
-      roleTitle: 'What We Do',
-      roleDesc:
-        'Doll clothes, mini slogans, lightstick accessories, scrunchies, keyrings — we only put out what we actually love using.',
-      visionTitle: 'What We Believe',
-      visionDesc:
+      storyLine1:
+        'Fan + Noir — we add a touch of black to your love, making it cooler than ever.',
+      storyLine2:
+        'Doll clothes, mini slogans, lightstick accessories — we only put out what we actually love using.',
+      storyLine3:
         'Cheering, styling, everyday life — the happiest moments are when your love for something shows.',
-      noirMovement: 'NEXT WITH FANOIR',
-      joinTitle: 'Ready to prep for the next concert?',
-      joinDesc: "New drops and collabs — we'll let you know first.",
-      joinCta: 'Browse Products',
+      spotlightLabel: 'FEATURED',
+      spotlightDesc:
+        'Making your love even prettier.\nCheck out what we handcrafted for you.',
+      spotlightCta: 'View Products',
     },
     showcase: {
       label: 'WHAT WE MAKE',
       title: 'Only the good stuff',
       desc: 'Doll clothes, cheering items, keyrings and more — we brought them to concerts and only kept what actually works.',
-      bestseller: 'Bestseller',
       comingSoon: 'Coming Soon',
-      karatValue: '100%',
-      karatLabel: 'Self-designed',
-      premiumQuality: 'Tested by us, made for you',
-      signatureLabel: 'HOW WE MAKE',
-      signatureTitle: 'One by one, by hand',
-      signatureDesc:
-        'From choosing materials to the final touch — every piece is handmade and handled by us.',
-      feature1Title: 'Bias Color Matching',
-      feature1Desc: 'Carefully picked to match your bias colors',
-      feature2Title: 'Tested Materials',
-      feature2Desc: "We only use what we've tried and trust",
       viewMore: 'See All',
+      philosophyLabel: 'OUR PHILOSOPHY',
+      philosophyQuote: 'Ready to prep for the next concert?',
+      philosophyDesc:
+        "New drops and collabs — we'll let you know first. Let's make those moments where your love shows, together.",
+      philosophyCta: 'Browse Products',
     },
     product: {
       title: 'Products',
@@ -202,6 +168,7 @@ export const translations = {
     collection: {
       title: 'Collection',
       desc: 'Special collab lineups with beloved fandom creators. Only at FANOIR!',
+      to: 'View Collection',
       viewMore: 'View All Collections',
     },
     termsPage: {
@@ -258,51 +225,32 @@ export const translations = {
       contact: '联系',
     },
     hero: {
-      label: 'BY FANS, FOR THE MOMENT',
       title: '应援的每个瞬间，',
-      titleBefore: '与',
-      titleAccent: 'FANOIR',
-      titleAfter: '一起',
       subtitle: '喜欢的心情 最好看地呈现',
-      cta1: '逛逛看',
-      cta2: '我们的故事',
-      scroll: 'Scroll',
     },
     identity: {
       label: 'WHO WE ARE',
       title: '找不到满意的 就自己动手做了',
       desc: 'FANOIR始于演唱会前夜的那份期待。装饰应援棒、给娃娃换新衣——那些时刻用的K-pop粉丝周边，我们自己来做。',
-      meaningTitle: 'Fan + Noir',
-      meaningDesc:
-        'Fan（粉丝）+ Noir（法语里的「黑」）。喜欢是认真的 表达也好看的话就更好了。',
-      roleTitle: '我们做的事',
-      roleDesc:
-        '娃衣、迷你横幅、应援棒配饰、发圈、钥匙扣等——自己用过觉得好的才放出来。',
-      visionTitle: '我们的想法',
-      visionDesc:
+      storyLine1: 'Fan + Noir — 为喜欢的心加上一抹黑色，比谁都酷。',
+      storyLine2: '娃衣、迷你横幅、应援棒配饰——自己用过觉得好的才放出来。',
+      storyLine3:
         '应援也好、打扮也好、日常也好——喜欢的心情能被看见的那一刻 最幸福。',
-      noirMovement: 'NEXT WITH FANOIR',
-      joinTitle: '下一场演唱会 一起准备？',
-      joinDesc: '新品和联名消息 第一时间告诉你。',
-      joinCta: '逛逛看',
+      spotlightLabel: '推荐商品',
+      spotlightDesc: '让喜欢变得更好看。\n来看看我们亲手做的吧？',
+      spotlightCta: '去看看',
     },
     showcase: {
       label: '我们做这些',
       title: '有底气的才上架',
       desc: '娃衣、应援用品、钥匙扣等——带去演唱会用过，觉得真不错的才放上来。',
-      bestseller: 'Bestseller',
       comingSoon: 'Coming Soon',
-      karatValue: '100%',
-      karatLabel: '自己企划',
-      premiumQuality: '我们自己试过的',
-      signatureLabel: 'HOW WE MAKE',
-      signatureTitle: '一件一件 亲手打磨',
-      signatureDesc: '从选材到最后一步，每一件都手工制作，全程自己把关。',
-      feature1Title: '成员色配色',
-      feature1Desc: '按担当色一个个挑的',
-      feature2Title: '验证过的材料',
-      feature2Desc: '用过觉得好的才坚持用',
       viewMore: '看全部',
+      philosophyLabel: 'OUR PHILOSOPHY',
+      philosophyQuote: '下一场演唱会 一起准备？',
+      philosophyDesc:
+        '新品和联名消息 第一时间告诉你。让我们一起创造喜欢被看见的瞬间。',
+      philosophyCta: '逛逛看',
     },
     product: {
       title: '商品',
@@ -320,6 +268,7 @@ export const translations = {
     collection: {
       title: '系列',
       desc: '粉丝圈人气创作者们的联名合作，FANOIR专属特别企划！',
+      to: '查看系列',
       viewMore: '查看全部系列',
     },
     termsPage: {
@@ -376,51 +325,32 @@ export const translations = {
       contact: '聯繫',
     },
     hero: {
-      label: 'BY FANS, FOR THE MOMENT',
       title: '應援的每個瞬間，',
-      titleBefore: '與',
-      titleAccent: 'FANOIR',
-      titleAfter: '一起',
       subtitle: '喜歡的心情 最好看地呈現',
-      cta1: '逛逛看',
-      cta2: '我們的故事',
-      scroll: 'Scroll',
     },
     identity: {
       label: 'WHO WE ARE',
       title: '找不到滿意的 就自己動手做了',
       desc: 'FANOIR始於演唱會前夜的那份期待。裝飾應援棒、幫娃娃換新衣——那些時刻用的K-pop粉絲周邊，我們自己來做。',
-      meaningTitle: 'Fan + Noir',
-      meaningDesc:
-        'Fan（粉絲）+ Noir（法語裡的「黑」）。喜歡是認真的 表達也好看的話就更好了。',
-      roleTitle: '我們做的事',
-      roleDesc:
-        '娃衣、迷你橫幅、應援棒配飾、髮圈、鑰匙圈等——自己用過覺得好的才放出來。',
-      visionTitle: '我們的想法',
-      visionDesc:
+      storyLine1: 'Fan + Noir — 為喜歡的心加上一抹黑色，比誰都酷。',
+      storyLine2: '娃衣、迷你橫幅、應援棒配飾——自己用過覺得好的才放出來。',
+      storyLine3:
         '應援也好、打扮也好、日常也好——喜歡的心情能被看見的那一刻 最幸福。',
-      noirMovement: 'NEXT WITH FANOIR',
-      joinTitle: '下一場演唱會 一起準備？',
-      joinDesc: '新品和聯名消息 第一時間告訴你。',
-      joinCta: '逛逛看',
+      spotlightLabel: '推薦商品',
+      spotlightDesc: '讓喜歡變得更好看。\n來看看我們親手做的吧？',
+      spotlightCta: '去看看',
     },
     showcase: {
       label: '我們做這些',
       title: '有底氣的才上架',
       desc: '娃衣、應援用品、鑰匙圈等——帶去演唱會用過，覺得真不錯的才放上來。',
-      bestseller: 'Bestseller',
       comingSoon: 'Coming Soon',
-      karatValue: '100%',
-      karatLabel: '自己企劃',
-      premiumQuality: '我們自己試過的',
-      signatureLabel: 'HOW WE MAKE',
-      signatureTitle: '一件一件 親手打磨',
-      signatureDesc: '從選材到最後一步，每一件都手工製作，全程自己把關。',
-      feature1Title: '成員色配色',
-      feature1Desc: '按擔當色一個個挑的',
-      feature2Title: '驗證過的材料',
-      feature2Desc: '用過覺得好的才堅持用',
       viewMore: '看全部',
+      philosophyLabel: 'OUR PHILOSOPHY',
+      philosophyQuote: '下一場演唱會 一起準備？',
+      philosophyDesc:
+        '新品和聯名消息 第一時間告訴你。讓我們一起創造喜歡被看見的瞬間。',
+      philosophyCta: '逛逛看',
     },
     product: {
       title: '商品',
@@ -438,6 +368,7 @@ export const translations = {
     collection: {
       title: '系列',
       desc: '粉絲圈人氣創作者們的聯名合作，FANOIR專屬特別企劃！',
+      to: '查看系列',
       viewMore: '查看全部系列',
     },
     termsPage: {
@@ -494,52 +425,35 @@ export const translations = {
       contact: 'お問い合わせ',
     },
     hero: {
-      label: 'BY FANS, FOR THE MOMENT',
       title: '応援するすべての瞬間、',
-      titleBefore: '',
-      titleAccent: 'FANOIR',
-      titleAfter: 'と一緒に',
       subtitle: '好きな気持ち いちばんかわいく',
-      cta1: '見てみる',
-      cta2: '私たちのこと',
-      scroll: 'Scroll',
     },
     identity: {
       label: 'WHO WE ARE',
       title: '気に入るものがなくて 自分たちで作ることにしました',
       desc: 'FANOIRはライブ前夜のワクワクから始まりました。ペンラをデコって、ぬいに新しい服を着せて——あの瞬間に使うK-popファンダムグッズを自分たちで作るようになりました。',
-      meaningTitle: 'Fan + Noir',
-      meaningDesc:
-        'Fan（ファン）+ Noir（フランス語で「黒」）。好きな気持ちは本気 見た目もおしゃれならもっといいよね。',
-      roleTitle: '私たちがやること',
-      roleDesc:
-        'ぬい服、ミニスローガン、ペンラデコ、シュシュ、キーリングなど——使ってみてよかったものだけ出してます。',
-      visionTitle: '私たちが思うこと',
-      visionDesc:
+      storyLine1:
+        'Fan + Noir — 好きな気持ちにブラックを加えて、誰よりもかっこよく。',
+      storyLine2:
+        'ぬい服、ミニスローガン、ペンラデコ——使ってみてよかったものだけ出してます。',
+      storyLine3:
         '応援も デコも 日常も——好きな気持ちが見える瞬間がいちばん幸せ。',
-      noirMovement: 'NEXT WITH FANOIR',
-      joinTitle: '次のライブ 一緒に準備しない？',
-      joinDesc: '新商品やコラボ情報 いち早くお届けします。',
-      joinCta: '見てみる',
+      spotlightLabel: 'おすすめ',
+      spotlightDesc:
+        '好きをもっとかわいく。\n私たちが作ったもの、見てみませんか？',
+      spotlightCta: '見に行く',
     },
     showcase: {
       label: 'こんなの作ってます',
       title: '自信あるものだけ',
       desc: 'ぬい服、応援グッズ、キーリングなど——ライブに持っていって本当によかったものだけ載せてます。',
-      bestseller: 'Bestseller',
       comingSoon: 'Coming Soon',
-      karatValue: '100%',
-      karatLabel: '自主企画',
-      premiumQuality: '自分たちで使ってみたもの',
-      signatureLabel: 'HOW WE MAKE',
-      signatureTitle: 'ひとつひとつ 自分たちの手で',
-      signatureDesc:
-        '素材選びから仕上げまで、一つ一つハンドメイドで仕上げてます。',
-      feature1Title: '推しカラーマッチング',
-      feature1Desc: '推しカラーに合わせてひとつずつ選びました',
-      feature2Title: '検証済みの素材',
-      feature2Desc: '使ってみて納得したものだけ使ってます',
       viewMore: '全部見る',
+      philosophyLabel: 'OUR PHILOSOPHY',
+      philosophyQuote: '次のライブ 一緒に準備しない？',
+      philosophyDesc:
+        '新商品やコラボ情報 いち早くお届けします。好きが見える瞬間を一緒に作りましょう。',
+      philosophyCta: '見てみる',
     },
     product: {
       title: '商品',
@@ -557,6 +471,7 @@ export const translations = {
     collection: {
       title: 'コレクション',
       desc: 'ファンダムで愛されるクリエイターたちとのコラボ。FANOIRだけの特別ラインナップ！',
+      to: 'コレクションを見る',
       viewMore: 'コレクションをすべて見る',
     },
     termsPage: {

@@ -26,7 +26,6 @@ export type CollectionForDisplay = {
   label: string;
   title: string;
   desc: string;
-  cta: string;
 };
 
 export type CollectionDetailForDisplay = CollectionForDisplay & {
@@ -76,6 +75,7 @@ export async function getProducts(locale: string): Promise<ProductForDisplay[]> 
 
 export async function getCollections(locale: string): Promise<CollectionForDisplay[]> {
   const collections = await prisma.collection.findMany({
+    where: { visible: true },
     orderBy: { order: 'asc' },
   });
 
@@ -89,14 +89,13 @@ export async function getCollections(locale: string): Promise<CollectionForDispl
       label: t.label,
       title: t.title,
       desc: t.desc,
-      cta: t.cta,
     };
   });
 }
 
 export async function getCollectionBySlug(slug: string, locale: string): Promise<CollectionDetailForDisplay | null> {
-  const collection = await prisma.collection.findUnique({
-    where: { slug },
+  const collection = await prisma.collection.findFirst({
+    where: { slug, visible: true },
     include: {
       products: {
         include: { product: { include: { category: true } } },
@@ -136,13 +135,13 @@ export async function getCollectionBySlug(slug: string, locale: string): Promise
     label: ct.label,
     title: ct.title,
     desc: ct.desc,
-    cta: ct.cta,
     products,
   };
 }
 
 export async function getCollectionSlugs(): Promise<string[]> {
   const collections = await prisma.collection.findMany({
+    where: { visible: true },
     select: { slug: true },
   });
   return collections.map((c) => c.slug);

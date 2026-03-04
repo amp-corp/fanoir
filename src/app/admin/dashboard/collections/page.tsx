@@ -8,6 +8,7 @@ type CollectionRow = {
   id: string;
   slug: string;
   image: string;
+  visible: boolean;
   order: number;
   translations: Record<string, { title: string }>;
   _count: { products: number };
@@ -68,6 +69,17 @@ export default function CollectionsListPage() {
     }
   }
 
+  async function handleToggleVisible(id: string, current: boolean) {
+    await fetch(`/api/admin/collections/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ visible: !current }),
+    });
+    setData((prev) =>
+      prev.map((c) => (c.id === id ? { ...c, visible: !current } : c)),
+    );
+  }
+
   const columns: Column<CollectionRow>[] = [
     {
       key: 'order',
@@ -81,6 +93,24 @@ export default function CollectionsListPage() {
           className="w-16 px-1.5 py-0.5 text-sm border border-gray-200 rounded text-center focus:outline-none focus:border-gray-400 disabled:opacity-50"
           onChange={(e) => handleInputChange(item.id, item.order, e.target.value)}
         />
+      ),
+    },
+    {
+      key: 'visible',
+      label: '공개',
+      render: (item) => (
+        <button
+          onClick={() => handleToggleVisible(item.id, item.visible)}
+          className={`w-9 h-5 rounded-full relative transition-colors ${
+            item.visible ? 'bg-green-500' : 'bg-gray-300'
+          }`}
+        >
+          <span
+            className={`absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full transition-transform ${
+              item.visible ? 'translate-x-4' : ''
+            }`}
+          />
+        </button>
       ),
     },
     {

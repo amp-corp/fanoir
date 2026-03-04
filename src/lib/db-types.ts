@@ -3,7 +3,7 @@ export type ProductTranslations = {
 };
 
 export type CollectionTranslations = {
-  [locale in 'ko' | 'en' | 'zh-CN' | 'zh-TW' | 'ja']: { label: string; title: string; desc: string; cta: string };
+  [locale in 'ko' | 'en' | 'zh-CN' | 'zh-TW' | 'ja']: { label: string; title: string; desc: string };
 };
 
 export type CategoryTranslations = {

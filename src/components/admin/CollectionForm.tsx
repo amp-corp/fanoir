@@ -137,7 +137,8 @@ export default function CollectionForm({ id }: { id?: string }) {
     return <div className="text-sm text-gray-400">Loading...</div>;
   }
 
-  const t = translations[activeLocale] || { label: '', title: '', desc: '' };
+  const raw = translations[activeLocale];
+  const t = { label: raw?.label ?? '', title: raw?.title ?? '', desc: raw?.desc ?? '' };
 
   return (
     <form onSubmit={handleSubmit} className="max-w-3xl flex flex-col gap-8">

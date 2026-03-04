@@ -21,13 +21,14 @@ export async function POST(request: NextRequest) {
   }
 
   const body = await request.json();
-  const { slug, image, order, translations, productIds } = body;
+  const { slug, image, order, visible, translations, productIds } = body;
 
   const collection = await prisma.collection.create({
     data: {
       slug,
       image,
       order: order ?? 0,
+      visible: visible ?? true,
       translations,
       products: productIds?.length
         ? {

@@ -33,7 +33,7 @@ export async function PUT(
 
   const { id } = await params;
   const body = await request.json();
-  const { slug, image, order, translations, productIds } = body;
+  const { slug, image, order, visible, translations, productIds } = body;
 
   // Update collection-product joins
   if (productIds) {
@@ -55,6 +55,7 @@ export async function PUT(
       ...(slug !== undefined && { slug }),
       ...(image !== undefined && { image }),
       ...(order !== undefined && { order }),
+      ...(visible !== undefined && { visible }),
       ...(translations !== undefined && { translations }),
     },
     include: { products: { include: { product: true }, orderBy: { order: 'asc' } } },
