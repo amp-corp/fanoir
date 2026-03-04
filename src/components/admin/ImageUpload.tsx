@@ -86,7 +86,7 @@ export default function ImageUpload({ value, onChange, variant = 'product' }: Im
           <input
             value={value}
             onChange={(e) => onChange(e.target.value)}
-            className="flex-1 px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]"
+            className="flex-1 px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#222222]"
           />
           <button
             type="button"
@@ -128,14 +128,14 @@ export default function ImageUpload({ value, onChange, variant = 'product' }: Im
         onClick={() => !uploading && inputRef.current?.click()}
         className={`flex flex-col items-center justify-center w-full border-2 border-dashed rounded-lg cursor-pointer transition-colors ${
           dragOver
-            ? 'border-[#FF6B6B] bg-[#FF6B6B]/5'
+            ? 'border-[#222222] bg-[#222222]/5'
             : 'border-gray-300 hover:border-gray-400'
         } ${uploading ? 'pointer-events-none opacity-60' : ''}`}
         style={{ aspectRatio: variant === 'banner' ? '21/9' : '1/1', maxHeight: '200px' }}
       >
         {uploading ? (
           <div className="flex flex-col items-center gap-2">
-            <div className="w-6 h-6 border-2 border-gray-300 border-t-[#FF6B6B] rounded-full animate-spin" />
+            <div className="w-6 h-6 border-2 border-gray-300 border-t-[#222222] rounded-full animate-spin" />
             <span className="text-xs text-gray-500">Optimizing & uploading...</span>
           </div>
         ) : (

@@ -25,7 +25,7 @@ export default function LocaleTabs({
           onClick={() => onChange(locale)}
           className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
             activeLocale === locale
-              ? 'border-[#FF6B6B] text-[#FF6B6B]'
+              ? 'border-[#222222] text-[#222222]'
               : 'border-transparent text-gray-500 hover:text-gray-700'
           }`}
         >

@@ -54,7 +54,7 @@ export default async function Image({
         style={{
           fontSize: 14,
           letterSpacing: '0.25em',
-          color: '#FF6B6B',
+          color: '#222222',
           marginBottom: 28,
           fontWeight: 500,
         }}
@@ -66,7 +66,7 @@ export default async function Image({
         style={{
           fontSize: 72,
           letterSpacing: '0.3em',
-          color: '#FF6B6B',
+          color: '#222222',
           fontWeight: 700,
           marginBottom: 28,
         }}
@@ -78,7 +78,7 @@ export default async function Image({
         style={{
           width: 100,
           height: 1,
-          backgroundColor: '#FF6B6B',
+          backgroundColor: '#222222',
           marginBottom: 28,
         }}
       />

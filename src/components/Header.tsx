@@ -41,8 +41,7 @@ export default function Header() {
           height={40}
           className="h-5 w-auto"
           style={{
-            filter:
-              'brightness(0) invert(52%) sepia(96%) saturate(1932%) hue-rotate(326deg) brightness(102%) contrast(103%)',
+            filter: 'brightness(0)',
           }}
           priority
         />
@@ -58,8 +57,8 @@ export default function Header() {
               href={l.href}
               className={`transition-colors text-sm font-medium leading-normal tracking-wide ${
                 isActive
-                  ? 'text-[#FF6B6B]'
-                  : 'text-[#3D3D3D] hover:text-[#FF6B6B]'
+                  ? 'text-[#222222]'
+                  : 'text-[#3D3D3D] hover:text-[#222222]'
               }`}
             >
               {l.label}
@@ -71,7 +70,7 @@ export default function Header() {
       {/* Right icons */}
       <div className="flex items-center gap-4">
         {/* <button
-          className="flex items-center justify-center rounded-full size-10 text-[#3D3D3D] hover:text-[#FF6B6B] transition-colors"
+          className="flex items-center justify-center rounded-full size-10 text-[#3D3D3D] hover:text-[#222222] transition-colors"
           aria-label="Search"
         >
           <span className="material-symbols-outlined">search</span>
@@ -80,7 +79,7 @@ export default function Header() {
         <div ref={langRef} className="relative hidden md:block">
           <button
             onClick={() => setLangOpen(!langOpen)}
-            className="flex items-center justify-start rounded-full size-10 text-[#3D3D3D] hover:text-[#FF6B6B] transition-colors text-xs font-bold tracking-wider"
+            className="flex items-center justify-start rounded-full size-10 text-[#3D3D3D] hover:text-[#222222] transition-colors text-xs font-bold tracking-wider"
           >
             {localeLabels[locale]}
           </button>
@@ -95,7 +94,7 @@ export default function Header() {
                       switchLocale(l);
                       setLangOpen(false);
                     }}
-                    className="block w-full px-3 py-1.5 text-xs font-bold text-[#3D3D3D] hover:text-[#FF6B6B] transition-colors tracking-wider text-center"
+                    className="block w-full px-3 py-1.5 text-xs font-bold text-[#3D3D3D] hover:text-[#222222] transition-colors tracking-wider text-center"
                   >
                     {localeLabels[l]}
                   </button>
@@ -106,7 +105,7 @@ export default function Header() {
         {/* Mobile menu */}
         <button
           onClick={() => setOpen(!open)}
-          className="md:hidden flex items-center justify-center rounded-full size-10 text-[#3D3D3D] hover:text-[#FF6B6B] transition-colors"
+          className="md:hidden flex items-center justify-center rounded-full size-10 text-[#3D3D3D] hover:text-[#222222] transition-colors"
           aria-label="Menu"
         >
           <span className="material-symbols-outlined">
@@ -127,8 +126,8 @@ export default function Header() {
                 onClick={() => setOpen(false)}
                 className={`transition-colors text-sm font-medium tracking-wide ${
                   isActive
-                    ? 'text-[#FF6B6B]'
-                    : 'text-[#3D3D3D] hover:text-[#FF6B6B]'
+                    ? 'text-[#222222]'
+                    : 'text-[#3D3D3D] hover:text-[#222222]'
                 }`}
               >
                 {l.label}
@@ -145,7 +144,7 @@ export default function Header() {
                     switchLocale(l);
                     setOpen(false);
                   }}
-                  className="text-[#3D3D3D] hover:text-[#FF6B6B] transition-colors text-xs font-bold tracking-wider"
+                  className="text-[#3D3D3D] hover:text-[#222222] transition-colors text-xs font-bold tracking-wider"
                 >
                   {localeLabels[l]}
                 </button>

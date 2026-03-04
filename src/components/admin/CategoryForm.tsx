@@ -122,7 +122,7 @@ export default function CategoryForm({ id }: { id?: string }) {
             <input
               value={key}
               onChange={(e) => setKey(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]"
+              className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#222222]"
               placeholder="dolls"
               required
             />
@@ -133,7 +133,7 @@ export default function CategoryForm({ id }: { id?: string }) {
               type="number"
               value={order}
               onChange={(e) => setOrder(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]"
+              className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#222222]"
             />
           </div>
         </div>
@@ -147,7 +147,7 @@ export default function CategoryForm({ id }: { id?: string }) {
             type="button"
             onClick={handleAutoTranslate}
             disabled={translating}
-            className="px-3 py-1.5 text-xs font-medium rounded-lg border border-[#FF6B6B] text-[#FF6B6B] hover:bg-[#FF6B6B]/10 disabled:opacity-50 transition-colors"
+            className="px-3 py-1.5 text-xs font-medium rounded-lg border border-[#222222] text-[#222222] hover:bg-[#222222]/10 disabled:opacity-50 transition-colors"
           >
             {translating ? 'Translating...' : 'Auto Translate'}
           </button>
@@ -161,7 +161,7 @@ export default function CategoryForm({ id }: { id?: string }) {
           <input
             value={t.name}
             onChange={(e) => updateTranslation(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]"
+            className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#222222]"
             placeholder="인형"
           />
         </div>
@@ -172,7 +172,7 @@ export default function CategoryForm({ id }: { id?: string }) {
         <button
           type="submit"
           disabled={saving}
-          className="px-6 py-2.5 bg-[#FF6B6B] text-white text-sm font-medium rounded-lg hover:bg-[#FF8585] disabled:opacity-50 transition-colors"
+          className="px-6 py-2.5 bg-[#222222] text-white text-sm font-medium rounded-lg hover:bg-[#393939] disabled:opacity-50 transition-colors"
         >
           {saving ? 'Saving...' : isEdit ? 'Update' : 'Create'}
         </button>

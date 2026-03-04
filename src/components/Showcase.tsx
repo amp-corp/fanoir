@@ -26,7 +26,7 @@ export default function Showcase({
     <section id="products" className="bg-[#FFFFFF]">
       {/* Header */}
       <div className="relative w-full px-4 md:px-8 lg:px-32 py-10 md:py-16 flex flex-col items-center text-center">
-        <h2 className="text-[#FF6B6B] text-sm font-bold tracking-widest uppercase mb-4">
+        <h2 className="text-[#222222] text-sm font-bold tracking-widest uppercase mb-4">
           {t.showcase.label}
         </h2>
         <h1 className="text-2xl md:text-3xl lg:text-4xl font-black tracking-tight leading-tight max-w-3xl mb-6 text-[#3D3D3D]">
@@ -38,7 +38,7 @@ export default function Showcase({
         <div className="w-full px-4 md:px-10 lg:px-20 max-w-[1400px] mx-auto pt-14">
           <Link
             href={localePath('/products')}
-            className="inline-flex h-12 items-center justify-center rounded-full border border-[#FF6B6B] px-8 text-[#FF6B6B] text-base font-semibold transition-transform hover:scale-105 active:scale-95"
+            className="inline-flex h-12 items-center justify-center rounded-full border border-[#222222] px-8 text-[#222222] text-base font-semibold transition-transform hover:scale-105 active:scale-95"
           >
             <span>{t.showcase.viewMore}</span>
           </Link>
@@ -64,7 +64,7 @@ export default function Showcase({
                 {...wrapperProps}
                 className={`group block ${product.comingSoon ? 'cursor-not-allowed' : product.link ? 'cursor-pointer' : ''}`}
               >
-                <div className="relative aspect-square overflow-hidden rounded-xl bg-[#FFF0F0]">
+                <div className="relative aspect-square overflow-hidden rounded-xl bg-[#F5F5F5]">
                   <Image
                     src={product.image}
                     alt={product.name}
@@ -86,7 +86,7 @@ export default function Showcase({
                       style={{
                         backgroundColor:
                           product.badgeColor?.match(/^bg-\[(.+)\]$/)?.[1] ||
-                          '#FF6B6B',
+                          '#222222',
                       }}
                     >
                       {product.badgeText}
@@ -95,7 +95,7 @@ export default function Showcase({
                 </div>
                 <div className="mt-3 flex flex-col gap-1">
                   <div className="flex justify-between items-start">
-                    <h3 className="text-base md:text-lg font-bold text-[#3D3D3D] group-hover:text-[#FF6B6B] transition-colors truncate pr-2">
+                    <h3 className="text-base md:text-lg font-bold text-[#3D3D3D] group-hover:text-[#222222] transition-colors truncate pr-2">
                       {product.name}
                     </h3>
                     <span className="text-[#888888] font-medium text-sm shrink-0">
@@ -112,11 +112,11 @@ export default function Showcase({
         </div>
 
         {/* Signature Pieces Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-white rounded-2xl p-8 lg:p-12 border border-[#FFE0E0] shadow-sm">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-white rounded-2xl p-8 lg:p-12 border border-[#E0E0E0] shadow-sm">
           {/* Text content */}
           <div className="flex flex-col gap-6 order-2 lg:order-1">
             <div className="flex flex-col gap-4">
-              <div className="flex items-center gap-2 text-[#FF6B6B]">
+              <div className="flex items-center gap-2 text-[#222222]">
                 <span className="material-symbols-outlined text-xl!">
                   diamond
                 </span>
@@ -135,8 +135,8 @@ export default function Showcase({
             {/* Features */}
             <div className="flex flex-col gap-4 mt-2">
               <div className="flex items-center gap-4">
-                <div className="h-10 w-10 rounded-full bg-[#FFF0F0] flex items-center justify-center shrink-0">
-                  <span className="material-symbols-outlined text-[#FF6B6B] text-xl!">
+                <div className="h-10 w-10 rounded-full bg-[#F5F5F5] flex items-center justify-center shrink-0">
+                  <span className="material-symbols-outlined text-[#222222] text-xl!">
                     verified
                   </span>
                 </div>
@@ -150,8 +150,8 @@ export default function Showcase({
                 </div>
               </div>
               <div className="flex items-center gap-4">
-                <div className="h-10 w-10 rounded-full bg-[#FFF0F0] flex items-center justify-center shrink-0">
-                  <span className="material-symbols-outlined text-[#FF6B6B] text-xl!">
+                <div className="h-10 w-10 rounded-full bg-[#F5F5F5] flex items-center justify-center shrink-0">
+                  <span className="material-symbols-outlined text-[#222222] text-xl!">
                     palette
                   </span>
                 </div>
@@ -170,7 +170,7 @@ export default function Showcase({
             <div className="mt-4">
               <Link
                 href={localePath('/products')}
-                className="inline-flex h-12 items-center justify-center rounded-full bg-[#FF6B6B] px-8 text-white text-base font-bold transition-transform hover:scale-105 active:scale-95"
+                className="inline-flex h-12 items-center justify-center rounded-full bg-[#222222] px-8 text-white text-base font-bold transition-transform hover:scale-105 active:scale-95"
               >
                 <span>{t.showcase.viewMore}</span>
                 <span className="material-symbols-outlined ml-2 text-lg!">
@@ -195,24 +195,24 @@ export default function Showcase({
                   <div className="absolute inset-0  transition-colors duration-500" />
                 </div>
               )}
-              <div className="w-full aspect-square rounded-lg overflow-hidden bg-[#FFF0F0] flex items-center justify-center border border-[#FFE0E0]">
+              <div className="w-full aspect-square rounded-lg overflow-hidden bg-[#F5F5F5] flex items-center justify-center border border-[#E0E0E0]">
                 <div className="text-center p-4">
-                  <span className="block text-3xl font-black text-[#FF6B6B] mb-1">
+                  <span className="block text-3xl font-black text-[#222222] mb-1">
                     {t.showcase.karatValue}
                   </span>
-                  <span className="text-xs text-[#FF6B6B] uppercase tracking-widest">
+                  <span className="text-xs text-[#222222] uppercase tracking-widest">
                     {t.showcase.karatLabel}
                   </span>
                 </div>
               </div>
             </div>
             <div className="space-y-4">
-              <div className="w-full aspect-square rounded-lg overflow-hidden bg-[#FF6B6B]/10 flex items-center justify-center border border-[#FF6B6B]/20">
+              <div className="w-full aspect-square rounded-lg overflow-hidden bg-[#222222]/10 flex items-center justify-center border border-[#222222]/20">
                 <div className="text-center p-4">
-                  <span className="material-symbols-outlined text-4xl text-[#FF6B6B] mb-2">
+                  <span className="material-symbols-outlined text-4xl text-[#222222] mb-2">
                     auto_awesome
                   </span>
-                  <span className="block text-xs text-[#FF6B6B] font-bold uppercase tracking-widest">
+                  <span className="block text-xs text-[#222222] font-bold uppercase tracking-widest">
                     {t.showcase.premiumQuality}
                   </span>
                 </div>

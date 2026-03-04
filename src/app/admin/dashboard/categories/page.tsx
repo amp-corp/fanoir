@@ -128,7 +128,7 @@ export default function CategoriesListPage() {
           )}
           <Link
             href="/admin/dashboard/categories/new"
-            className="px-4 py-2 bg-[#FF6B6B] text-white text-sm font-medium rounded-lg hover:bg-[#FF8585] transition-colors"
+            className="px-4 py-2 bg-[#222222] text-white text-sm font-medium rounded-lg hover:bg-[#393939] transition-colors"
           >
             + New Category
           </Link>

@@ -32,7 +32,7 @@ export default function Hero({ heroImage }: { heroImage?: string }) {
           <div className="flex flex-col items-center gap-6">
             {/* Badge */}
             <span
-              className="px-3 py-1 rounded-full  text-[#FF6B6B] text-xs font-bold uppercase tracking-widest"
+              className="px-3 py-1 rounded-full  text-[#222222] text-xs font-bold uppercase tracking-widest"
               style={{ textShadow: 'none' }}
             >
               {t.hero.label}
@@ -62,7 +62,7 @@ export default function Hero({ heroImage }: { heroImage?: string }) {
           >
             <a
               href={localePath('/products')}
-              className="group flex items-center justify-center rounded-full h-14 px-8 bg-[#FF6B6B] text-white text-sm font-bold leading-normal tracking-wide hover:bg-[#FF8585] transition-all transform hover:scale-105"
+              className="group flex items-center justify-center rounded-full h-14 px-8 bg-[#222222] text-white text-sm font-bold leading-normal tracking-wide hover:bg-[#393939] transition-all transform hover:scale-105"
             >
               <span>{t.hero.cta1}</span>
               <span className="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform text-xl">
@@ -71,7 +71,7 @@ export default function Hero({ heroImage }: { heroImage?: string }) {
             </a>
             <a
               href={localePath('/#identity')}
-              className="group flex items-center justify-center rounded-full h-14 px-8 bg-white text-[#FF6B6B] text-sm font-bold leading-normal tracking-wide hover:bg-white/90  transition-all"
+              className="group flex items-center justify-center rounded-full h-14 px-8 bg-white text-[#222222] text-sm font-bold leading-normal tracking-wide hover:bg-white/90  transition-all"
             >
               <span>{t.hero.cta2}</span>
             </a>

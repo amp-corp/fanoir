@@ -28,7 +28,7 @@ export default function Identity() {
       <div className="max-w-6xl mx-auto px-6 py-24 md:py-32">
         {/* Header */}
         <div className="mb-16">
-          <p className="text-xs tracking-[0.3em] text-[#FF6B6B] uppercase mb-4">
+          <p className="text-xs tracking-[0.3em] text-[#222222] uppercase mb-4">
             {t.identity.label}
           </p>
           <h2 className="text-2xl md:text-4xl font-black text-[#3D3D3D] tracking-tight mb-6 leading-tight">
@@ -42,22 +42,22 @@ export default function Identity() {
           {cards.map((card) => (
             <div
               key={card.title}
-              className="group relative bg-white border border-[#FFE0E0] rounded-2xl p-8 hover:border-[#FF6B6B]/40 shadow-sm hover:shadow-md transition-all overflow-hidden"
+              className="group relative bg-white border border-[#E0E0E0] rounded-2xl p-8 hover:border-[#222222]/40 shadow-sm hover:shadow-md transition-all overflow-hidden"
             >
               {/* Decorative hover circle */}
-              <div className="absolute -right-10 -top-10 w-32 h-32 bg-[#FF6B6B]/5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="absolute -right-10 -top-10 w-32 h-32 bg-[#222222]/5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
 
               {/* Icon */}
               <div className="relative z-10 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-[#FFF0F0] ring-1 ring-[#FF6B6B]/20 flex items-center justify-center">
-                  <span className="material-symbols-outlined text-[#FF6B6B] text-xl!">
+                <div className="w-12 h-12 rounded-xl bg-[#F5F5F5] ring-1 ring-[#222222]/20 flex items-center justify-center">
+                  <span className="material-symbols-outlined text-[#222222] text-xl!">
                     {card.icon}
                   </span>
                 </div>
               </div>
 
               {/* Gold separator */}
-              <div className="w-8 h-0.5 bg-linear-to-r from-[#FF6B6B] to-transparent mb-5" />
+              <div className="w-8 h-0.5 bg-linear-to-r from-[#222222] to-transparent mb-5" />
 
               <h3 className="relative z-10 text-[#3D3D3D] text-lg font-semibold mb-3 tracking-wide">
                 {card.title}
@@ -72,7 +72,7 @@ export default function Identity() {
         {/* Join CTA - Image background card */}
         <div className="relative rounded-2xl overflow-hidden">
           <div className="absolute inset-0 bg-cover bg-center" />
-          <div className="absolute inset-0 bg-linear-to-r from-[#FF6B6B] via-[#fc7a7a] to-[#ff8d8d]" />
+          <div className="absolute inset-0 bg-linear-to-r from-[#222222] via-[#fc7a7a] to-[#ff8d8d]" />
 
           <div className="relative z-10 p-10 md:p-14">
             <div className="max-w-lg">
@@ -92,7 +92,7 @@ export default function Identity() {
               </p>
               <a
                 href={localePath('/products')}
-                className="inline-flex items-center gap-2 bg-white text-[#FF6B6B] px-7 py-3.5 text-sm tracking-wider font-bold hover:bg-[#FFF0F0] transition-colors rounded-full"
+                className="inline-flex items-center gap-2 bg-white text-[#222222] px-7 py-3.5 text-sm tracking-wider font-bold hover:bg-[#F5F5F5] transition-colors rounded-full"
               >
                 {t.identity.joinCta}
                 <span className="material-symbols-outlined text-lg!">

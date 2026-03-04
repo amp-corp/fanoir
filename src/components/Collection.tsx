@@ -69,7 +69,7 @@ export default function Collection({
             <Link
               key={collab.slug}
               href={localePath(`/collection/${collab.slug}`)}
-              className="group relative overflow-hidden rounded-xl bg-[#FFF0F0] aspect-video md:aspect-4/3 lg:aspect-16/7"
+              className="group relative overflow-hidden rounded-xl bg-[#F5F5F5] aspect-video md:aspect-4/3 lg:aspect-16/7"
             >
               <div
                 className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
@@ -77,7 +77,7 @@ export default function Collection({
               />
               <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
               <div className="absolute bottom-0 left-0 p-6 flex flex-col gap-2">
-                <span className="bg-[#FF6B6B]/90 text-white text-xs font-bold px-2 py-1 rounded w-fit uppercase tracking-wider">
+                <span className="bg-[#222222]/90 text-white text-xs font-bold px-2 py-1 rounded w-fit uppercase tracking-wider">
                   {collab.label}
                 </span>
                 <h3 className="text-white text-xl md:text-2xl font-bold italic">
@@ -95,7 +95,7 @@ export default function Collection({
             <button
               disabled={currentPage <= 1}
               onClick={() => handlePage(currentPage - 1)}
-              className="flex items-center justify-center size-10 rounded-lg text-[#888888] hover:bg-[#FFF0F0] disabled:opacity-50"
+              className="flex items-center justify-center size-10 rounded-lg text-[#888888] hover:bg-[#F5F5F5] disabled:opacity-50"
             >
               <span className="material-symbols-outlined text-[20px]!">
                 chevron_left
@@ -116,8 +116,8 @@ export default function Collection({
                   onClick={() => handlePage(p)}
                   className={`flex items-center justify-center size-10 rounded-lg font-medium text-sm transition-colors ${
                     currentPage === p
-                      ? 'bg-[#FF6B6B] text-white font-bold shadow-md shadow-[#FF6B6B]/30'
-                      : 'text-[#3D3D3D] hover:bg-[#FFF0F0]'
+                      ? 'bg-[#222222] text-white font-bold shadow-md shadow-[#222222]/30'
+                      : 'text-[#3D3D3D] hover:bg-[#F5F5F5]'
                   }`}
                 >
                   {p}
@@ -128,7 +128,7 @@ export default function Collection({
             <button
               disabled={currentPage >= totalPages}
               onClick={() => handlePage(currentPage + 1)}
-              className="flex items-center justify-center size-10 rounded-lg text-[#3D3D3D] hover:bg-[#FFF0F0] hover:text-[#FF6B6B] disabled:opacity-50 transition-colors"
+              className="flex items-center justify-center size-10 rounded-lg text-[#3D3D3D] hover:bg-[#F5F5F5] hover:text-[#222222] disabled:opacity-50 transition-colors"
             >
               <span className="material-symbols-outlined text-[20px]!">
                 chevron_right

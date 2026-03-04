@@ -26,7 +26,7 @@ export default function CollectionDetail({
         />
         <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 max-w-7xl mx-auto px-4 md:px-8 lg:px-12 pb-12 flex flex-col gap-2">
-          <span className="bg-[#FF6B6B]/90 text-white text-xs font-bold px-2 py-1 rounded w-fit uppercase tracking-wider">
+          <span className="bg-[#222222]/90 text-white text-xs font-bold px-2 py-1 rounded w-fit uppercase tracking-wider">
             {collection.label}
           </span>
           <h1 className="text-white text-3xl md:text-5xl font-bold italic">
@@ -43,7 +43,7 @@ export default function CollectionDetail({
         <nav className="text-sm text-[#888888] flex items-center gap-1">
           <Link
             href={localePath('/collection')}
-            className="hover:text-[#FF6B6B]"
+            className="hover:text-[#222222]"
           >
             {t.collection.title}
           </Link>
@@ -71,7 +71,7 @@ export default function CollectionDetail({
                 {...wrapperProps}
                 className={`group flex flex-col gap-3 ${product.comingSoon ? 'cursor-not-allowed' : product.link ? 'cursor-pointer' : ''}`}
               >
-                <div className="relative aspect-square overflow-hidden rounded-xl bg-[#FFF0F0]">
+                <div className="relative aspect-square overflow-hidden rounded-xl bg-[#F5F5F5]">
                   <Image
                     src={product.image}
                     alt={product.name}
@@ -87,7 +87,7 @@ export default function CollectionDetail({
                     </div>
                   )}
                   {!product.comingSoon && (
-                    <button className="absolute bottom-4 right-4 bg-white p-2 rounded-full shadow-lg opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:bg-[#FF6B6B] hover:text-white text-[#3D3D3D]">
+                    <button className="absolute bottom-4 right-4 bg-white p-2 rounded-full shadow-lg opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:bg-[#222222] hover:text-white text-[#3D3D3D]">
                       <span className="material-symbols-outlined text-[20px]!">
                         add_shopping_cart
                       </span>
@@ -99,7 +99,7 @@ export default function CollectionDetail({
                       style={{
                         backgroundColor:
                           product.badgeColor?.match(/^bg-\[(.+)\]$/)?.[1] ||
-                          '#FF6B6B',
+                          '#222222',
                       }}
                     >
                       {product.badgeText}

@@ -130,7 +130,7 @@ export default function Products({
             </h2>
             <Link
               href={localePath('/collection')}
-              className="text-sm font-medium text-[#FF6B6B] hover:text-[#FF6B6B]/80 flex items-center gap-1"
+              className="text-sm font-medium text-[#222222] hover:text-[#222222]/80 flex items-center gap-1"
             >
               {t.collection.viewMore}
               <span className="material-symbols-outlined text-[16px]!">
@@ -143,7 +143,7 @@ export default function Products({
         </div>
 
         {/* Filter & Sort Bar */}
-        <div className="sticky top-[73px] z-40 bg-[#FFFFFF]/95 backdrop-blur-md py-4 border-b border-[#FFE0E0]">
+        <div className="sticky top-[73px] z-40 bg-[#FFFFFF]/95 backdrop-blur-md py-4 border-b border-[#E0E0E0]">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             {/* Categories */}
             <div className="flex overflow-x-auto pb-2 md:pb-0 gap-2">
@@ -156,8 +156,8 @@ export default function Products({
                   }}
                   className={`whitespace-nowrap px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${
                     activeFilter === tab.key
-                      ? 'bg-[#FF6B6B] text-white'
-                      : 'bg-[#FFF0F0] text-[#666666] hover:bg-[#FFE0E0]'
+                      ? 'bg-[#222222] text-white'
+                      : 'bg-[#F5F5F5] text-[#666666] hover:bg-[#E0E0E0]'
                   }`}
                 >
                   {tab.name}
@@ -169,7 +169,7 @@ export default function Products({
             <div className="relative flex items-center gap-3" ref={sortRef}>
               <button
                 onClick={() => setSortOpen((v) => !v)}
-                className="flex items-center gap-2 px-4 py-2 bg-[#FFF0F0] rounded-lg text-sm font-medium text-[#666666]"
+                className="flex items-center gap-2 px-4 py-2 bg-[#F5F5F5] rounded-lg text-sm font-medium text-[#666666]"
               >
                 <span className="material-symbols-outlined text-[18px]!">
                   sort
@@ -183,14 +183,14 @@ export default function Products({
               </button>
 
               {sortOpen && (
-                <div className="absolute top-full right-0 mt-1 bg-white rounded-lg shadow-lg border border-[#FFE0E0] py-1 min-w-[180px] z-50">
+                <div className="absolute top-full right-0 mt-1 bg-white rounded-lg shadow-lg border border-[#E0E0E0] py-1 min-w-[180px] z-50">
                   {SORT_KEYS.map((key) => (
                     <button
                       key={key}
                       onClick={() => handleSort(key)}
                       className={`w-full text-left px-4 py-2.5 text-sm transition-colors ${
                         sort === key
-                          ? 'bg-[#FFF0F0] text-[#FF6B6B] font-semibold'
+                          ? 'bg-[#F5F5F5] text-[#222222] font-semibold'
                           : 'text-[#666666] hover:bg-[#FFFFFF]'
                       }`}
                     >
@@ -221,7 +221,7 @@ export default function Products({
                 {...wrapperProps}
                 className={`group flex flex-col gap-3 ${product.comingSoon ? 'cursor-not-allowed' : product.link ? 'cursor-pointer' : ''}`}
               >
-                <div className="relative aspect-square overflow-hidden rounded-xl bg-[#FFF0F0]">
+                <div className="relative aspect-square overflow-hidden rounded-xl bg-[#F5F5F5]">
                   <Image
                     src={product.image}
                     alt={product.name}
@@ -242,7 +242,7 @@ export default function Products({
                       style={{
                         backgroundColor:
                           product.badgeColor?.match(/^bg-\[(.+)\]$/)?.[1] ||
-                          '#FF6B6B',
+                          '#222222',
                       }}
                     >
                       {product.badgeText}
@@ -273,7 +273,7 @@ export default function Products({
             <button
               disabled={currentPage <= 1}
               onClick={() => handlePage(currentPage - 1)}
-              className="flex items-center justify-center size-10 rounded-lg text-[#888888] hover:bg-[#FFF0F0] disabled:opacity-50"
+              className="flex items-center justify-center size-10 rounded-lg text-[#888888] hover:bg-[#F5F5F5] disabled:opacity-50"
             >
               <span className="material-symbols-outlined text-[20px]!">
                 chevron_left
@@ -294,8 +294,8 @@ export default function Products({
                   onClick={() => handlePage(p)}
                   className={`flex items-center justify-center size-10 rounded-lg font-medium text-sm transition-colors ${
                     currentPage === p
-                      ? 'bg-[#FF6B6B] text-white font-bold shadow-md shadow-[#FF6B6B]/30'
-                      : 'text-[#3D3D3D] hover:bg-[#FFF0F0]'
+                      ? 'bg-[#222222] text-white font-bold shadow-md shadow-[#222222]/30'
+                      : 'text-[#3D3D3D] hover:bg-[#F5F5F5]'
                   }`}
                 >
                   {p}
@@ -306,7 +306,7 @@ export default function Products({
             <button
               disabled={currentPage >= totalPages}
               onClick={() => handlePage(currentPage + 1)}
-              className="flex items-center justify-center size-10 rounded-lg text-[#3D3D3D] hover:bg-[#FFF0F0] hover:text-[#FF6B6B] disabled:opacity-50 transition-colors"
+              className="flex items-center justify-center size-10 rounded-lg text-[#3D3D3D] hover:bg-[#F5F5F5] hover:text-[#222222] disabled:opacity-50 transition-colors"
             >
               <span className="material-symbols-outlined text-[20px]!">
                 chevron_right

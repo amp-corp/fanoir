@@ -223,7 +223,7 @@ export default function ProductForm({ id }: { id?: string }) {
             <select
               value={categoryId}
               onChange={(e) => setCategoryId(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]"
+              className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#222222]"
             >
               {categories.map((c) => (
                 <option key={c.id} value={c.id}>
@@ -240,7 +240,7 @@ export default function ProductForm({ id }: { id?: string }) {
               type="number"
               value={order}
               onChange={(e) => setOrder(Number(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]"
+              className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#222222]"
             />
           </div>
           <div>
@@ -250,7 +250,7 @@ export default function ProductForm({ id }: { id?: string }) {
             <input
               value={badgeText}
               onChange={(e) => setBadgeText(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]"
+              className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#222222]"
               placeholder="HOT, NEW, etc."
             />
           </div>
@@ -264,7 +264,7 @@ export default function ProductForm({ id }: { id?: string }) {
             value={link}
             onChange={(e) => setLink(e.target.value)}
             placeholder="https://shop.duckzill.com/goods/goods_view.php?goodsNo=상품번호"
-            className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]"
+            className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#222222]"
           />
         </div>
         <label className="flex items-center gap-2 cursor-pointer">
@@ -272,7 +272,7 @@ export default function ProductForm({ id }: { id?: string }) {
             type="checkbox"
             checked={comingSoon}
             onChange={(e) => setComingSoon(e.target.checked)}
-            className="accent-[#FF6B6B]"
+            className="accent-[#222222]"
           />
           <span className="text-sm font-medium text-gray-700">Coming Soon</span>
         </label>
@@ -285,7 +285,7 @@ export default function ProductForm({ id }: { id?: string }) {
               type="datetime-local"
               value={comingSoonUntil}
               onChange={(e) => setComingSoonUntil(e.target.value)}
-              className="w-64 px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]"
+              className="w-64 px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#222222]"
             />
             <p className="text-xs text-gray-400 mt-1">
               Set a date to automatically release this product. Leave empty for
@@ -313,7 +313,7 @@ export default function ProductForm({ id }: { id?: string }) {
                   }
                   className={`relative w-8 h-8 rounded-full border-2 transition-all ${
                     isSelected
-                      ? 'border-[#FF6B6B] scale-110'
+                      ? 'border-[#222222] scale-110'
                       : 'border-gray-200 hover:border-gray-400'
                   }`}
                   style={
@@ -343,7 +343,7 @@ export default function ProductForm({ id }: { id?: string }) {
                     <button
                       type="button"
                       title={currentHex}
-                      className="relative w-8 h-8 rounded-full border-2 border-[#FF6B6B] scale-110 transition-all"
+                      className="relative w-8 h-8 rounded-full border-2 border-[#222222] scale-110 transition-all"
                       style={{ backgroundColor: currentHex }}
                       onClick={() => {
                         /* already selected */
@@ -360,7 +360,7 @@ export default function ProductForm({ id }: { id?: string }) {
                   >
                     <input
                       type="color"
-                      value={currentHex || '#FF6B6B'}
+                      value={currentHex || '#222222'}
                       onChange={(e) => setBadgeColor(`bg-[${e.target.value}]`)}
                       className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                     />
@@ -385,7 +385,7 @@ export default function ProductForm({ id }: { id?: string }) {
             value={rawPrice}
             onChange={(e) => setRawPrice(e.target.value.replace(/\D/g, ''))}
             placeholder="45000"
-            className="w-48 px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]"
+            className="w-48 px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#222222]"
           />
           {rawPrice && (
             <span className="text-sm text-gray-500">{formatKRW(rawPrice)}</span>
@@ -404,7 +404,7 @@ export default function ProductForm({ id }: { id?: string }) {
             type="button"
             onClick={handleAutoTranslate}
             disabled={translating}
-            className="px-3 py-1.5 text-xs font-medium rounded-lg border border-[#FF6B6B] text-[#FF6B6B] hover:bg-[#FF6B6B]/10 disabled:opacity-50 transition-colors"
+            className="px-3 py-1.5 text-xs font-medium rounded-lg border border-[#222222] text-[#222222] hover:bg-[#222222]/10 disabled:opacity-50 transition-colors"
           >
             {translating ? 'Translating...' : 'Auto Translate'}
           </button>
@@ -420,7 +420,7 @@ export default function ProductForm({ id }: { id?: string }) {
           <input
             value={t.name}
             onChange={(e) => updateTranslation('name', e.target.value)}
-            className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]"
+            className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#222222]"
           />
         </div>
       </section>
@@ -430,7 +430,7 @@ export default function ProductForm({ id }: { id?: string }) {
         <button
           type="submit"
           disabled={saving}
-          className="px-6 py-2.5 bg-[#FF6B6B] text-white text-sm font-medium rounded-lg hover:bg-[#FF8585] disabled:opacity-50 transition-colors"
+          className="px-6 py-2.5 bg-[#222222] text-white text-sm font-medium rounded-lg hover:bg-[#393939] disabled:opacity-50 transition-colors"
         >
           {saving ? 'Saving...' : isEdit ? 'Update' : 'Create'}
         </button>

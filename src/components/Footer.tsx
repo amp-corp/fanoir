@@ -30,7 +30,7 @@ export default function Footer() {
         <div className="flex items-center justify-center gap-6 mb-8">
           <a
             href={localePath('/service/terms')}
-            className="text-sm text-gray-500 hover:text-[#FF6B6B] transition-colors"
+            className="text-sm text-gray-500 hover:text-[#222222] transition-colors"
           >
             {t.footer.terms}
           </a>
@@ -43,7 +43,7 @@ export default function Footer() {
             href="https://www.instagram.com/fanoir_official"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-400 hover:text-[#FF6B6B] transition-colors"
+            className="text-gray-400 hover:text-[#222222] transition-colors"
             aria-label="Instagram"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -55,7 +55,7 @@ export default function Footer() {
             href="https://x.com/fanoir_official"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-400 hover:text-[#FF6B6B] transition-colors"
+            className="text-gray-400 hover:text-[#222222] transition-colors"
             aria-label="X"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -67,7 +67,7 @@ export default function Footer() {
             href="https://www.tiktok.com/@fanoir_official"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-400 hover:text-[#FF6B6B] transition-colors"
+            className="text-gray-400 hover:text-[#222222] transition-colors"
             aria-label="TikTok"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -79,7 +79,7 @@ export default function Footer() {
             href="https://www.youtube.com/@fanoir_official"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-400 hover:text-[#FF6B6B] transition-colors"
+            className="text-gray-400 hover:text-[#222222] transition-colors"
             aria-label="YouTube"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
