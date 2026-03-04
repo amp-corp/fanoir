@@ -72,7 +72,7 @@ export default function Identity() {
         {/* Join CTA - Image background card */}
         <div className="relative rounded-2xl overflow-hidden">
           <div className="absolute inset-0 bg-cover bg-center" />
-          <div className="absolute inset-0 bg-linear-to-r from-[#222222] via-[#fc7a7a] to-[#ff8d8d]" />
+          <div className="absolute inset-0 bg-linear-to-r from-[#222222] via-[#444444] to-[#555555]" />
 
           <div className="relative z-10 p-10 md:p-14">
             <div className="max-w-lg">
