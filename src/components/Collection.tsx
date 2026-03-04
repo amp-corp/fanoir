@@ -52,12 +52,15 @@ export default function Collection({
 
   return (
     <section className="bg-[#FFFFFF] min-h-screen">
-      <div className="max-w-7xl w-full mx-auto px-4 md:px-8 lg:px-12 py-24 flex flex-col gap-10">
+      <div className="max-w-7xl w-full mx-auto px-4 md:px-8 lg:px-12 lg:py-24 flex flex-col gap-10 py-16">
         {/* Header */}
         <div>
           <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-[#3D3D3D]">
             {t.collection.title}
           </h1>
+          <p className="text-[#888888] text-sm md:text-base mt-2">
+            {t.collection.desc}
+          </p>
         </div>
 
         {/* Collection Card Grid */}

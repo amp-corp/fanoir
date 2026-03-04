@@ -6,7 +6,11 @@ import Link from 'next/link';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { useLang } from '@/contexts/LangContext';
 import CollectionBannerSlider from './CollectionBannerSlider';
-import type { ProductForDisplay, CollectionForDisplay, CategoryForDisplay } from '@/lib/db-queries';
+import type {
+  ProductForDisplay,
+  CollectionForDisplay,
+  CategoryForDisplay,
+} from '@/lib/db-queries';
 
 const SORT_KEYS = ['newest', 'price-asc', 'price-desc'] as const;
 type SortKey = (typeof SORT_KEYS)[number];
@@ -38,10 +42,10 @@ export default function Products({
   const sortRef = useRef<HTMLDivElement>(null);
 
   const allLabel = t.product.filters.all;
-  const filterTabs = useMemo(() => [
-    { key: 'all', name: allLabel },
-    ...categories,
-  ], [categories, allLabel]);
+  const filterTabs = useMemo(
+    () => [{ key: 'all', name: allLabel }, ...categories],
+    [categories, allLabel],
+  );
   const sortOptions = t.product.sortOptions;
 
   // Close dropdown on outside click
@@ -117,7 +121,7 @@ export default function Products({
 
   return (
     <section className="bg-[#FFFFFF] min-h-screen">
-      <div className="max-w-7xl w-full mx-auto px-4 md:px-8 lg:px-12 py-24 flex flex-col gap-10">
+      <div className="max-w-7xl w-full mx-auto px-4 md:px-8 lg:px-12 lg:py-24 flex flex-col gap-10 py-16">
         {/* Featured Collaborations */}
         <div>
           <div className="flex items-center justify-between mb-6">
@@ -195,12 +199,6 @@ export default function Products({
                   ))}
                 </div>
               )}
-
-              <button className="flex md:hidden items-center justify-center p-2 bg-[#FFF0F0] rounded-lg text-[#666666]">
-                <span className="material-symbols-outlined text-[20px]!">
-                  filter_list
-                </span>
-              </button>
             </div>
           </div>
         </div>

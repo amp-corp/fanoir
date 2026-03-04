@@ -41,8 +41,9 @@ export default function Hero({ heroImage }: { heroImage?: string }) {
             {/* Heading */}
             <div className="space-y-2">
               <h1 className="text-white text-3xl md:text-5xl lg:text-6xl font-semibold leading-tight tracking-tight">
-                {t.hero.title} {t.hero.titleBefore}
-                <span className="font-extrabold ">{t.hero.titleAccent}</span>
+                {t.hero.title}
+                <br className="sm:hidden" /> {t.hero.titleBefore}
+                <span className="font-extrabold">{t.hero.titleAccent}</span>
                 {t.hero.titleAfter}
               </h1>
               <p

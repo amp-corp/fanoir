@@ -58,7 +58,8 @@ export const translations = {
       premiumQuality: '우리가 직접 써본 것들',
       signatureLabel: 'HOW WE MAKE',
       signatureTitle: '하나하나, 손이 가는 대로',
-      signatureDesc: '소재 고르는 것부터 마무리까지, 하나하나 핸드메이드로 직접 챙겨요.',
+      signatureDesc:
+        '소재 고르는 것부터 마무리까지, 하나하나 핸드메이드로 직접 챙겨요.',
       feature1Title: '멤버별 컬러 매칭',
       feature1Desc: '최애 컬러에 맞춰서 하나하나 골랐어요',
       feature2Title: '검증된 소재',
@@ -80,6 +81,7 @@ export const translations = {
     },
     collection: {
       title: '컬렉션',
+      desc: '팬덤에서 사랑받는 크리에이터들과 함께했어요. 파누아만의 특별한 콜라보 라인업!',
       viewMore: '컬렉션 모두 보기',
     },
     termsPage: {
@@ -150,7 +152,7 @@ export const translations = {
       label: 'WHO WE ARE',
       title:
         "We couldn't find what we wanted so we started making it ourselves",
-      desc: "FANOIR started from the excitement the night before a concert — decorating lightsticks, dressing up dolls. We started making K-pop fan goods for those exact moments ourselves.",
+      desc: 'FANOIR started from the excitement the night before a concert — decorating lightsticks, dressing up dolls. We started making K-pop fan goods for those exact moments ourselves.',
       meaningTitle: 'Fan + Noir',
       meaningDesc:
         "Fan + Noir (French for 'black'). We mean it when we say we love something — and it's even better when it looks good too.",
@@ -168,7 +170,7 @@ export const translations = {
     showcase: {
       label: 'WHAT WE MAKE',
       title: 'Only the good stuff',
-      desc: "Doll clothes, cheering items, keyrings and more — we brought them to concerts and only kept what actually works.",
+      desc: 'Doll clothes, cheering items, keyrings and more — we brought them to concerts and only kept what actually works.',
       bestseller: 'Bestseller',
       comingSoon: 'Coming Soon',
       karatValue: '100%',
@@ -199,6 +201,7 @@ export const translations = {
     },
     collection: {
       title: 'Collection',
+      desc: 'Special collab lineups with beloved fandom creators. Only at FANOIR!',
       viewMore: 'View All Collections',
     },
     termsPage: {
@@ -316,6 +319,7 @@ export const translations = {
     },
     collection: {
       title: '系列',
+      desc: '粉丝圈人气创作者们的联名合作，FANOIR专属特别企划！',
       viewMore: '查看全部系列',
     },
     termsPage: {
@@ -433,6 +437,7 @@ export const translations = {
     },
     collection: {
       title: '系列',
+      desc: '粉絲圈人氣創作者們的聯名合作，FANOIR專屬特別企劃！',
       viewMore: '查看全部系列',
     },
     termsPage: {
@@ -528,7 +533,8 @@ export const translations = {
       premiumQuality: '自分たちで使ってみたもの',
       signatureLabel: 'HOW WE MAKE',
       signatureTitle: 'ひとつひとつ 自分たちの手で',
-      signatureDesc: '素材選びから仕上げまで、一つ一つハンドメイドで仕上げてます。',
+      signatureDesc:
+        '素材選びから仕上げまで、一つ一つハンドメイドで仕上げてます。',
       feature1Title: '推しカラーマッチング',
       feature1Desc: '推しカラーに合わせてひとつずつ選びました',
       feature2Title: '検証済みの素材',
@@ -550,6 +556,7 @@ export const translations = {
     },
     collection: {
       title: 'コレクション',
+      desc: 'ファンダムで愛されるクリエイターたちとのコラボ。FANOIRだけの特別ラインナップ！',
       viewMore: 'コレクションをすべて見る',
     },
     termsPage: {

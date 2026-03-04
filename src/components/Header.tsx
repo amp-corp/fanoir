@@ -61,12 +61,12 @@ export default function Header() {
 
       {/* Right icons */}
       <div className="flex items-center gap-4">
-        <button
+        {/* <button
           className="flex items-center justify-center rounded-full size-10 text-[#3D3D3D] hover:text-[#FF6B6B] transition-colors"
           aria-label="Search"
         >
           <span className="material-symbols-outlined">search</span>
-        </button>
+        </button> */}
         {/* Language dropdown */}
         <div ref={langRef} className="relative hidden md:block">
           <button
