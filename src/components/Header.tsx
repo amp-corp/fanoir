@@ -2,11 +2,13 @@
 
 import { useLang } from '@/contexts/LangContext';
 import { useState, useRef, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import { locales, localeLabels, type Locale } from '@/lib/i18n';
 
 export default function Header() {
   const { locale, t, switchLocale, localePath } = useLang();
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const langRef = useRef<HTMLDivElement>(null);
@@ -48,15 +50,22 @@ export default function Header() {
 
       {/* Desktop nav - centered */}
       <nav className="hidden md:flex flex-1 justify-center gap-12">
-        {links.map((l) => (
-          <a
-            key={l.href}
-            href={l.href}
-            className="text-[#3D3D3D] hover:text-[#FF6B6B] transition-colors text-sm font-medium leading-normal tracking-wide"
-          >
-            {l.label}
-          </a>
-        ))}
+        {links.map((l) => {
+          const isActive = !l.href.includes('#') && pathname.startsWith(l.href);
+          return (
+            <a
+              key={l.href}
+              href={l.href}
+              className={`transition-colors text-sm font-medium leading-normal tracking-wide ${
+                isActive
+                  ? 'text-[#FF6B6B]'
+                  : 'text-[#3D3D3D] hover:text-[#FF6B6B]'
+              }`}
+            >
+              {l.label}
+            </a>
+          );
+        })}
       </nav>
 
       {/* Right icons */}
@@ -109,16 +118,23 @@ export default function Header() {
       {/* Mobile menu dropdown */}
       {open && (
         <nav className="absolute top-full left-0 right-0 bg-white border-t border-gray-100 px-6 py-6 flex flex-col gap-5 md:hidden shadow-lg">
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              onClick={() => setOpen(false)}
-              className="text-[#3D3D3D] hover:text-[#FF6B6B] transition-colors text-sm font-medium tracking-wide"
-            >
-              {l.label}
-            </a>
-          ))}
+          {links.map((l) => {
+            const isActive = !l.href.includes('#') && pathname.startsWith(l.href);
+            return (
+              <a
+                key={l.href}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className={`transition-colors text-sm font-medium tracking-wide ${
+                  isActive
+                    ? 'text-[#FF6B6B]'
+                    : 'text-[#3D3D3D] hover:text-[#FF6B6B]'
+                }`}
+              >
+                {l.label}
+              </a>
+            );
+          })}
           <div className="flex gap-3">
             {locales
               .filter((l) => l !== locale)
