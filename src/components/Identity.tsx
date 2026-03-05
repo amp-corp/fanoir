@@ -1,54 +1,34 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
+import useEmblaCarousel from 'embla-carousel-react';
+import Autoplay from 'embla-carousel-autoplay';
 import { useLang } from '@/contexts/LangContext';
-import { useSwipe } from '@/hooks/useSwipe';
-import type { ProductForDisplay } from '@/lib/db-queries';
-
-const GALLERY_SLIDE_INTERVAL = 4000;
+import { useDotButton } from '@/hooks/useEmblaDots';
 
 export default function Identity({
-  products,
   signatureImage1,
   signatureImage2,
 }: {
-  products: ProductForDisplay[];
+  products?: unknown;
   signatureImage1?: string;
   signatureImage2?: string;
 }) {
   const { t, localePath } = useLang();
-  const spotlight = products[0];
-  const [gallerySlide, setGallerySlide] = useState(0);
 
-  // Free-scroll row images
+  const sliderImages = [signatureImage1, signatureImage2].filter(Boolean);
+
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
+    Autoplay({ delay: 4000, stopOnInteraction: false }),
+  ]);
+  const { selectedIndex, scrollSnaps, onDotClick } = useDotButton(emblaApi);
+
   const scrollImages = ['/brand/04.jpg', '/brand/05.jpg', '/brand/06.jpg'];
-
-  // Left-column slider images
-  const sliderImages = [signatureImage1, signatureImage2];
-
-  const goToSlide = useCallback((i: number) => setGallerySlide(i), []);
-  const slidePrev = useCallback(
-    () => setGallerySlide((p) => (p - 1 + sliderImages.length) % sliderImages.length),
-    [sliderImages.length],
-  );
-  const slideNext = useCallback(
-    () => setGallerySlide((p) => (p + 1) % sliderImages.length),
-    [sliderImages.length],
-  );
-  const swipe = useSwipe(slidePrev, slideNext);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setGallerySlide((prev) => (prev + 1) % sliderImages.length);
-    }, GALLERY_SLIDE_INTERVAL);
-    return () => clearInterval(timer);
-  }, [sliderImages.length]);
 
   return (
     <section id="identity">
       {/* sec-comment — Brand Story */}
-      <div className="py-56 md:py-72">
+      <div className="py-40 md:py-72">
         <div className="max-w-3xl mx-auto px-6 text-center">
           <p className="text-[#666666] text-base md:text-lg font-bold leading-[1.8] mb-3">
             {t.identity.storyLine1}
@@ -84,45 +64,51 @@ export default function Identity({
           </div>
         </div>
 
-        {/* Row 2: 2-column (left: image fade slider + dots, right: product CTA card) */}
+        {/* Row 2: 2-column (left: Embla slider, right: product CTA card) */}
         <div className="grid grid-cols-1 md:grid-cols-2">
-          {/* Left: fade slider */}
-          <div
-            className="relative aspect-square overflow-hidden cursor-grab active:cursor-grabbing select-none"
-            {...swipe}
-          >
-            {sliderImages.map((src, i) => (
-              <div
-                key={i}
-                className="absolute inset-0 transition-opacity duration-1000 pointer-events-none"
-                style={{ opacity: gallerySlide === i ? 1 : 0 }}
-              >
-                <Image
-                  src={src || ''}
-                  alt=""
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover"
-                />
-              </div>
-            ))}
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-              {sliderImages.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => goToSlide(i)}
-                  className={`w-2 h-2 rounded-full transition-colors ${
-                    gallerySlide === i ? 'bg-white' : 'bg-white/40'
-                  }`}
-                />
-              ))}
-            </div>
+          {/* Left: Embla slider */}
+          <div className="relative aspect-square overflow-hidden">
+            {sliderImages.length > 0 && (
+              <>
+                <div ref={emblaRef} className="absolute inset-0">
+                  <div className="flex h-full">
+                    {sliderImages.map((src, i) => (
+                      <div
+                        key={i}
+                        className="relative flex-[0_0_100%] min-w-0 h-full select-none"
+                      >
+                        <Image
+                          src={src!}
+                          alt=""
+                          fill
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                          className="object-cover"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                {scrollSnaps.length > 1 && (
+                  <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                    {scrollSnaps.map((_, i) => (
+                      <button
+                        key={i}
+                        onClick={() => onDotClick(i)}
+                        className={`w-2 h-2 rounded-full transition-colors ${
+                          selectedIndex === i ? 'bg-white' : 'bg-white/40'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                )}
+              </>
+            )}
           </div>
 
           {/* Right: product CTA card */}
           <div className="relative aspect-square flex items-center justify-center bg-[#F5F5F0] overflow-hidden">
-            <div className="relative z-10 flex flex-col items-start gap-4 px-10 md:px-14 max-w-md">
-              <p className="text-[#3D3D3D] text-xl md:text-2xl font-bold leading-snug whitespace-pre-line">
+            <div className="relative z-10 flex flex-col items-start gap-4 px-8 md:px-14 max-w-md">
+              <p className="text-[#3D3D3D] text-lg md:text-2xl font-bold leading-snug whitespace-pre-line">
                 {t.identity.spotlightDesc}
               </p>
               <a

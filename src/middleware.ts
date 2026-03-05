@@ -8,15 +8,23 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  // /ko or /ko/... → redirect to / or /... (canonical URL)
+  if (pathname === `/${defaultLocale}` || pathname.startsWith(`/${defaultLocale}/`)) {
+    const url = request.nextUrl.clone();
+    url.pathname = pathname.replace(`/${defaultLocale}`, '') || '/';
+    return NextResponse.redirect(url);
+  }
+
+  // Non-default locale (/en, /ja, etc.) → pass through
   const hasLocale = locales.some(
-    (l) => pathname.startsWith(`/${l}/`) || pathname === `/${l}`
+    (l) => l !== defaultLocale && (pathname.startsWith(`/${l}/`) || pathname === `/${l}`)
   );
   if (hasLocale) return NextResponse.next();
 
-  const locale = defaultLocale;
+  // No locale prefix → rewrite to /ko/... (URL stays clean)
   const url = request.nextUrl.clone();
-  url.pathname = `/${locale}${pathname}`;
-  return NextResponse.redirect(url);
+  url.pathname = `/${defaultLocale}${pathname}`;
+  return NextResponse.rewrite(url);
 }
 
 export const config = {

@@ -31,7 +31,7 @@ export async function PUT(
   try {
     const { id } = await params;
     const body = await request.json();
-    const { image, badgeText, badgeColor, categoryId, order, translations, comingSoon, comingSoonUntil, link } = body;
+    const { image, badgeText, badgeColor, categoryId, order, translations, comingSoon, comingSoonUntil, link, visible } = body;
 
     const product = await prisma.product.update({
       where: { id },
@@ -43,6 +43,7 @@ export async function PUT(
         ...(comingSoon !== undefined && { comingSoon }),
         ...(comingSoonUntil !== undefined && { comingSoonUntil: comingSoonUntil ? new Date(comingSoonUntil) : null }),
         ...(link !== undefined && { link: link || null }),
+        ...(visible !== undefined && { visible }),
         ...(order !== undefined && { order }),
         ...(translations !== undefined && { translations }),
       },

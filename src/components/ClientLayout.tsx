@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { LangProvider } from "@/contexts/LangContext";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import type { Locale } from "@/lib/i18n";
+import { LangProvider } from '@/contexts/LangContext';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import type { Locale } from '@/lib/i18n';
 
 export default function ClientLayout({
   locale,
@@ -15,7 +15,7 @@ export default function ClientLayout({
   return (
     <LangProvider locale={locale}>
       <Header />
-      <main>{children}</main>
+      <main className="mx-auto">{children}</main>
       <Footer />
     </LangProvider>
   );

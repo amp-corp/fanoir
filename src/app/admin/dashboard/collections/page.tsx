@@ -18,9 +18,12 @@ export default function CollectionsListPage() {
   const [data, setData] = useState<CollectionRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [orderChanges, setOrderChanges] = useState<Record<string, number>>({});
+  const [visibilityChanges, setVisibilityChanges] = useState<Record<string, boolean>>({});
   const [saving, setSaving] = useState(false);
 
-  const hasChanges = Object.keys(orderChanges).length > 0;
+  const hasChanges =
+    Object.keys(orderChanges).length > 0 ||
+    Object.keys(visibilityChanges).length > 0;
 
   function fetchCollections() {
     return fetch('/api/admin/collections')
@@ -53,31 +56,39 @@ export default function CollectionsListPage() {
   async function handleBatchSave() {
     setSaving(true);
     try {
+      const changedIds = new Set([
+        ...Object.keys(orderChanges),
+        ...Object.keys(visibilityChanges),
+      ]);
       await Promise.all(
-        Object.entries(orderChanges).map(([id, order]) =>
-          fetch(`/api/admin/collections/${id}`, {
+        Array.from(changedIds).map((id) => {
+          const body: Record<string, number | boolean> = {};
+          if (id in orderChanges) body.order = orderChanges[id];
+          if (id in visibilityChanges) body.visible = visibilityChanges[id];
+          return fetch(`/api/admin/collections/${id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ order }),
-          }),
-        ),
+            body: JSON.stringify(body),
+          });
+        }),
       );
       setOrderChanges({});
+      setVisibilityChanges({});
       refetchCollections();
     } finally {
       setSaving(false);
     }
   }
 
-  async function handleToggleVisible(id: string, current: boolean) {
-    await fetch(`/api/admin/collections/${id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ visible: !current }),
+  function handleToggleVisible(id: string, originalVisible: boolean) {
+    const newVisible = !(visibilityChanges[id] ?? originalVisible);
+    setVisibilityChanges((prev) => {
+      if (newVisible === originalVisible) {
+        const { [id]: _, ...rest } = prev;
+        return rest;
+      }
+      return { ...prev, [id]: newVisible };
     });
-    setData((prev) =>
-      prev.map((c) => (c.id === id ? { ...c, visible: !current } : c)),
-    );
   }
 
   const columns: Column<CollectionRow>[] = [
@@ -98,20 +109,24 @@ export default function CollectionsListPage() {
     {
       key: 'visible',
       label: '공개',
-      render: (item) => (
-        <button
-          onClick={() => handleToggleVisible(item.id, item.visible)}
-          className={`w-9 h-5 rounded-full relative transition-colors ${
-            item.visible ? 'bg-green-500' : 'bg-gray-300'
-          }`}
-        >
-          <span
-            className={`absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full transition-transform ${
-              item.visible ? 'translate-x-4' : ''
+      render: (item) => {
+        const visible = visibilityChanges[item.id] ?? item.visible;
+        return (
+          <button
+            onClick={() => handleToggleVisible(item.id, item.visible)}
+            disabled={saving}
+            className={`w-9 h-5 rounded-full relative transition-colors disabled:opacity-50 ${
+              visible ? 'bg-green-500' : 'bg-gray-300'
             }`}
-          />
-        </button>
-      ),
+          >
+            <span
+              className={`absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full transition-transform ${
+                visible ? 'translate-x-4' : ''
+              }`}
+            />
+          </button>
+        );
+      },
     },
     {
       key: 'slug',
@@ -151,7 +166,7 @@ export default function CollectionsListPage() {
               disabled={saving}
               className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
             >
-              {saving ? '저장 중...' : '순서 변경하기'}
+              {saving ? '저장 중...' : '적용하기'}
             </button>
           )}
           <Link

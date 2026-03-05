@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@theme {
+  --animate-marquee: marquee 12s linear infinite;
+}
+
 html {
   scroll-behavior: smooth;
 }

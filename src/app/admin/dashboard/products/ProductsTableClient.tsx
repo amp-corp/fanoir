@@ -17,6 +17,7 @@ type ProductRow = {
   badgeText: string | null;
   categoryId: string;
   category: CategoryRow;
+  visible: boolean;
   order: number;
   translations: Record<string, { name: string; price: string }>;
 };
@@ -32,9 +33,13 @@ export default function ProductsTableClient({
   const [isPending, startTransition] = useTransition();
   const [orderChanges, setOrderChanges] = useState<Record<string, number>>({});
   const [categoryChanges, setCategoryChanges] = useState<Record<string, string>>({});
+  const [visibilityChanges, setVisibilityChanges] = useState<Record<string, boolean>>({});
   const [saving, setSaving] = useState(false);
 
-  const hasChanges = Object.keys(orderChanges).length > 0 || Object.keys(categoryChanges).length > 0;
+  const hasChanges =
+    Object.keys(orderChanges).length > 0 ||
+    Object.keys(categoryChanges).length > 0 ||
+    Object.keys(visibilityChanges).length > 0;
 
   function handleInputChange(id: string, originalOrder: number, value: string) {
     const val = parseInt(value, 10);
@@ -58,6 +63,17 @@ export default function ProductsTableClient({
     });
   }
 
+  function handleToggleVisible(id: string, originalVisible: boolean) {
+    const newVisible = !(visibilityChanges[id] ?? originalVisible);
+    setVisibilityChanges((prev) => {
+      if (newVisible === originalVisible) {
+        const { [id]: _, ...rest } = prev;
+        return rest;
+      }
+      return { ...prev, [id]: newVisible };
+    });
+  }
+
   async function handleBatchSave() {
     setSaving(true);
     try {
@@ -65,6 +81,7 @@ export default function ProductsTableClient({
       const changedIds = new Set([
         ...Object.keys(orderChanges),
         ...Object.keys(categoryChanges),
+        ...Object.keys(visibilityChanges),
       ]);
 
       await Promise.all(
@@ -72,6 +89,7 @@ export default function ProductsTableClient({
           const body: Record<string, unknown> = {};
           if (id in orderChanges) body.order = orderChanges[id];
           if (id in categoryChanges) body.categoryId = categoryChanges[id];
+          if (id in visibilityChanges) body.visible = visibilityChanges[id];
           return fetch(`/api/admin/products/${id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
@@ -81,6 +99,7 @@ export default function ProductsTableClient({
       );
       setOrderChanges({});
       setCategoryChanges({});
+      setVisibilityChanges({});
       router.refresh();
     } finally {
       setSaving(false);
@@ -101,6 +120,28 @@ export default function ProductsTableClient({
           onChange={(e) => handleInputChange(item.id, item.order, e.target.value)}
         />
       ),
+    },
+    {
+      key: 'visible',
+      label: '공개',
+      render: (item) => {
+        const visible = visibilityChanges[item.id] ?? item.visible;
+        return (
+          <button
+            onClick={() => handleToggleVisible(item.id, item.visible)}
+            disabled={saving}
+            className={`w-9 h-5 rounded-full relative transition-colors disabled:opacity-50 ${
+              visible ? 'bg-green-500' : 'bg-gray-300'
+            }`}
+          >
+            <span
+              className={`absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full transition-transform ${
+                visible ? 'translate-x-4' : ''
+              }`}
+            />
+          </button>
+        );
+      },
     },
     {
       key: 'name',
@@ -137,6 +178,27 @@ export default function ProductsTableClient({
     },
   ];
 
+  function handleCopy(id: string) {
+    const product = data.find((p) => p.id === id);
+    if (!product) return;
+
+    startTransition(async () => {
+      await fetch('/api/admin/products', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          image: product.image,
+          badgeText: product.badgeText,
+          categoryId: product.categoryId,
+          order: product.order,
+          visible: product.visible,
+          translations: product.translations,
+        }),
+      });
+      router.refresh();
+    });
+  }
+
   function handleDelete(id: string) {
     if (!confirm('정말 삭제하시겠습니까?')) return;
 
@@ -157,7 +219,7 @@ export default function ProductsTableClient({
               disabled={saving}
               className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
             >
-              {saving ? '저장 중...' : '변경사항 저장'}
+              {saving ? '저장 중...' : '적용하기'}
             </button>
           )}
           <Link
@@ -177,6 +239,7 @@ export default function ProductsTableClient({
           data={data}
           editPath={(id) => `/admin/dashboard/products/${id}`}
           onDelete={handleDelete}
+          onCopy={handleCopy}
         />
       )}
     </div>

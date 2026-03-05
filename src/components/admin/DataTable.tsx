@@ -13,11 +13,13 @@ export default function DataTable<T extends { id: string }>({
   data,
   editPath,
   onDelete,
+  onCopy,
 }: {
   columns: Column<T>[];
   data: T[];
   editPath: (id: string) => string;
   onDelete: (id: string) => void;
+  onCopy?: (id: string) => void;
 }) {
   return (
     <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
@@ -50,6 +52,14 @@ export default function DataTable<T extends { id: string }>({
                   >
                     Edit
                   </Link>
+                  {onCopy && (
+                    <button
+                      onClick={() => onCopy(item.id)}
+                      className="px-3 py-1.5 text-xs font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors"
+                    >
+                      Copy
+                    </button>
+                  )}
                   <button
                     onClick={() => onDelete(item.id)}
                     className="px-3 py-1.5 text-xs font-medium text-red-600 bg-red-50 hover:bg-red-100 rounded-lg transition-colors"

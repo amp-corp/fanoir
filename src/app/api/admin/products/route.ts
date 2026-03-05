@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
 
   try {
     const body = await request.json();
-    const { image, badgeText, badgeColor, categoryId, order, translations, comingSoon, comingSoonUntil, link } = body;
+    const { image, badgeText, badgeColor, categoryId, order, translations, comingSoon, comingSoonUntil, link, visible } = body;
 
     const product = await prisma.product.create({
       data: {
@@ -32,6 +32,7 @@ export async function POST(request: NextRequest) {
         comingSoon: comingSoon ?? false,
         comingSoonUntil: comingSoonUntil ? new Date(comingSoonUntil) : null,
         link: link || null,
+        visible: visible ?? true,
         order: order ?? 0,
         translations,
       },

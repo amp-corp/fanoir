@@ -2,7 +2,7 @@
 
 import { createContext, useContext, type ReactNode } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { type Locale, translations } from "@/lib/i18n";
+import { type Locale, translations, defaultLocale } from "@/lib/i18n";
 
 type LangContextType = {
   locale: Locale;
@@ -25,11 +25,18 @@ export function LangProvider({
   const t = translations[locale];
 
   const switchLocale = (target: Locale) => {
-    const newPath = pathname.replace(`/${locale}`, `/${target}`);
+    // Strip current locale prefix from pathname
+    const strippedPath =
+      locale === defaultLocale
+        ? pathname // ko pages are at / already
+        : pathname.replace(`/${locale}`, '') || '/';
+    // Build new path
+    const newPath = target === defaultLocale ? strippedPath : `/${target}${strippedPath}`;
     router.push(newPath);
   };
 
-  const localePath = (path: string) => `/${locale}${path}`;
+  const localePath = (path: string) =>
+    locale === defaultLocale ? path : `/${locale}${path}`;
 
   return (
     <LangContext.Provider value={{ locale, t, switchLocale, localePath }}>

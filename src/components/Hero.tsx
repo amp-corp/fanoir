@@ -1,26 +1,12 @@
 'use client';
 
-import { useState, useEffect, useCallback, useSyncExternalStore } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import useEmblaCarousel from 'embla-carousel-react';
+import Autoplay from 'embla-carousel-autoplay';
 import { useLang } from '@/contexts/LangContext';
-import { useSwipe } from '@/hooks/useSwipe';
+import { useDotButton } from '@/hooks/useEmblaDots';
 
-const SLIDE_INTERVAL = 5000;
-
-const MQ = '(max-width: 767px)';
-function subscribeMQ(cb: () => void) {
-  const mql = window.matchMedia(MQ);
-  mql.addEventListener('change', cb);
-  return () => mql.removeEventListener('change', cb);
-}
-function getSnapshotMQ() {
-  return window.matchMedia(MQ).matches;
-}
-function getServerSnapshotMQ() {
-  return false;
-}
-
-// Raw image pairs (desktop shows 2 per slide, mobile shows 1 per slide)
 const IMAGE_PAIRS: [string, string][] = [
   ['/brand/00.jpg', '/brand/10.jpg'],
   ['/brand/01.jpg', '/brand/02.jpg'],
@@ -32,95 +18,159 @@ const MOBILE_SLIDES = IMAGE_PAIRS.flat().map((src) => [src]);
 
 export default function Hero() {
   const { t } = useLang();
-  const isMobile = useSyncExternalStore(subscribeMQ, getSnapshotMQ, getServerSnapshotMQ);
-  const slides = isMobile ? MOBILE_SLIDES : DESKTOP_SLIDES;
 
-  const [current, setCurrent] = useState(0);
-  const safeIndex = current >= slides.length ? 0 : current;
-
-  const goTo = useCallback((index: number) => setCurrent(index), []);
-  const goPrev = useCallback(
-    () => setCurrent((p) => (p - 1 + slides.length) % slides.length),
-    [slides.length],
-  );
-  const goNext = useCallback(
-    () => setCurrent((p) => (p + 1) % slides.length),
-    [slides.length],
-  );
-  const swipe = useSwipe(goPrev, goNext);
+  // Determine mobile after mount only — avoids hydration mismatch
+  const [state, setState] = useState({ mobile: false, mounted: false });
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % slides.length);
-    }, SLIDE_INTERVAL);
-    return () => clearInterval(timer);
-  }, [slides.length]);
+    const mql = window.matchMedia('(max-width: 767px)');
+    const handler = () => setState({ mobile: mql.matches, mounted: true });
+    handler(); // sync initial value
+    mql.addEventListener('change', handler);
+    return () => mql.removeEventListener('change', handler);
+  }, []);
+
+  const { mobile: isMobile, mounted } = state;
+
+  const slides = isMobile ? MOBILE_SLIDES : DESKTOP_SLIDES;
 
   return (
     <section className="relative w-full pt-16 overflow-hidden">
-      <div
-        className="relative w-full aspect-[3/4] md:aspect-[16/7] cursor-grab active:cursor-grabbing select-none"
-        {...swipe}
-      >
-        {slides.map((images, i) => (
-          <div
-            key={`${isMobile ? 'm' : 'd'}-${i}`}
-            className="absolute inset-0 transition-opacity duration-1000 pointer-events-none"
-            style={{ opacity: safeIndex === i ? 1 : 0 }}
-          >
-            <div
-              className={`grid h-full ${
-                images.length === 2 ? 'grid-cols-2' : 'grid-cols-1'
-              }`}
-            >
-              {images.map((src, j) => (
-                <div key={j} className="relative w-full h-full overflow-hidden">
-                  <Image
-                    src={src}
-                    alt=""
-                    fill
-                    priority={i === 0 && j === 0}
-                    sizes={images.length === 2 ? '50vw' : '100vw'}
-                    className="object-cover"
-                  />
-                </div>
-              ))}
-            </div>
-
-            {i === 0 && (
-              <div className="absolute inset-0 flex items-end justify-start p-8 md:p-14">
-                <div>
-                  <h1
-                    className="text-white text-2xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight"
-                    style={{ textShadow: '0 2px 8px rgba(0,0,0,0.4)' }}
-                  >
-                    {t.hero.title}
-                  </h1>
-                  <p
-                    className="text-white text-sm md:text-base lg:text-lg font-medium mt-2"
-                    style={{ textShadow: '0 2px 8px rgba(0,0,0,0.4)' }}
-                  >
-                    {t.hero.subtitle}
-                  </p>
-                </div>
+      {mounted ? (
+        <HeroCarousel
+          slides={slides}
+          isMobile={isMobile}
+          heroTitle={t.hero.title}
+          heroSubtitle={t.hero.subtitle}
+        />
+      ) : (
+        // SSR / pre-mount: show first slide statically to avoid layout shift
+        <div className="relative w-full aspect-square md:aspect-21/7">
+          <div className="grid h-full grid-cols-1 md:grid-cols-2">
+            {IMAGE_PAIRS[0].map((src, j) => (
+              <div
+                key={j}
+                className="relative w-full h-full overflow-hidden md:block hidden first:block"
+              >
+                <Image
+                  src={src}
+                  alt=""
+                  fill
+                  priority
+                  className="object-cover"
+                />
               </div>
-            )}
+            ))}
           </div>
-        ))}
+          <div className="absolute inset-0 flex items-end justify-start p-8 md:p-14">
+            <div>
+              <h1
+                className="text-white text-2xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight"
+                style={{ textShadow: '0 2px 8px rgba(0,0,0,0.4)' }}
+              >
+                {t.hero.title}
+              </h1>
+              <p
+                className="text-white text-sm md:text-base lg:text-lg font-medium mt-2"
+                style={{ textShadow: '0 2px 8px rgba(0,0,0,0.4)' }}
+              >
+                {t.hero.subtitle}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
+  );
+}
+
+function HeroCarousel({
+  slides,
+  isMobile,
+  heroTitle,
+  heroSubtitle,
+}: {
+  slides: string[][];
+  isMobile: boolean;
+  heroTitle: string;
+  heroSubtitle: string;
+}) {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
+    Autoplay({ delay: 5000, stopOnInteraction: false }),
+  ]);
+  const { selectedIndex, scrollSnaps, onDotClick } = useDotButton(emblaApi);
+
+  // Force Embla to reinit when slide structure changes (mobile ↔ desktop)
+  useEffect(() => {
+    emblaApi?.reInit();
+  }, [emblaApi, isMobile]);
+
+  return (
+    <>
+      <div ref={emblaRef} className="overflow-hidden">
+        <div className="flex">
+          {slides.map((images, i) => (
+            <div
+              key={`${isMobile ? 'm' : 'd'}-${i}`}
+              className="relative w-full aspect-square md:aspect-21/7 flex-[0_0_100%] min-w-0"
+            >
+              <div
+                className={`grid h-full ${
+                  images.length === 2 ? 'grid-cols-2' : 'grid-cols-1'
+                }`}
+              >
+                {images.map((src, j) => (
+                  <div
+                    key={j}
+                    className="relative w-full h-full overflow-hidden"
+                  >
+                    <Image
+                      src={src}
+                      alt=""
+                      fill
+                      priority={i === 0 && j === 0}
+                      sizes={images.length === 2 ? '50vw' : '100vw'}
+                      className="object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
+
+              {i === 0 && (
+                <div className="absolute inset-0 flex items-end justify-start p-8 md:p-14">
+                  <div>
+                    <h1
+                      className="text-white text-2xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight"
+                      style={{ textShadow: '0 2px 8px rgba(0,0,0,0.4)' }}
+                    >
+                      {heroTitle}
+                    </h1>
+                    <p
+                      className="text-white text-sm md:text-base lg:text-lg font-medium mt-2"
+                      style={{ textShadow: '0 2px 8px rgba(0,0,0,0.4)' }}
+                    >
+                      {heroSubtitle}
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Dot indicators */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-        {slides.map((_, i) => (
+        {scrollSnaps.map((_, i) => (
           <button
             key={i}
-            onClick={() => goTo(i)}
+            onClick={() => onDotClick(i)}
             className={`w-2 h-2 rounded-full transition-colors ${
-              safeIndex === i ? 'bg-[#222222]' : 'bg-[#222222]/30'
+              selectedIndex === i ? 'bg-[#222222]' : 'bg-[#222222]/30'
             }`}
           />
         ))}
       </div>
-    </section>
+    </>
   );
 }

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Manrope, Noto_Sans } from "next/font/google";
-import { locales, type Locale } from "@/lib/i18n";
+import { locales, defaultLocale, type Locale } from "@/lib/i18n";
 import ClientLayout from "@/components/ClientLayout";
 import "../globals.css";
 
@@ -85,6 +85,8 @@ export async function generateMetadata({
   const { locale } = await params;
   const meta = metaMap[locale as Locale] ?? metaMap.ko;
   const alternateLocales = locales.filter((l) => l !== locale).map((l) => ogLocaleMap[l]);
+  const localeUrl = (l: string) =>
+    l === defaultLocale ? SITE_URL : `${SITE_URL}/${l}`;
 
   return {
     metadataBase: new URL(SITE_URL),
@@ -115,7 +117,7 @@ export async function generateMetadata({
       type: "website",
       locale: meta.ogLocale,
       alternateLocale: alternateLocales,
-      url: `${SITE_URL}/${locale}`,
+      url: localeUrl(locale),
       siteName: "FANOIR",
       title: meta.ogTitle,
       description: meta.ogDesc,
@@ -126,9 +128,9 @@ export async function generateMetadata({
       description: meta.twitterDesc,
     },
     alternates: {
-      canonical: `${SITE_URL}/${locale}`,
+      canonical: localeUrl(locale),
       languages: Object.fromEntries(
-        locales.map((l) => [ogLocaleMap[l].replace("_", "-"), `${SITE_URL}/${l}`])
+        locales.map((l) => [ogLocaleMap[l].replace("_", "-"), localeUrl(l)])
       ),
     },
     category: "shopping",
@@ -138,6 +140,7 @@ export async function generateMetadata({
 function buildStructuredData(locale: Locale) {
   const meta = metaMap[locale] ?? metaMap.ko;
   const langTag = ogLocaleMap[locale]?.replace("_", "-") ?? "ko-KR";
+  const pageUrl = locale === defaultLocale ? SITE_URL : `${SITE_URL}/${locale}`;
 
   return {
     "@context": "https://schema.org",
@@ -173,8 +176,8 @@ function buildStructuredData(locale: Locale) {
       },
       {
         "@type": "WebPage",
-        "@id": `${SITE_URL}/${locale}/#webpage`,
-        url: `${SITE_URL}/${locale}`,
+        "@id": `${pageUrl}/#webpage`,
+        url: pageUrl,
         name: meta.ogTitle,
         isPartOf: { "@id": `${SITE_URL}/#website` },
         about: { "@id": `${SITE_URL}/#organization` },
