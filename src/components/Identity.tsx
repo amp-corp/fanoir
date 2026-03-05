@@ -6,24 +6,33 @@ import Autoplay from 'embla-carousel-autoplay';
 import { useLang } from '@/contexts/LangContext';
 import { useDotButton } from '@/hooks/useEmblaDots';
 
+const FALLBACK_GALLERY = ['/brand/04.jpg', '/brand/05.jpg', '/brand/06.jpg'];
+const FALLBACK_SLIDER = ['/brand/01.jpg', '/brand/02.jpg'];
+
 export default function Identity({
-  signatureImage1,
-  signatureImage2,
+  galleryImages,
+  sliderImages,
 }: {
   products?: unknown;
-  signatureImage1?: string;
-  signatureImage2?: string;
+  galleryImages?: string[];
+  sliderImages?: string[];
 }) {
   const { t, localePath } = useLang();
 
-  const sliderImages = [signatureImage1, signatureImage2].filter(Boolean);
+  const gallery =
+    (galleryImages ?? []).filter(Boolean).length > 0
+      ? galleryImages!.filter(Boolean)
+      : FALLBACK_GALLERY;
+
+  const slider =
+    (sliderImages ?? []).filter(Boolean).length > 0
+      ? sliderImages!.filter(Boolean)
+      : FALLBACK_SLIDER;
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
     Autoplay({ delay: 4000, stopOnInteraction: false }),
   ]);
   const { selectedIndex, scrollSnaps, onDotClick } = useDotButton(emblaApi);
-
-  const scrollImages = ['/brand/04.jpg', '/brand/05.jpg', '/brand/06.jpg'];
 
   return (
     <section id="identity">
@@ -65,7 +74,7 @@ export default function Identity({
         {/* Row 1: Horizontal free-scroll gallery */}
         <div className="overflow-x-auto scrollbar-hide">
           <div className="flex gap-0">
-            {scrollImages.map((src, i) => (
+            {gallery.map((src, i) => (
               <div
                 key={i}
                 className="shrink-0 w-[80vw] md:w-[33.333vw] aspect-square relative"
@@ -86,17 +95,17 @@ export default function Identity({
         <div className="grid grid-cols-1 md:grid-cols-2">
           {/* Left: Embla slider */}
           <div className="relative aspect-square overflow-hidden">
-            {sliderImages.length > 0 && (
+            {slider.length > 0 && (
               <>
                 <div ref={emblaRef} className="absolute inset-0">
                   <div className="flex h-full">
-                    {sliderImages.map((src, i) => (
+                    {slider.map((src, i) => (
                       <div
                         key={i}
                         className="relative flex-[0_0_100%] min-w-0 h-full select-none"
                       >
                         <Image
-                          src={src!}
+                          src={src}
                           alt=""
                           fill
                           sizes="(max-width: 768px) 100vw, 50vw"

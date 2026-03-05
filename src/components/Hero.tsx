@@ -7,17 +7,27 @@ import Autoplay from 'embla-carousel-autoplay';
 import { useLang } from '@/contexts/LangContext';
 import { useDotButton } from '@/hooks/useEmblaDots';
 
-const IMAGE_PAIRS: [string, string][] = [
-  ['/brand/00.jpg', '/brand/10.jpg'],
+const FALLBACK_PAIRS: [string, string][] = [
+  ['/brand/00.jpg', '/brand/011.png'],
   ['/brand/01.jpg', '/brand/02.jpg'],
   ['/brand/03.jpg', '/brand/07.jpg'],
 ];
 
-const DESKTOP_SLIDES = IMAGE_PAIRS.map((pair) => pair);
-const MOBILE_SLIDES = IMAGE_PAIRS.flat().map((src) => [src]);
-
-export default function Hero() {
+export default function Hero({
+  imagePairs,
+}: {
+  imagePairs?: [string, string][];
+}) {
   const { t } = useLang();
+
+  // Use DB images if available, otherwise fallback to hardcoded
+  const pairs: [string, string][] =
+    (imagePairs ?? []).filter(([a, b]) => a && b).length > 0
+      ? (imagePairs!.filter(([a, b]) => a && b) as [string, string][])
+      : FALLBACK_PAIRS;
+
+  const DESKTOP_SLIDES = pairs.map((pair) => pair);
+  const MOBILE_SLIDES = pairs.flat().map((src) => [src]);
 
   // Determine mobile after mount only — avoids hydration mismatch
   const [state, setState] = useState({ mobile: false, mounted: false });
@@ -47,7 +57,7 @@ export default function Hero() {
         // SSR / pre-mount: show first slide statically to avoid layout shift
         <div className="relative w-full aspect-square md:aspect-21/7">
           <div className="grid h-full grid-cols-1 md:grid-cols-2">
-            {IMAGE_PAIRS[0].map((src, j) => (
+            {pairs[0].map((src, j) => (
               <div
                 key={j}
                 className="relative w-full h-full overflow-hidden md:block hidden first:block"
@@ -100,7 +110,7 @@ function HeroCarousel({
   ]);
   const { selectedIndex, scrollSnaps, onDotClick } = useDotButton(emblaApi);
 
-  // Force Embla to reinit when slide structure changes (mobile ↔ desktop)
+  // Force Embla to reinit when slide structure changes (mobile <-> desktop)
   useEffect(() => {
     emblaApi?.reInit();
   }, [emblaApi, isMobile]);

@@ -150,28 +150,40 @@ export async function getCollectionSlugs(): Promise<string[]> {
 // ── Site Settings ──────────────────────────────────────────
 
 export type SiteImages = {
-  hero_image: string;
-  signature_image_1: string;
-  signature_image_2: string;
+  /** Hero: each entry is [left, right] pair */
+  heroSlides: [string, string][];
+  /** Identity: horizontal scroll gallery */
+  identityGallery: string[];
+  /** Identity: swipe slider */
+  identitySlider: string[];
+  /** Showcase: mood banner */
+  showcaseMood: string[];
 };
 
-const SITE_IMAGE_KEYS: (keyof SiteImages)[] = [
-  'hero_image',
-  'signature_image_1',
-  'signature_image_2',
-];
+const SITE_IMAGE_JSON_KEYS = [
+  'hero_slides',
+  'identity_gallery',
+  'identity_slider',
+  'showcase_mood',
+] as const;
 
 export async function getSiteImages(): Promise<SiteImages> {
   const rows = await prisma.siteSetting.findMany({
-    where: { key: { in: SITE_IMAGE_KEYS } },
+    where: { key: { in: [...SITE_IMAGE_JSON_KEYS] } },
   });
 
   const map = Object.fromEntries(rows.map((r) => [r.key, r.value]));
 
+  const parse = <T>(key: string, fallback: T): T => {
+    try { return map[key] ? JSON.parse(map[key]) : fallback; }
+    catch { return fallback; }
+  };
+
   return {
-    hero_image: map.hero_image || '',
-    signature_image_1: map.signature_image_1 || '',
-    signature_image_2: map.signature_image_2 || '',
+    heroSlides: parse('hero_slides', []),
+    identityGallery: parse('identity_gallery', []),
+    identitySlider: parse('identity_slider', []),
+    showcaseMood: parse('showcase_mood', []),
   };
 }
 

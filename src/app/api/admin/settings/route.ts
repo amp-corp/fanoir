@@ -13,10 +13,17 @@ export async function GET() {
   } catch (e) {
     console.error('Failed to fetch site images:', e);
     return NextResponse.json(
-      { hero_image: '', signature_image_1: '', signature_image_2: '' },
+      { heroSlides: [], identityGallery: [], identitySlider: [], showcaseMood: [] },
     );
   }
 }
+
+const KEY_MAP: Record<string, string> = {
+  heroSlides: 'hero_slides',
+  identityGallery: 'identity_gallery',
+  identitySlider: 'identity_slider',
+  showcaseMood: 'showcase_mood',
+};
 
 export async function PUT(request: Request) {
   if (!(await isAdminAuthenticated())) {
@@ -24,12 +31,11 @@ export async function PUT(request: Request) {
   }
 
   const body = await request.json();
-  const allowedKeys = ['hero_image', 'signature_image_1', 'signature_image_2'];
   const updates: Promise<unknown>[] = [];
 
-  for (const [key, value] of Object.entries(body)) {
-    if (allowedKeys.includes(key) && typeof value === 'string') {
-      updates.push(upsertSiteSetting(key, value));
+  for (const [field, dbKey] of Object.entries(KEY_MAP)) {
+    if (field in body && Array.isArray(body[field])) {
+      updates.push(upsertSiteSetting(dbKey, JSON.stringify(body[field])));
     }
   }
 

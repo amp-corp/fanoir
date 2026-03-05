@@ -74,7 +74,7 @@ export default function ImageUpload({ value, onChange, variant = 'product' }: Im
       <div className="flex flex-col gap-2">
         <div
           className="relative w-full bg-gray-50 rounded-lg border border-gray-200 overflow-hidden"
-          style={{ aspectRatio: variant === 'banner' ? '21/9' : '1/1', maxHeight: '240px' }}
+          style={{ aspectRatio: variant === 'banner' ? '21/9' : '1/1' }}
         >
           <img
             src={value}
@@ -131,7 +131,7 @@ export default function ImageUpload({ value, onChange, variant = 'product' }: Im
             ? 'border-[#222222] bg-[#222222]/5'
             : 'border-gray-300 hover:border-gray-400'
         } ${uploading ? 'pointer-events-none opacity-60' : ''}`}
-        style={{ aspectRatio: variant === 'banner' ? '21/9' : '1/1', maxHeight: '200px' }}
+        style={{ aspectRatio: variant === 'banner' ? '21/9' : '1/1' }}
       >
         {uploading ? (
           <div className="flex flex-col items-center gap-2">

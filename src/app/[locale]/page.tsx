@@ -186,13 +186,13 @@ export default async function Home({
           __html: JSON.stringify(buildHomeStructuredData(products, locale)),
         }}
       />
-      <Hero />
+      <Hero imagePairs={siteImages.heroSlides} />
       <Identity
         products={products}
-        signatureImage1={siteImages.signature_image_1}
-        signatureImage2={siteImages.signature_image_2}
+        galleryImages={siteImages.identityGallery}
+        sliderImages={siteImages.identitySlider}
       />
-      <Showcase />
+      <Showcase moodImages={siteImages.showcaseMood} />
     </>
   );
 }

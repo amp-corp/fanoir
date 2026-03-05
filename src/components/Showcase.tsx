@@ -6,10 +6,18 @@ import Autoplay from 'embla-carousel-autoplay';
 import { useLang } from '@/contexts/LangContext';
 import { useDotButton } from '@/hooks/useEmblaDots';
 
-const moodImages = ['/brand/09.jpg', '/brand/08.jpg'];
+const FALLBACK_MOOD = ['/brand/09.jpg', '/brand/08.jpg'];
 
-export default function Showcase() {
+export default function Showcase({
+  moodImages,
+}: {
+  moodImages?: string[];
+}) {
   const { t, localePath } = useLang();
+
+  const mood = (moodImages ?? []).filter(Boolean).length > 0
+    ? moodImages!.filter(Boolean)
+    : FALLBACK_MOOD;
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
     Autoplay({ delay: 5000, stopOnInteraction: false }),
@@ -44,7 +52,7 @@ export default function Showcase() {
       <div className="relative w-full aspect-[16/9] md:aspect-[21/9] overflow-hidden">
         <div ref={emblaRef} className="overflow-hidden h-full">
           <div className="flex h-full">
-            {moodImages.map((src, i) => (
+            {mood.map((src, i) => (
               <div key={i} className="relative flex-[0_0_100%] min-w-0 h-full">
                 <Image
                   src={src}
