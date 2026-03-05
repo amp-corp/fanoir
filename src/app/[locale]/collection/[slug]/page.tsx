@@ -6,7 +6,7 @@ import { locales, type Locale } from '@/lib/i18n';
 
 export const revalidate = 60;
 
-const SITE_URL = 'https://fanoir.vercel.app';
+const SITE_URL = 'https://fanoir.kr';
 const ogLocaleMap: Record<string, string> = { ko: 'ko_KR', en: 'en_US', 'zh-CN': 'zh_CN', 'zh-TW': 'zh_TW', ja: 'ja_JP' };
 
 export async function generateStaticParams() {

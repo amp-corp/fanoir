@@ -7,7 +7,7 @@ import type { ProductForDisplay } from '@/lib/db-queries';
 
 export const revalidate = 60;
 
-const SITE_URL = 'https://fanoir.vercel.app';
+const SITE_URL = 'https://fanoir.kr';
 const ogLocaleMap: Record<string, string> = {
   ko: 'ko_KR',
   en: 'en_US',

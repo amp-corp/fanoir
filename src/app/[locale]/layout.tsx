@@ -8,7 +8,7 @@ import "../globals.css";
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope" });
 const notoSans = Noto_Sans({ subsets: ["latin"], variable: "--font-noto" });
 
-const SITE_URL = "https://fanoir.vercel.app";
+const SITE_URL = "https://fanoir.kr";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -159,7 +159,7 @@ function buildStructuredData(locale: Locale) {
         sameAs: ["https://instagram.com/fanoir.official"],
         contactPoint: {
           "@type": "ContactPoint",
-          email: "contact@fanoir.com",
+          email: "contact@fanoir.kr",
           contactType: "customer service",
           availableLanguage: ["Korean", "English", "Chinese", "Japanese"],
         },

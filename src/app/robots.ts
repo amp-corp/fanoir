@@ -28,6 +28,6 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
       },
     ],
-    sitemap: "https://fanoir.vercel.app/sitemap.xml",
+    sitemap: "https://fanoir.kr/sitemap.xml",
   };
 }

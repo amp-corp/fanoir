@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { locales, defaultLocale } from "@/lib/i18n";
 import { getCollectionSlugs } from "@/lib/db-queries";
 
-const SITE_URL = "https://fanoir.vercel.app";
+const SITE_URL = "https://fanoir.kr";
 
 function localeUrl(locale: string, path: string) {
   return locale === defaultLocale
