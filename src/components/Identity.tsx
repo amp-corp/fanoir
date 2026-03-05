@@ -30,13 +30,31 @@ export default function Identity({
       {/* sec-comment — Brand Story */}
       <div className="py-40 md:py-72">
         <div className="max-w-3xl mx-auto px-6 text-center">
-          <p className="text-[#666666] text-base md:text-lg font-bold leading-[1.8] mb-3">
-            {t.identity.storyLine1}
-          </p>
-          <p className="text-[#666666] text-sm md:text-base leading-[1.8] mb-3">
+          <div className="flex flex-col items-center mb-3">
+            <Image
+              src="/logo.png"
+              alt="FANOIR"
+              width={200}
+              height={82}
+              className="mb-15"
+              style={{ filter: 'brightness(0)' }}
+            />
+            <p className="text-[#666666] text-base md:text-lg leading-[1.8] whitespace-pre-line">
+              {t.identity.storyLine1
+                .split(/(\*\*.*?\*\*)/)
+                .map((part, i) =>
+                  part.startsWith('**') && part.endsWith('**') ? (
+                    <strong key={i}>{part.slice(2, -2)}</strong>
+                  ) : (
+                    part
+                  ),
+                )}
+            </p>
+          </div>
+          <p className="text-[#666666] text-sm md:text-base leading-[1.8] mb-3 whitespace-pre-line">
             {t.identity.storyLine2}
           </p>
-          <p className="text-[#666666] text-sm md:text-base leading-[1.8] mb-3">
+          <p className="text-[#666666] text-sm md:text-base leading-[1.8] mb-3 whitespace-pre-line">
             {t.identity.storyLine3}
           </p>
         </div>

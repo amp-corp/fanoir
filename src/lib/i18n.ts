@@ -26,14 +26,13 @@ export const translations = {
       label: 'WHO WE ARE',
       title: '마음에 드는 게 없어서 직접 만들기로 했어요',
       desc: 'FANOIR는 콘서트 전날의 설렘에서 시작됐어요. 응원봉 꾸미고, 인형한테 새 옷 입히는 그 시간 — 그 순간에 쓸 케이팝 팬덤 굿즈를 우리가 직접 만들게 됐어요.',
-      storyLine1: 'Fan + Noir — 좋아하는 마음에 블랙을 더해, 누구보다 멋지게.',
+      storyLine1: '**Fan + Noir**\n\n팬의 마음에\n**Noir를 더 합니다.**',
       storyLine2:
-        '인형옷, 미니슬로건, 응원봉 꾸미기 — 직접 써보고 괜찮은 것만 내놓아요.',
-      storyLine3:
-        '응원도, 꾸미기도, 일상도 — 좋아하는 마음이 눈에 보일 때가 제일 행복하잖아요.',
+        '응원하는 순간도\n좋아하는 것을 표현하는 순간도\n마음이 보이는 모든 순간.',
+      storyLine3: 'FANOIR는\n그 순간을 위한 브랜드입니다.',
       spotlightLabel: '추천 상품',
       spotlightDesc:
-        '좋아하는 마음을 더 예쁘게.\n우리가 직접 만든 것들, 구경해 볼래요?',
+        '좋아하는 마음을 더 특별하게.\nFANOIR가 만든 것들을 만나보세요.',
       spotlightCta: '보러 가기',
     },
     showcase: {
@@ -43,9 +42,8 @@ export const translations = {
       comingSoon: 'Coming Soon',
       viewMore: '더 보기',
       philosophyLabel: 'OUR PHILOSOPHY',
-      philosophyQuote: '다음 콘서트, 같이 준비할까요?',
-      philosophyDesc:
-        '새 상품이랑 콜라보 소식 제일 먼저 알려드릴게요. 좋아하는 마음이 눈에 보이는 순간을 함께 만들어요.',
+      philosophyQuote: '다음 응원의 순간도 FANOIR와 함께',
+      philosophyDesc: '새 상품이랑 콜라보 소식을 가장 먼저 만나보세요',
       philosophyCta: '구경하러 가기',
     },
     product: {
@@ -130,14 +128,13 @@ export const translations = {
         "We couldn't find what we wanted so we started making it ourselves",
       desc: 'FANOIR started from the excitement the night before a concert — decorating lightsticks, dressing up dolls. We started making K-pop fan goods for those exact moments ourselves.',
       storyLine1:
-        'Fan + Noir — we add a touch of black to your love, making it cooler than ever.',
+        '**Fan + Noir**\n\nTo your heart,\n**we add Noir.**',
       storyLine2:
-        'Doll clothes, mini slogans, lightstick accessories — we only put out what we actually love using.',
-      storyLine3:
-        'Cheering, styling, everyday life — the happiest moments are when your love for something shows.',
+        'Every moment you cheer,\nevery moment you express what you love,\nevery moment your heart shows.',
+      storyLine3: 'FANOIR is\na brand made for those moments.',
       spotlightLabel: 'FEATURED',
       spotlightDesc:
-        'Making your love even prettier.\nCheck out what we handcrafted for you.',
+        'Making your love even more special.\nDiscover what FANOIR has crafted.',
       spotlightCta: 'View Products',
     },
     showcase: {
@@ -147,9 +144,9 @@ export const translations = {
       comingSoon: 'Coming Soon',
       viewMore: 'See All',
       philosophyLabel: 'OUR PHILOSOPHY',
-      philosophyQuote: 'Ready to prep for the next concert?',
+      philosophyQuote: 'Your next moment of cheer, together with FANOIR',
       philosophyDesc:
-        "New drops and collabs — we'll let you know first. Let's make those moments where your love shows, together.",
+        'Be the first to discover new drops and collab news.',
       philosophyCta: 'Browse Products',
     },
     product: {
@@ -232,12 +229,12 @@ export const translations = {
       label: 'WHO WE ARE',
       title: '找不到满意的 就自己动手做了',
       desc: 'FANOIR始于演唱会前夜的那份期待。装饰应援棒、给娃娃换新衣——那些时刻用的K-pop粉丝周边，我们自己来做。',
-      storyLine1: 'Fan + Noir — 为喜欢的心加上一抹黑色，比谁都酷。',
-      storyLine2: '娃衣、迷你横幅、应援棒配饰——自己用过觉得好的才放出来。',
-      storyLine3:
-        '应援也好、打扮也好、日常也好——喜欢的心情能被看见的那一刻 最幸福。',
+      storyLine1: '**Fan + Noir**\n\n在粉丝的心中\n**添上Noir。**',
+      storyLine2:
+        '应援的瞬间\n表达喜欢的瞬间\n心意被看见的每个瞬间。',
+      storyLine3: 'FANOIR是\n为那些瞬间而生的品牌。',
       spotlightLabel: '推荐商品',
-      spotlightDesc: '让喜欢变得更好看。\n来看看我们亲手做的吧？',
+      spotlightDesc: '让喜欢变得更特别。\n来看看FANOIR打造的好物吧。',
       spotlightCta: '去看看',
     },
     showcase: {
@@ -247,9 +244,8 @@ export const translations = {
       comingSoon: 'Coming Soon',
       viewMore: '看全部',
       philosophyLabel: 'OUR PHILOSOPHY',
-      philosophyQuote: '下一场演唱会 一起准备？',
-      philosophyDesc:
-        '新品和联名消息 第一时间告诉你。让我们一起创造喜欢被看见的瞬间。',
+      philosophyQuote: '下一次应援的瞬间 与FANOIR一起',
+      philosophyDesc: '第一时间了解新品和联名消息。',
       philosophyCta: '逛逛看',
     },
     product: {
@@ -332,12 +328,12 @@ export const translations = {
       label: 'WHO WE ARE',
       title: '找不到滿意的 就自己動手做了',
       desc: 'FANOIR始於演唱會前夜的那份期待。裝飾應援棒、幫娃娃換新衣——那些時刻用的K-pop粉絲周邊，我們自己來做。',
-      storyLine1: 'Fan + Noir — 為喜歡的心加上一抹黑色，比誰都酷。',
-      storyLine2: '娃衣、迷你橫幅、應援棒配飾——自己用過覺得好的才放出來。',
-      storyLine3:
-        '應援也好、打扮也好、日常也好——喜歡的心情能被看見的那一刻 最幸福。',
+      storyLine1: '**Fan + Noir**\n\n在粉絲的心中\n**添上Noir。**',
+      storyLine2:
+        '應援的瞬間\n表達喜歡的瞬間\n心意被看見的每個瞬間。',
+      storyLine3: 'FANOIR是\n為那些瞬間而生的品牌。',
       spotlightLabel: '推薦商品',
-      spotlightDesc: '讓喜歡變得更好看。\n來看看我們親手做的吧？',
+      spotlightDesc: '讓喜歡變得更特別。\n來看看FANOIR打造的好物吧。',
       spotlightCta: '去看看',
     },
     showcase: {
@@ -347,9 +343,8 @@ export const translations = {
       comingSoon: 'Coming Soon',
       viewMore: '看全部',
       philosophyLabel: 'OUR PHILOSOPHY',
-      philosophyQuote: '下一場演唱會 一起準備？',
-      philosophyDesc:
-        '新品和聯名消息 第一時間告訴你。讓我們一起創造喜歡被看見的瞬間。',
+      philosophyQuote: '下一次應援的瞬間 與FANOIR一起',
+      philosophyDesc: '第一時間了解新品和聯名消息。',
       philosophyCta: '逛逛看',
     },
     product: {
@@ -433,14 +428,13 @@ export const translations = {
       title: '気に入るものがなくて 自分たちで作ることにしました',
       desc: 'FANOIRはライブ前夜のワクワクから始まりました。ペンラをデコって、ぬいに新しい服を着せて——あの瞬間に使うK-popファンダムグッズを自分たちで作るようになりました。',
       storyLine1:
-        'Fan + Noir — 好きな気持ちにブラックを加えて、誰よりもかっこよく。',
+        '**Fan + Noir**\n\nファンの心に\n**Noirを加えます。**',
       storyLine2:
-        'ぬい服、ミニスローガン、ペンラデコ——使ってみてよかったものだけ出してます。',
-      storyLine3:
-        '応援も デコも 日常も——好きな気持ちが見える瞬間がいちばん幸せ。',
+        '応援する瞬間も\n好きを表現する瞬間も\n気持ちが見えるすべての瞬間。',
+      storyLine3: 'FANOIRは\nその瞬間のためのブランドです。',
       spotlightLabel: 'おすすめ',
       spotlightDesc:
-        '好きをもっとかわいく。\n私たちが作ったもの、見てみませんか？',
+        '好きをもっと特別に。\nFANOIRが作ったものに出会ってみませんか。',
       spotlightCta: '見に行く',
     },
     showcase: {
@@ -450,9 +444,8 @@ export const translations = {
       comingSoon: 'Coming Soon',
       viewMore: '全部見る',
       philosophyLabel: 'OUR PHILOSOPHY',
-      philosophyQuote: '次のライブ 一緒に準備しない？',
-      philosophyDesc:
-        '新商品やコラボ情報 いち早くお届けします。好きが見える瞬間を一緒に作りましょう。',
+      philosophyQuote: '次の応援の瞬間も FANOIRと一緒に',
+      philosophyDesc: '新商品やコラボ情報をいち早くお届けします。',
       philosophyCta: '見てみる',
     },
     product: {
