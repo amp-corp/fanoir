@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Manrope, Noto_Sans } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { locales, defaultLocale, type Locale } from "@/lib/i18n";
 import ClientLayout from "@/components/ClientLayout";
 import "../globals.css";
@@ -218,6 +219,7 @@ export default async function LocaleLayout({
       <body className={`${manrope.variable} ${notoSans.variable}`}>
         <ClientLayout locale={locale as Locale}>{children}</ClientLayout>
       </body>
+      <GoogleAnalytics gaId="G-SMKNN10JBL" />
     </html>
   );
 }
