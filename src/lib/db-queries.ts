@@ -49,6 +49,7 @@ export async function getCategories(locale: string): Promise<CategoryForDisplay[
 
 export async function getProducts(locale: string): Promise<ProductForDisplay[]> {
   const products = await prisma.product.findMany({
+    where: { visible: true },
     include: { category: true },
     orderBy: { order: 'asc' },
   });
