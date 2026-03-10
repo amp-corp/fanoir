@@ -99,6 +99,7 @@ export async function getCollectionBySlug(slug: string, locale: string): Promise
     where: { slug, visible: true },
     include: {
       products: {
+        where: { product: { visible: true } },
         include: { product: { include: { category: true } } },
         orderBy: { order: 'asc' },
       },
