@@ -51,11 +51,13 @@ jobs:
         env:
           SERVER_IP: ${{ secrets.FANOIR_SERVER_IP }}
         run: |
+          # fanoir middleware 가 / 에서 i18n locale 로 307 redirect.
+          # 2xx/3xx 모두 healthy 로 본다 (앱이 응답하면 OK).
           for i in {1..10}; do
             CODE=$(curl -s -o /dev/null -w "%{http_code}" "http://$SERVER_IP/")
             echo "attempt $i: HTTP $CODE"
-            if [ "$CODE" = "200" ]; then exit 0; fi
+            if [ "$CODE" -ge 200 ] && [ "$CODE" -lt 400 ]; then exit 0; fi
             sleep 3
           done
-          echo "::error::헬스체크 실패 — http://$SERVER_IP/ 응답 200 아님"
+          echo "::error::헬스체크 실패 — http://$SERVER_IP/ 응답이 2xx/3xx 아님"
           exit 1
