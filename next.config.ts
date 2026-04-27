@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // NCloud 배포: standalone 빌드로 산출물 최소화
+  output: "standalone",
   images: {
     remotePatterns: [
       {

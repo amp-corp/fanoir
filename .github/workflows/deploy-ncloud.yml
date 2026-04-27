@@ -1,0 +1,61 @@
+name: deploy-ncloud
+
+on:
+  push:
+    branches:
+      - ncloud/migration
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-ncloud-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # pnpm 사용. corepack 으로 packageManager 필드 따라감.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - run: corepack enable
+
+      - name: Setup SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+
+      - name: Sync .env to server
+        env:
+          SERVER_IP: ${{ secrets.FANOIR_SERVER_IP }}
+          ENV_CONTENT: ${{ secrets.FANOIR_ENV }}
+        run: |
+          printf '%s' "$ENV_CONTENT" | ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy_key \
+            root@$SERVER_IP 'cat > /opt/app/shared/config/.env && chmod 600 /opt/app/shared/config/.env'
+
+      - name: Deploy
+        env:
+          SERVER_IP: ${{ secrets.FANOIR_SERVER_IP }}
+          SSH_KEY: ~/.ssh/deploy_key
+          RELEASE_DIR: ./
+          APP_NAME: fanoir
+        run: bash scripts/deploy.sh
+
+      - name: Health check (Mode A — IP-only HTTP)
+        env:
+          SERVER_IP: ${{ secrets.FANOIR_SERVER_IP }}
+        run: |
+          for i in {1..10}; do
+            CODE=$(curl -s -o /dev/null -w "%{http_code}" "http://$SERVER_IP/")
+            echo "attempt $i: HTTP $CODE"
+            if [ "$CODE" = "200" ]; then exit 0; fi
+            sleep 3
+          done
+          echo "::error::헬스체크 실패 — http://$SERVER_IP/ 응답 200 아님"
+          exit 1
