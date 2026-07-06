@@ -14,6 +14,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     timeout-minutes: 25
+    permissions:
+      id-token: write # OIDC 토큰 발급 (AWS role assume)
+      contents: read
 
     steps:
       - uses: actions/checkout@v4
@@ -25,19 +28,29 @@ jobs:
 
       - run: corepack enable
 
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::020329126309:role/prod-duckzill-deploy-fanoir
+          aws-region: ap-northeast-2
+
       - name: Setup SSH key
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
 
-      - name: Sync .env to server
+      # env 출처: SSM /duckzill/prod/fanoir (전체 덮어쓰기 = SSM 정본)
+      - name: Sync .env to server (from SSM)
         env:
           SERVER_IP: ${{ secrets.FANOIR_SERVER_IP }}
-          ENV_CONTENT: ${{ secrets.FANOIR_ENV }}
         run: |
-          printf '%s' "$ENV_CONTENT" | ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy_key \
-            root@$SERVER_IP 'cat > /opt/app/shared/config/.env && chmod 600 /opt/app/shared/config/.env'
+          aws ssm get-parameter --name /duckzill/prod/fanoir --with-decryption \
+            --query Parameter.Value --output text --region ap-northeast-2 > /tmp/env
+          [ -s /tmp/env ] || { echo "SSM value empty — abort"; exit 1; }
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/deploy_key \
+            root@$SERVER_IP 'cat > /opt/app/shared/config/.env && chmod 600 /opt/app/shared/config/.env' < /tmp/env
+          rm -f /tmp/env
 
       - name: Deploy
         env:
